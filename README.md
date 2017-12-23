@@ -54,13 +54,13 @@ If you need to display a list of already attached tags, use the `:old-tags` prop
                 'javascript': 'JavaScript',
             }"
             :old-tags="{{ 
-								old('tags') ? json_encode(old('tags')) :
-								(
-									isset($postTags)
-									? json_encode($postTags)
-									: json_encode('')
-								) 
-						}}"
+		old('tags') ? json_encode(old('tags')) :
+		(
+			isset($postTags)
+			? json_encode($postTags)
+			: json_encode('')
+		) 
+	    }}"
             :typeahead="true"></tags-input>
 ```
 
