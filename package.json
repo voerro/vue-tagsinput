@@ -17,5 +17,6 @@
     "license": "MIT",
     "devDependencies": {
         "vue": "^2.1.10"
-    }
+    },
+    "repository": "https://github.com/AlexMordred/vue-tagsinput"
 }
