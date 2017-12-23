@@ -1,0 +1,21 @@
+{
+    "name": "@voerro/vue-tagsinput",
+    "version": "1.0.0",
+    "description": "A simple tags input with typeahead made with Vue.js 2",
+    "main": "src/index.js",
+    "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "vue",
+        "vuejs",
+        "tagsinput",
+        "input",
+        "tags"
+    ],
+    "author": "Alexander Zavyalov <alex@voerro.com> (http://voerro.com)",
+    "license": "MIT",
+    "devDependencies": {
+        "vue": "^2.1.10"
+    }
+}
