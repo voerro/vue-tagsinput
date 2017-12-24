@@ -1,7 +1,7 @@
 # Vue Tags Input
 
 [![npm (scoped)](https://img.shields.io/npm/v/@voerro/vue-tagsinput.svg)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
-[![npm](https://img.shields.io/npm/dt/@voerro/vue-tagsinput.svg)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
+[![npm](https://img.shields.io/npm/dm/@voerro/vue-tagsinput.svg)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
 [![Packagist](https://img.shields.io/packagist/l/voerro/laravel-file-uploader.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 A simple tags input with typeahead built with Vue.js 2.
@@ -77,9 +77,9 @@ web-development,javascript,This is a new tag,php
 
 ## Styling
 
-The component uses default Bootstrap 4 classes for styling. You can apply your own css.
+The component uses default Bootstrap 4 classes for styling. If you don't use Bootstrap in your project, use the `bootstrap.css` file included in this repository. It is an extraction of all the required classes.
 
-The visible input is a `div` with classes `.form-control` and `.tags-input`. Each tag inside is a `span` with standard Bootstrap 4 classes `.badge`, `.badge-pill`, and `.badge-light`.
+You can also apply your own css. The visible input is a `div` with classes `.form-control` and `.tags-input`. Each tag inside is a `span` with standard Bootstrap 4 classes `.badge`, `.badge-pill`, and `.badge-light`. The remove buttons of each tags are `.tagsinput-remove`.
 
 The typeahead parent element is a `p` with `.typeahead` class. Its children are `span`s with standard Bootstrap 4 classes `.badge`, `.badge-primary` (for the selected tag), `.badge-dark` (for all the unselected tags).
 

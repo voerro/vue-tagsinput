@@ -7,9 +7,7 @@
             >
                 <span v-html="badge"></span>
 
-                <a href="#" @click.prevent="removeTag(index)">
-                    <i class="fa fa-remove"></i>
-                </a>
+                <i href="#" class="tagsinput-remove" @click.prevent="removeTag(index)"></i>
             </span>
 
             <input type="text"
@@ -57,7 +55,7 @@ export default {
     },
 
     created() {
-        if (this.oldTags.length) {
+        if (this.oldTags && this.oldTags.length) {
             let oldTags = Array.isArray(this.oldTags)
                 ? this.oldTags
                 : this.oldTags.split(',');
@@ -183,6 +181,7 @@ export default {
 </script>
 
 <style>
+/* tagsinput */
 .tags-input {
     display: flex;
     flex-wrap: wrap;
@@ -198,6 +197,34 @@ export default {
 .tags-input span {
     margin-right: 0.3rem;
     margin-bottom: 0.2rem;
+}
+
+.tagsinput-remove {
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    overflow: hidden;
+}
+
+.tagsinput-remove:before, .tagsinput-remove:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    background: #5dc282;
+
+    height: 2px;
+    margin-top: -1px;
+}
+
+.tagsinput-remove:before {
+    transform: rotate(45deg);
+}
+.tagsinput-remove:after {
+    transform: rotate(-45deg);
 }
 
 .typeahead > span {
