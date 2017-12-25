@@ -77,11 +77,13 @@ web-development,javascript,This is a new tag,php
 
 ## Styling
 
-The component uses default Bootstrap 4 classes for styling. If you don't use Bootstrap in your project, use the `bootstrap.css` file included in this repository. It is an extraction of all the required classes.
+The component partially relies on default Bootstrap 4 classes for styling. If you don't use Bootstrap in your project, use the `bootstrap.css` file included in this repository. It is an extraction of all the required classes.
 
-You can also apply your own css. The visible input is a `div` with classes `.form-control` and `.tags-input`. Each tag inside is a `span` with standard Bootstrap 4 classes `.badge`, `.badge-pill`, and `.badge-light`. The remove buttons of each tags are `.tagsinput-remove`.
+You can apply your own css. The visible input is a `div` with classes `.form-control` and `.tags-input`. Each tag inside is a `span` with standard Bootstrap 4 classes `.badge`, `.badge-pill`, and `.badge-light`. The remove buttons of each tags are `.tagsinput-remove`.
 
 The typeahead parent element is a `p` with `.typeahead` class. Its children are `span`s with standard Bootstrap 4 classes `.badge`, `.badge-primary` (for the selected tag), `.badge-dark` (for all the unselected tags).
+
+See the `template` and `style` sections of `src/TagsInput.vue` to have a better idea of how things work.
 
 ## Typeahead
 
