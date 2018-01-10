@@ -24,6 +24,12 @@ Then register the component with Vue:
 Vue.component('tags-input', require('@voerro/vue-tagsinput'));
 ```
 
+If you're getting the `[Vue warn]: Failed to mount component: template or render function not defined.` error, try this instead:
+
+```javascript
+Vue.component('tags-input', require('@voerro/vue-tagsinput').default);
+```
+
 You might also need to add this line if removing tags by pressing backspace doesn't work:
 
 ```javascript
