@@ -24,6 +24,12 @@ Then register the component with Vue:
 Vue.component('tags-input', require('@voerro/vue-tagsinput'));
 ```
 
+You might also need to add this line if removing tags by pressing backspace doesn't work:
+
+```javascript
+Vue.config.keyCodes.backspace = 8;
+```
+
 ## Usage
 
 ```html
