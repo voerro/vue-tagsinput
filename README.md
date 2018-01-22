@@ -2,7 +2,7 @@
 
 [![npm (scoped)](https://img.shields.io/npm/v/@voerro/vue-tagsinput.svg)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
 [![npm](https://img.shields.io/npm/dm/@voerro/vue-tagsinput.svg)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
-[![Packagist](https://img.shields.io/github/license/AlexMordred/vue-tagsinput.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![MIT](https://img.shields.io/github/license/AlexMordred/vue-tagsinput.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 A simple tags input with typeahead built with Vue.js 2.
 
