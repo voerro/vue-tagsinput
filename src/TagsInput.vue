@@ -39,16 +39,28 @@
 
 <script>
 export default {
-    props: ['elementId', 'existingTags', 'oldTags', 'typeahead'],
+    props: {
+        elementId: String,
+        existingTags: {
+            type: Array,
+            default: () => {
+                return [];
+            }
+        },
+        oldTags: Array,
+        typeahead: Boolean
+    },
 
     data() {
         return {
             badgeId: 0,
             tagBadges: [],
             tags: [],
+
             input: '',
             oldInput: '',
             hiddenInput: '',
+            
             searchResults: [],
             searchSelection: 0,
         };
@@ -153,6 +165,14 @@ export default {
                                 this.searchResults.push({ slug, text: this.existingTags[slug] });
                             }
                         }
+
+                        // Sort the search results alphabetically
+                        this.searchResults.sort((a, b) => {
+                            if (a.text < b.text) return -1;
+                            if (a.text > b.text) return 1;
+
+                            return 0;
+                        });
                     }
 
                     this.oldInput = this.input;
