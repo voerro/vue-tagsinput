@@ -40,12 +40,12 @@ Vue.config.keyCodes.backspace = 8;
 
 ```html
 <tags-input element-id="tags"
-            :existing-tags="{ 
-                'web-development': 'Web Development',
-                'php': 'PHP',
-                'javascript': 'JavaScript',
-            }"
-            :typeahead="true"></tags-input>
+    :existing-tags="{ 
+        'web-development': 'Web Development',
+        'php': 'PHP',
+        'javascript': 'JavaScript',
+    }"
+    :typeahead="true"></tags-input>
 ```
 
 `element-id` will be applied to `id` and `name` attributes of the hidden input that contains the list of the selected tags as its value.
@@ -56,24 +56,40 @@ Remove the `typeahead` property to disable this functionality.
 
 #### "Old" Tags
 
-If you need to display a list of already attached tags, use the `:old-tags` property. Provide a list in the same format as with `existing-tags`. In this Laravel example we attach either the tags from `old()`, the tags of an existing blog post, or nothing, depending on what's available.
+If you need to display a list of already attached tags, use the `:old-tags` property. Provide an array of tag slugs, tag ids, or just strings.
 
 ```html
 <tags-input element-id="tags"
-            :existing-tags="{ 
-                'web-development': 'Web Development',
-                'php': 'PHP',
-                'javascript': 'JavaScript',
-            }"
-            :old-tags="{{ 
-		old('tags') ? json_encode(old('tags')) :
-		(
-			isset($postTags)
-			? json_encode($postTags)
-			: json_encode('')
-		) 
-	    }}"
-            :typeahead="true"></tags-input>
+    :existing-tags="{ 
+        'web-development': 'Web Development',
+        'php': 'PHP',
+        'javascript': 'JavaScript',
+    }"
+    :old-tags="[
+        'php',
+        'javascript',
+    ]"
+    :typeahead="true"></tags-input>
+```
+
+In this Laravel example we attach either the tags from `old()`, the tags of an existing blog post, or nothing, depending on what's available.
+
+```html
+<tags-input element-id="tags"
+    :existing-tags="{ 
+        'web-development': 'Web Development',
+        'php': 'PHP',
+        'javascript': 'JavaScript',
+    }"
+    :old-tags="{{ 
+        old('tags') ? json_encode(old('tags')) :
+        (
+            isset($postTags)
+            ? json_encode($postTags)
+            : json_encode('')
+        ) 
+    }}"
+    :typeahead="true"></tags-input>
 ```
 
 ## Data

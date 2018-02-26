@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>@voerro/vue-tagsinput</title>
+    
+    <link rel="stylesheet" href="bootstrap.css">    
+    <link rel="stylesheet" href="demo/css/bulma.min.css">
+</head>
+<body>
+    <section class="hero is-info">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">@voerro/vue-tagsinput</h1>
+                <h2 class="subtitle">
+                    Tags input for Vue.js 2 by
+                    <a href="http://voerro.com">Voerro</a>
+                </h2>
+            </div>
+        </div>
+    </section>
+
+    <div id="voerro-tags-input-demo-vqk6etkfjrcpsjg5">
+        <div class="container section">
+            <tags-input
+                element-id="tags"
+                :existing-tags="{ 
+                    'children-of-bodom': 'Children of Bodom',
+                    'epica': 'Epica',
+                    'emperor': 'Emperor',
+                    'shape-of-despair': 'Shape of Despair',
+                    'protest-the-hero': 'Protest the Hero',
+                    'my-dying-bride': 'My Dying Bride',
+                    'ne-obliviscaris': 'Ne Obliviscaris',
+                    'belakor': 'Be\'lakor',
+                    'dark-lunacy': 'Dark Lunacy',
+                    'dominia': 'Dominia',
+                    'jason-becker': 'Jason Becker',
+                    'jeff-loomis': 'Jeff Loomis',
+                    'persefone': 'Persefone',
+                }"
+                :old-tags="[
+                    'ne-obliviscaris',
+                    'epica',
+                    'shape-of-despair',
+                ]"
+                :typeahead="true"></tags-input>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+    <script src="/dist/build.js"></script>
+
+    <script>
+        new Vue({
+            el: '#voerro-tags-input-demo-vqk6etkfjrcpsjg5',
+
+            components: { TagsInput },
+        });
+    </script>
+</body>
+</html>
