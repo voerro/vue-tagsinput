@@ -24,6 +24,7 @@
     <div id="voerro-tags-input-demo-vqk6etkfjrcpsjg5">
         <div class="container section">
             <tags-input
+                v-model="selectedTags"
                 element-id="tags"
                 :existing-tags="{ 
                     'children-of-bodom': 'Children of Bodom',
@@ -46,17 +47,27 @@
                     'shape-of-despair',
                 ]"
                 :typeahead="true"></tags-input>
+
+            <hr>
+
+            <h2 class="is-size-5">Selected tags (via v-model):</h2>
+
+            <p v-text="selectedTags"></p>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
-    <script src="/dist/build.js"></script>
+    <script src="dist/build.js"></script>
 
     <script>
         new Vue({
             el: '#voerro-tags-input-demo-vqk6etkfjrcpsjg5',
 
             components: { TagsInput },
+
+            data: {
+                selectedTags: []
+            }
         });
     </script>
 </body>

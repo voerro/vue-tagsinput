@@ -18,7 +18,8 @@
                 @keypress.down="nextSearchResult"
                 @keypress.up="prevSearchResult"
                 @keypress.esc="ignoreSearchResults"
-                @keyup="searchTag">
+                @keyup="searchTag"
+                @value="tags">
 
             <input type="hidden" :name="elementId" :id="elementId" v-model="hiddenInput">
         </div>
@@ -85,6 +86,9 @@ export default {
         tags() {
             // Updating the hidden input
             this.hiddenInput = this.tags.join(',');
+            
+            // Update the bound v-model value
+            this.$emit('input', this.tags);
         }
     },
 

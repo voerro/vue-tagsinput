@@ -21,16 +21,12 @@ npm i @voerro/vue-tagsinput --save
 Then register the component with Vue:
 
 ```javascript
-Vue.component('tags-input', require('@voerro/vue-tagsinput'));
+import TagsInput from '@voerro/vue-tagsinput';
+
+Vue.component('tags-input', TagsInput);
 ```
 
-If you're getting the `[Vue warn]: Failed to mount component: template or render function not defined.` error, try this instead:
-
-```javascript
-Vue.component('tags-input', require('@voerro/vue-tagsinput').default);
-```
-
-You might also need to add this line if removing tags by pressing backspace doesn't work:
+You might also need to add this line if removing tags by pressing backspace doesn't work (usually it works without the line):
 
 ```javascript
 Vue.config.keyCodes.backspace = 8;
@@ -40,6 +36,7 @@ Vue.config.keyCodes.backspace = 8;
 
 ```html
 <tags-input element-id="tags"
+    v-model="selectedTags"
     :existing-tags="{ 
         'web-development': 'Web Development',
         'php': 'PHP',
@@ -48,7 +45,7 @@ Vue.config.keyCodes.backspace = 8;
     :typeahead="true"></tags-input>
 ```
 
-`element-id` will be applied to `id` and `name` attributes of the hidden input that contains the list of the selected tags as its value.
+`element-id` will be applied to `id` and `name` attributes of the hidden input that contains the list of the selected tags as its value. Optionally you can also use the `v-model` directive to bind a variable to the array of selected tags.
 
 `existing-tags` is the list of the existing on your website tags. Include it even if you're not using typeahead.
 
