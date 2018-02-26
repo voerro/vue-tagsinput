@@ -43,12 +43,12 @@ export default {
     props: {
         elementId: String,
         existingTags: {
-            type: Array,
+            type: [Array, Object],
             default: () => {
                 return [];
             }
         },
-        oldTags: Array,
+        oldTags: [Array, Object],
         typeahead: Boolean
     },
 
@@ -86,7 +86,7 @@ export default {
         tags() {
             // Updating the hidden input
             this.hiddenInput = this.tags.join(',');
-            
+
             // Update the bound v-model value
             this.$emit('input', this.tags);
         }
