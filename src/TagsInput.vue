@@ -48,7 +48,7 @@ export default {
                 return [];
             }
         },
-        oldTags: [Array, Object],
+        oldTags: [Array, String],
         typeahead: Boolean
     },
 
