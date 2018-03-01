@@ -91,9 +91,21 @@ In this Laravel example we attach either the tags from `old()`, the tags of an e
     :typeahead="true"></tags-input>
 ```
 
+#### All Available Props
+
+Prop | Type | Default | Required | Description
+--- | --- | --- | --- | ---
+elementId | String | - | no | id & name for the hidden input
+existingTags | Object | {} | no | An object with existing tags where keys are tag slugs and values are strings to be displayed
+oldTags | Array, String | [] | no | A list of already selected tags in the form of an array or a comma separated string.
+typeahead | Boolean | false | no | Whether the typeahead (autocomplete) functionality should be enabled.
+placeholder | String | 'Add a tag' | no | The placeholder of the tag input.
+
 ## Data
 
-The list of selected tags is stored as a string (tags are separated with a comma) inside a hidden input with name = `element-id`.
+The list of selected tags is stored as a string (tags separated with a comma) inside a hidden input with id and name set to the value from the `element-id` props (but only if you've provided this prop).
+
+You can also bind the array of selected tags to a variable via `v-model`.
 
 If a tag is listed in `existing-tags`, the tag's slug will be used, otherwise the text entered by user is added.
 
