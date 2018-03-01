@@ -11,7 +11,7 @@
             </span>
 
             <input type="text"
-                placeholder="Add a tag"
+                :placeholder="placeholder"
                 v-model="input"
                 @keypress.enter.prevent="tagFromInput"
                 @keypress.backspace="removeLastTag"
@@ -63,6 +63,11 @@ export default {
         typeahead: {
             type: Boolean,
             default: false
+        },
+
+        placeholder: {
+            type: String,
+            default: 'Add a tag'
         }
     },
 
