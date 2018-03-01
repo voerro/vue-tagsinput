@@ -22,37 +22,64 @@
     </section>
 
     <div id="voerro-tags-input-demo-vqk6etkfjrcpsjg5">
-        <div class="container section">
-            <tags-input
-                v-model="selectedTags"
-                element-id="tags"
-                :existing-tags="{ 
-                    'children-of-bodom': 'Children of Bodom',
-                    'epica': 'Epica',
-                    'emperor': 'Emperor',
-                    'shape-of-despair': 'Shape of Despair',
-                    'protest-the-hero': 'Protest the Hero',
-                    'my-dying-bride': 'My Dying Bride',
-                    'ne-obliviscaris': 'Ne Obliviscaris',
-                    'belakor': 'Be\'lakor',
-                    'dark-lunacy': 'Dark Lunacy',
-                    'dominia': 'Dominia',
-                    'jason-becker': 'Jason Becker',
-                    'jeff-loomis': 'Jeff Loomis',
-                    'persefone': 'Persefone',
-                }"
-                :old-tags="[
-                    'ne-obliviscaris',
-                    'epica',
-                    'shape-of-despair',
-                ]"
-                :typeahead="true"></tags-input>
 
-            <hr>
+        <div style="padding: 2rem;">
+            <div class="columns">
+                <div class="column is-3">
+                    <h2 class="is-size-4" style="margin-bottom: 1rem;">Options</h2>
 
-            <h2 class="is-size-5">Selected tags (via v-model):</h2>
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="typeahead">
+                                Typeahead/autocomplete on
+                            </label>
+                        </div>
+                    </div>
 
-            <p v-text="selectedTags"></p>
+                    <div class="field">
+                        <label class="label">Placeholder</label>
+
+                        <div class="control">
+                            <input class="input" type="text" v-model="placeholder">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <tags-input
+                        v-model="selectedTags"
+                        element-id="tags"
+                        :existing-tags="{
+                            'children-of-bodom': 'Children of Bodom',
+                            'epica': 'Epica',
+                            'emperor': 'Emperor',
+                            'shape-of-despair': 'Shape of Despair',
+                            'protest-the-hero': 'Protest the Hero',
+                            'my-dying-bride': 'My Dying Bride',
+                            'ne-obliviscaris': 'Ne Obliviscaris',
+                            'belakor': 'Be\'lakor',
+                            'dark-lunacy': 'Dark Lunacy',
+                            'dominia': 'Dominia',
+                            'jason-becker': 'Jason Becker',
+                            'jeff-loomis': 'Jeff Loomis',
+                            'persefone': 'Persefone',
+                        }"
+                        :old-tags="[
+                            'ne-obliviscaris',
+                            'epica',
+                            'shape-of-despair',
+                        ]"
+                        :typeahead="typeahead"
+                        :placeholder="placeholder"></tags-input>
+
+                    <hr>
+
+                    <h2 class="is-size-5">Selected tags (via v-model):</h2>
+
+                    <p v-text="selectedTags"></p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -66,7 +93,9 @@
             components: { TagsInput },
 
             data: {
-                selectedTags: []
+                selectedTags: [],
+                typeahead: true,
+                placeholder: 'Customizable placeholder',
             }
         });
     </script>
