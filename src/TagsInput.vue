@@ -21,7 +21,10 @@
                 @keyup="searchTag"
                 @value="tags">
 
-            <input type="hidden" :name="elementId" :id="elementId" v-model="hiddenInput">
+            <input type="hidden" v-if="elementId" 
+                :name="elementId"
+                :id="elementId"
+                v-model="hiddenInput">
         </div>
 
         <p v-show="searchResults.length" class="typeahead">
