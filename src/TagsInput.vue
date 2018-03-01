@@ -45,14 +45,25 @@
 export default {
     props: {
         elementId: String,
+
         existingTags: {
-            type: [Array, Object],
+            type: Object,
+            default: () => {
+                return {};
+            }
+        },
+
+        oldTags: {
+            type: [Array, String],
             default: () => {
                 return [];
             }
         },
-        oldTags: [Array, String],
-        typeahead: Boolean
+        
+        typeahead: {
+            type: Boolean,
+            default: false
+        }
     },
 
     data() {
