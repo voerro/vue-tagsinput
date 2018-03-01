@@ -41,6 +41,7 @@
 <script>
 export default {
     props: {
+        max: number,
         elementId: String,
         existingTags: {
             type: [Array, Object],
@@ -76,7 +77,7 @@ export default {
             for (let slug of oldTags) {
                 let existingTag = this.existingTags[slug];
                 let text = existingTag ? existingTag : slug;
-
+addTag(slug, text)
                 this.addTag(slug, text);
             }
         }
@@ -131,6 +132,9 @@ export default {
         },
 
         addTag(slug, text) {
+            if (this.tags.length >= this.max) {
+                return;
+            }
             // Attach the tag if it hasn't been attached yet
             let searchSlug = this.makeSlug(slug);
             let found = this.tags.find((value) => {
