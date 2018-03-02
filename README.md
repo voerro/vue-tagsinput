@@ -100,6 +100,7 @@ existingTags | Object | {} | no | An object with existing tags where keys are ta
 oldTags | Array, String | [] | no | A list of already selected tags in the form of an array or a comma separated string.
 typeahead | Boolean | false | no | Whether the typeahead (autocomplete) functionality should be enabled.
 placeholder | String | 'Add a tag' | no | The placeholder of the tag input.
+limit | Number | 0 | no | Limit the number of tags that can be chosen. 0 = no limit.
 
 ## Data
 

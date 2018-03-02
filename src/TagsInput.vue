@@ -68,6 +68,11 @@ export default {
         placeholder: {
             type: String,
             default: 'Add a tag'
+        },
+
+        limit: {
+            type: Number,
+            default: 0
         }
     },
 
@@ -150,6 +155,11 @@ export default {
         },
 
         addTag(slug, text) {
+            // Check if the limit has been reached
+            if (this.limit > 0 && this.tags.length >= this.limit) {
+                return false;
+            }
+
             // Attach the tag if it hasn't been attached yet
             let searchSlug = this.makeSlug(slug);
             let found = this.tags.find((value) => {

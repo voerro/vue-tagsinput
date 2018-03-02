@@ -44,6 +44,14 @@
                             <input class="input" type="text" v-model="placeholder">
                         </div>
                     </div>
+
+                    <div class="field">
+                        <label class="label">Limit</label>
+                    
+                        <div class="control">
+                            <input class="input" type="text" v-model="limit">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="column">
@@ -71,7 +79,8 @@
                             'shape-of-despair',
                         ]"
                         :typeahead="typeahead"
-                        :placeholder="placeholder"></tags-input>
+                        :placeholder="placeholder"
+                        :limit="limit"></tags-input>
 
                     <hr>
 
@@ -96,6 +105,7 @@
                 selectedTags: [],
                 typeahead: true,
                 placeholder: 'Customizable placeholder',
+                limit: 0,
             }
         });
     </script>
