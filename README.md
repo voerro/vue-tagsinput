@@ -8,7 +8,7 @@ A simple tags input with typeahead built with Vue.js 2.
 
 ![](demo.gif)
 
-[Live Demo](https://alexmordred.github.io/vue-tagsinput/)
+[Live Demo](https://voerro.github.io/vue-tagsinput/)
 
 ## Installation via NPM
 
