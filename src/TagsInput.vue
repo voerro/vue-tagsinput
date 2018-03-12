@@ -73,6 +73,11 @@ export default {
         limit: {
             type: Number,
             default: 0
+        },
+
+        onlyExistingTags: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -124,10 +129,11 @@ export default {
 
                 this.input = '';
             } else {
+                // If we're adding an unexisting tag
                 let text = this.input.trim();
 
                 // If the new tag is not an empty string
-                if (text.length) {
+                if (!this.onlyExistingTags && text.length) {
                     this.input = '';
 
                     // Determine the tag's slug and text depending on if the tag exists

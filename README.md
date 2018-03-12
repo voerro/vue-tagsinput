@@ -47,6 +47,17 @@ Vue.config.keyCodes.backspace = 8;
     :typeahead="true"></tags-input>
 ```
 
+```html
+<tags-input element-id="tags"
+    v-model="selectedTags"
+    :existing-tags="{ 
+        1: 'Web Development',
+        2: 'PHP',
+        3: 'JavaScript',
+    }"
+    :typeahead="true"></tags-input>
+```
+
 `element-id` will be applied to `id` and `name` attributes of the hidden input that contains the list of the selected tags as its value. Optionally you can also use the `v-model` directive to bind a variable to the array of selected tags.
 
 `existing-tags` is the list of the existing on your website tags. Include it even if you're not using typeahead.
@@ -96,11 +107,12 @@ In this Laravel example we attach either the tags from `old()`, the tags of an e
 Prop | Type | Default | Required | Description
 --- | --- | --- | --- | ---
 elementId | String | - | no | id & name for the hidden input
-existingTags | Object | {} | no | An object with existing tags where keys are tag slugs and values are strings to be displayed
+existingTags | Object | {} | no | An object with existing tags where keys are tag slugs or ids and values are strings to be displayed
 oldTags | Array, String | [] | no | A list of already selected tags in the form of an array or a comma separated string.
 typeahead | Boolean | false | no | Whether the typeahead (autocomplete) functionality should be enabled.
 placeholder | String | 'Add a tag' | no | The placeholder of the tag input.
 limit | Number | 0 | no | Limit the number of tags that can be chosen. 0 = no limit.
+only-existing-tags | Boolean | false | no | Only existing tags can be added/chosen. New tags won't be created.
 
 ## Data
 

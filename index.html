@@ -52,6 +52,15 @@
                             <input class="input" type="text" v-model="limit">
                         </div>
                     </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="onlyExistingTags"> 
+                                Allow to add only existing tags
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="column">
@@ -80,7 +89,8 @@
                         ]"
                         :typeahead="typeahead"
                         :placeholder="placeholder"
-                        :limit="limit"></tags-input>
+                        :limit="limit"
+                        :only-existing-tags="onlyExistingTags"></tags-input>
 
                     <hr>
 
@@ -106,6 +116,7 @@
                 typeahead: true,
                 placeholder: 'Customizable placeholder',
                 limit: 0,
+                onlyExistingTags: false,
             }
         });
     </script>
