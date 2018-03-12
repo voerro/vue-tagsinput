@@ -34,6 +34,8 @@ You might also need to add this line if removing tags by pressing backspace does
 Vue.config.keyCodes.backspace = 8;
 ```
 
+Also read the `Styling` section to learn how to make the input look like in the live demo.
+
 ## Usage
 
 ```html
@@ -113,6 +115,7 @@ typeahead | Boolean | false | no | Whether the typeahead (autocomplete) function
 placeholder | String | 'Add a tag' | no | The placeholder of the tag input.
 limit | Number | 0 | no | Limit the number of tags that can be chosen. 0 = no limit.
 only-existing-tags | Boolean | false | no | Only existing tags can be added/chosen. New tags won't be created.
+input-class | String | 'tags-input-default-class' | no | Apply a class to make the wrapping div look like an input. For example, you can use 'form-control' for Bootstrap or 'input' for Bulma.
 
 ## Data
 
@@ -129,13 +132,9 @@ web-development,javascript,This is a new tag,php
 
 ## Styling
 
-The component partially relies on default Bootstrap 4 classes for styling. If you don't use Bootstrap in your project, use the `bootstrap.css` file included in this repository. It is an extraction of all the required classes.
+To apply styling include the `dist/style.css` file on your page. Copy and edit the file if you want to modify the package's appearance. If you're using Bootstrap 4 you can delete the `.badge*` classes as they were copied from the default Bootstrap 4's css.
 
-You can apply your own css. The visible input is a `div` with classes `.form-control` and `.tags-input`. Each tag inside is a `span` with standard Bootstrap 4 classes `.badge`, `.badge-pill`, and `.badge-light`. The remove buttons of each tags are `.tagsinput-remove`.
-
-The typeahead parent element is a `p` with `.typeahead` class. Its children are `span`s with standard Bootstrap 4 classes `.badge`, `.badge-primary` (for the selected tag), `.badge-dark` (for all the unselected tags).
-
-See the `template` and `style` sections of `src/TagsInput.vue` to have a better idea of how things work.
+You can apply a wrapper class to make the input look different via the `input-class` prop. `input-class="form-control"` if you're working with bootstrap, `input-class="input"` if you're working with Bulma, or `input-class="your-custom-class"` if you have something else.
 
 ## Typeahead
 

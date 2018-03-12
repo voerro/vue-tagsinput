@@ -1,13 +1,13 @@
 <template>
     <div>
-        <div class="form-control tags-input">
+        <div :class="inputClass + ' tags-input'">
             <span class="badge badge-pill badge-light"
                 v-for="(badge, index) in tagBadges"
                 :key="index"
             >
                 <span v-html="badge"></span>
 
-                <i href="#" class="tagsinput-remove" @click.prevent="removeTag(index)"></i>
+                <i href="#" class="tags-input-remove" @click.prevent="removeTag(index)"></i>
             </span>
 
             <input type="text"
@@ -45,6 +45,11 @@
 export default {
     props: {
         elementId: String,
+
+        inputClass: {
+            type: String,
+            default: 'tags-input-default-class'
+        },
 
         existingTags: {
             type: Object,
@@ -240,7 +245,7 @@ export default {
 </script>
 
 <style>
-/* tagsinput */
+/* tags-input */
 .tags-input {
     display: flex;
     flex-wrap: wrap;
@@ -256,34 +261,6 @@ export default {
 .tags-input span {
     margin-right: 0.3rem;
     margin-bottom: 0.2rem;
-}
-
-.tagsinput-remove {
-    cursor: pointer;
-    position: relative;
-    display: inline-block;
-    width: 0.5rem;
-    height: 0.5rem;
-    overflow: hidden;
-}
-
-.tagsinput-remove:before, .tagsinput-remove:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    top: 50%;
-    left: 0;
-    background: #5dc282;
-
-    height: 2px;
-    margin-top: -1px;
-}
-
-.tagsinput-remove:before {
-    transform: rotate(45deg);
-}
-.tagsinput-remove:after {
-    transform: rotate(-45deg);
 }
 
 .typeahead > span {
