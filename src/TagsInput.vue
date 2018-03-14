@@ -157,6 +157,7 @@ export default {
         tagFromSearch(tag) {
             this.searchResults = [];
             this.input = '';
+            this.oldInput = '';
             
             this.addTag(tag.slug, tag.text);
         },
