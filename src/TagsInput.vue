@@ -52,7 +52,7 @@ export default {
         },
 
         existingTags: {
-            type: Object,
+            type: [Array, Object],
             default: () => {
                 return {};
             }
