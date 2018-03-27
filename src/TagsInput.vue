@@ -13,11 +13,11 @@
             <input type="text"
                 :placeholder="placeholder"
                 v-model="input"
-                @keypress.enter.prevent="tagFromInput"
-                @keypress.backspace="removeLastTag"
-                @keypress.down="nextSearchResult"
-                @keypress.up="prevSearchResult"
-                @keypress.esc="ignoreSearchResults"
+                @keyup.enter.prevent="tagFromInput"
+                @keydown.delete="removeLastTag"
+                @keydown.down="nextSearchResult"
+                @keydown.up="prevSearchResult"
+                @keyup.esc="ignoreSearchResults"
                 @keyup="searchTag"
                 @value="tags">
 
