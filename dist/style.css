@@ -96,3 +96,7 @@
 .tags-input-remove:after {
     transform: rotate(-45deg);
 }
+
+.tags-input input:focus {
+    outline: none;
+}
