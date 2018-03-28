@@ -116,6 +116,7 @@ placeholder | String | 'Add a tag' | no | The placeholder of the tag input.
 limit | Number | 0 | no | Limit the number of tags that can be chosen. 0 = no limit.
 only-existing-tags | Boolean | false | no | Only existing tags can be added/chosen. New tags won't be created.
 input-class | String | 'tags-input-default-class' | no | Apply a class to make the wrapping div look like an input. For example, you can use 'form-control' for Bootstrap or 'input' for Bulma.
+delete-on-backspace | Boolean | true | no | Whether deleting tags by pressing Backspace is allowed.
 
 ## Data
 

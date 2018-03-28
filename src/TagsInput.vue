@@ -83,6 +83,11 @@ export default {
         onlyExistingTags: {
             type: Boolean,
             default: false
+        },
+        
+        deleteOnBackspace: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -185,7 +190,7 @@ export default {
         },
 
         removeLastTag(e) {
-            if (!e.target.value.length) {
+            if (!e.target.value.length && this.deleteOnBackspace) {
                 this.removeTag(this.tags.length - 1);
             }
         },
