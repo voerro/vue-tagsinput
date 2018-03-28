@@ -14,7 +14,7 @@
                 :placeholder="placeholder"
                 v-model="input"
                 @keyup.enter.prevent="tagFromInput"
-                @keydown.delete="removeLastTag"
+                @keydown.8="removeLastTag"
                 @keydown.down="nextSearchResult"
                 @keydown.up="prevSearchResult"
                 @keyup.esc="ignoreSearchResults"
