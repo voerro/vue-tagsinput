@@ -13,15 +13,15 @@
             <input type="text"
                 :placeholder="placeholder"
                 v-model="input"
-                @keypress.enter.prevent="tagFromInput"
-                @keypress.backspace="removeLastTag"
-                @keypress.down="nextSearchResult"
-                @keypress.up="prevSearchResult"
-                @keypress.esc="ignoreSearchResults"
+                @keydown.enter.prevent="tagFromInput"
+                @keydown.backspace="removeLastTag"
+                @keydown.down="nextSearchResult"
+                @keydown.up="prevSearchResult"
+                @keydown.esc="ignoreSearchResults"
                 @keyup="searchTag"
                 @value="tags">
 
-            <input type="hidden" v-if="elementId" 
+            <input type="hidden" v-if="elementId"
                 :name="elementId"
                 :id="elementId"
                 v-model="hiddenInput">
@@ -64,7 +64,7 @@ export default {
                 return [];
             }
         },
-        
+
         typeahead: {
             type: Boolean,
             default: false
@@ -83,6 +83,10 @@ export default {
         onlyExistingTags: {
             type: Boolean,
             default: false
+        },
+        value: {
+          type: Array,
+          default: []
         }
     },
 
@@ -95,37 +99,23 @@ export default {
             input: '',
             oldInput: '',
             hiddenInput: '',
-            
+
             searchResults: [],
-            searchSelection: 0,
+            searchSelection: 0
         };
     },
-
-    created() {
-        if (this.oldTags && this.oldTags.length) {
-            let oldTags = Array.isArray(this.oldTags)
-                ? this.oldTags
-                : this.oldTags.split(',');
-
-            for (let slug of oldTags) {
-                let existingTag = this.existingTags[slug];
-                let text = existingTag ? existingTag : slug;
-
-                this.addTag(slug, text);
-            }
-        }
-    },
-
     watch: {
-        tags() {
+        tags: function() {
             // Updating the hidden input
             this.hiddenInput = this.tags.join(',');
 
             // Update the bound v-model value
             this.$emit('input', this.tags);
+        },
+        value: function () {
+            this.resetTags(this.value);
         }
     },
-
     methods: {
         tagFromInput(e) {
             // If we're choosing a tag from the search results
@@ -158,7 +148,7 @@ export default {
             this.searchResults = [];
             this.input = '';
             this.oldInput = '';
-            
+
             this.addTag(tag.slug, tag.text);
         },
 
@@ -240,7 +230,34 @@ export default {
         ignoreSearchResults() {
             this.searchResults = [];
             this.searchSelection = 0;
+        },
+
+        clearTags()
+        {
+            this.tags.splice(0, this.tags.length);
+            this.tagBadges.splice(0, this.tagBadges.length);
+        },
+
+        resetTags(newTags) {
+            if(this.tags == newTags)
+              return;
+
+            this.clearTags();
+
+            if (newTags && newTags.length) {
+                let desiredTags = Array.isArray(newTags)
+                    ? newTags
+                    : newTags.split(',');
+
+                for (let slug of newTags) {
+                    let existingTag = this.existingTags[slug];
+                    let text = existingTag ? existingTag : slug;
+
+                    this.addTag(slug, text);
+                }
+            }
         }
+
     }
 }
 </script>
