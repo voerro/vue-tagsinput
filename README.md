@@ -23,9 +23,9 @@ npm i @voerro/vue-tagsinput --save
 Then register the component with Vue:
 
 ```javascript
-import TagsInput from '@voerro/vue-tagsinput';
+import VoerroTagsInput from '@voerro/vue-tagsinput';
 
-Vue.component('tags-input', TagsInput);
+Vue.component('tags-input', VoerroTagsInput);
 ```
 
 Include the `dist/style.css` file on your page to apply the styling. Read the `Styling` section to learn how to modify the appearance.
@@ -41,7 +41,7 @@ If you're not using NPM, you can manually include the `dist/voerro-vue-tagsinput
 <script>
     new Vue({
         el: '#app',
-        components: { TagsInput },
+        components: { VoerroTagsInput },
     });
 </script>
 ```
@@ -97,7 +97,7 @@ You can pre-set the value of this variable:
 new Vue({
     el: '#app',
 
-    components: { TagsInput },
+    components: { VoerroTagsInput },
 
     data: {
         selectedTags: [
@@ -117,7 +117,7 @@ new Vue({
 new Vue({
     el: '#app',
 
-    components: { TagsInput },
+    components: { VoerroTagsInput },
 
     data: {
         selectedTags: [],
@@ -174,3 +174,7 @@ When search results are displayed underneath the input, use the `arrow down` and
 #### Older versions up to v1.4.0 -> v1.5.0
 
 The `oldTags` property was removed. See the `Setting Selected Tags Programmatically` section on how to (pre)set the list of existing tags.
+
+#### v1.5.0 -> v1.5.1
+
+Renamed `TagsInput` to `VoerroTagsInput` to eliminate possible name conflicts with other packages.

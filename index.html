@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="column">
-                    <tags-input
+                    <voerro-tags-input
                         v-model="selectedTags"
                         element-id="tags"
                         :existing-tags="{
@@ -96,7 +96,7 @@
                         :placeholder="placeholder"
                         :limit="limit"
                         :only-existing-tags="onlyExistingTags"
-                        :delete-on-backspace="deleteOnBackspace"></tags-input>
+                        :delete-on-backspace="deleteOnBackspace"></voerro-tags-input>
 
                     <hr>
 
@@ -115,7 +115,7 @@
         new Vue({
             el: '#voerro-tags-input-demo-vqk6etkfjrcpsjg5',
 
-            components: { TagsInput },
+            components: { VoerroTagsInput },
 
             data: {
                 selectedTags: [

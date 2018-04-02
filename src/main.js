@@ -1,7 +1,5 @@
-import TagsInput from './TagsInput.vue'
+import VoerroTagsInput from './VoerroTagsInput.vue'
 
-if (document.querySelector('#voerro-tags-input-demo-vqk6etkfjrcpsjg5')) {
-    window.TagsInput = TagsInput;
-}
+window.VoerroTagsInput = VoerroTagsInput;
 
-export default TagsInput;
+export default VoerroTagsInput;
