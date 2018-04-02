@@ -58,7 +58,7 @@ export default {
             }
         },
 
-        oldTags: {
+        value: {
             type: [Array, String],
             default: () => {
                 return [];
@@ -88,7 +88,7 @@ export default {
         deleteOnBackspace: {
             type: Boolean,
             default: true
-        }
+        },
     },
 
     data() {
@@ -106,19 +106,8 @@ export default {
         };
     },
 
-    created() {
-        if (this.oldTags && this.oldTags.length) {
-            let oldTags = Array.isArray(this.oldTags)
-                ? this.oldTags
-                : this.oldTags.split(',');
-
-            for (let slug of oldTags) {
-                let existingTag = this.existingTags[slug];
-                let text = existingTag ? existingTag : slug;
-
-                this.addTag(slug, text);
-            }
-        }
+    created () {
+        this.tagsFromValue();
     },
 
     watch: {
@@ -128,6 +117,10 @@ export default {
 
             // Update the bound v-model value
             this.$emit('input', this.tags);
+        },
+
+        value() {
+            this.tagsFromValue();
         }
     },
 
@@ -245,6 +238,44 @@ export default {
         ignoreSearchResults() {
             this.searchResults = [];
             this.searchSelection = 0;
+        },
+
+        /**
+        * Clear the list of selected tags
+        */
+        clearTags() {
+            this.tags.splice(0, this.tags.length);
+            this.tagBadges.splice(0, this.tagBadges.length);
+        },
+
+        /**
+        * Replace the currently selected tags with the tags from the value
+        */
+        tagsFromValue() {
+            if (this.value && this.value.length) {
+                let tags = Array.isArray(this.value)
+                    ? this.value
+                    : this.value.split(',');
+
+                if (this.tags == tags) {
+                    return;
+                }
+
+                this.clearTags();
+
+                for (let slug of tags) {
+                    let existingTag = this.existingTags[slug];
+                    let text = existingTag ? existingTag : slug;
+
+                    this.addTag(slug, text);
+                }
+            } else {
+                if (this.tags.length == 0) {
+                    return;
+                }
+
+                this.clearTags();
+            }
         }
     }
 }

@@ -28,13 +28,25 @@ import TagsInput from '@voerro/vue-tagsinput';
 Vue.component('tags-input', TagsInput);
 ```
 
-You might also need to add this line if removing tags by pressing backspace doesn't work (usually it works without the line):
+Include the `dist/style.css` file on your page to apply the styling. Read the `Styling` section to learn how to modify the appearance.
 
-```javascript
-Vue.config.keyCodes.backspace = 8;
+## Installation via "CDN"
+
+If you're not using NPM, you can manually include the `dist/voerro-vue-tagsinput.js` file on your page. Don't forget to include Vue as well.
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+<script src="dist/build.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        components: { TagsInput },
+    });
+</script>
 ```
 
-Also read the `Styling` section to learn how to make the input look like in the live demo.
+Include the `dist/style.css` file on your page to apply the styling. Read the `Styling` section to learn how to modify the appearance.
 
 ## Usage
 
@@ -66,42 +78,59 @@ Also read the `Styling` section to learn how to make the input look like in the 
 
 Remove the `typeahead` property to disable this functionality.
 
-#### "Old" Tags
+#### Setting Selected Tags Programmatically
 
-If you need to display a list of already attached tags, use the `:old-tags` property. Provide an array of tag slugs, tag ids, or just strings.
+If you need to programmatically (manually) set or change the list of selected tags from "outside" - just set the required value to the variable bound with the component via `v-model`.
 
+Acceptable values:
+- an array of tag slugs or tag strings
+- a string with tags separated via comma)
+
+For example, the variable name is `selectedTags`:
 ```html
-<tags-input element-id="tags"
-    :existing-tags="{ 
-        'web-development': 'Web Development',
-        'php': 'PHP',
-        'javascript': 'JavaScript',
-    }"
-    :old-tags="[
-        'php',
-        'javascript',
-    ]"
-    :typeahead="true"></tags-input>
+<tags-input element-id="tags" 
+    v-model="selectedTags"></tags-input>
 ```
 
-In this Laravel example we attach either the tags from `old()`, the tags of an existing blog post, or nothing, depending on what's available.
+You can pre-set the value of this variable:
+```javascript
+new Vue({
+    el: '#app',
 
-```html
-<tags-input element-id="tags"
-    :existing-tags="{ 
-        'web-development': 'Web Development',
-        'php': 'PHP',
-        'javascript': 'JavaScript',
-    }"
-    :old-tags="{{ 
-        old('tags') ? json_encode(old('tags')) :
-        (
-            isset($postTags)
-            ? json_encode($postTags)
-            : json_encode('')
-        ) 
-    }}"
-    :typeahead="true"></tags-input>
+    components: { TagsInput },
+
+    data: {
+        selectedTags: [
+            'tags',
+            'selected',
+            'by',
+            'default',
+        ],
+        // ALTERNATIVELY
+        selectedTags: 'tags,selected,by,default',
+    }
+});
+```
+
+... or change it whenever you need to:
+```javascript
+new Vue({
+    el: '#app',
+
+    components: { TagsInput },
+
+    data: {
+        selectedTags: [],
+    },
+
+    methods: {
+        setSelectedTags() {
+            this.selectedTags = ['programmatically', 'selected', 'tags'];
+            // ALTERNATIVELY
+            this.selectedTags = 'programmatically,selected,tags';
+        }
+    }
+});
 ```
 
 #### All Available Props
@@ -110,7 +139,6 @@ Prop | Type | Default | Required | Description
 --- | --- | --- | --- | ---
 elementId | String | - | no | id & name for the hidden input
 existingTags | Object | {} | no | An object with existing tags where keys are tag slugs or ids and values are strings to be displayed
-oldTags | Array, String | [] | no | A list of already selected tags in the form of an array or a comma separated string.
 typeahead | Boolean | false | no | Whether the typeahead (autocomplete) functionality should be enabled.
 placeholder | String | 'Add a tag' | no | The placeholder of the tag input.
 limit | Number | 0 | no | Limit the number of tags that can be chosen. 0 = no limit.
@@ -133,14 +161,16 @@ web-development,javascript,This is a new tag,php
 
 ## Styling
 
-To apply styling include the `dist/style.css` file on your page. Copy and edit the file if you want to modify the package's appearance. If you're using Bootstrap 4 you can delete the `.badge*` classes as they were copied from the default Bootstrap 4's css.
+Edit the `dist/style.css` file if you want to modify the package's appearance. If you're using Bootstrap 4 you can delete the `.badge*` classes as they were copied from the default Bootstrap 4's css.
 
 You can apply a wrapper class to make the input look different via the `input-class` prop. `input-class="form-control"` if you're working with bootstrap, `input-class="input"` if you're working with Bulma, or `input-class="your-custom-class"` if you have something else.
 
-## Typeahead
+## Using Typeahead (Autocomplete)
 
 When search results are displayed underneath the input, use the `arrow down` and `arrow up` keys on the keyboard to move the selection. Press `Enter` to select a tag. Press `Esc` to discard the search results and then `Enter` to add a new tag the way you've typed it.
 
-## License
+## Updating From Older Versions
 
-This is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+#### Older versions up to v1.4.0 -> v1.5.0
+
+The `oldTags` property was removed. See the `Setting Selected Tags Programmatically` section on how to (pre)set the list of existing tags.

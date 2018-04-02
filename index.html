@@ -92,11 +92,6 @@
                             'jeff-loomis': 'Jeff Loomis',
                             'persefone': 'Persefone',
                         }"
-                        :old-tags="[
-                            'ne-obliviscaris',
-                            'epica',
-                            'shape-of-despair',
-                        ]"
                         :typeahead="typeahead"
                         :placeholder="placeholder"
                         :limit="limit"
@@ -114,7 +109,7 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
-    <script src="dist/build.js"></script>
+    <script src="dist/voerro-vue-tagsinput.js"></script>
 
     <script>
         new Vue({
@@ -123,7 +118,11 @@
             components: { TagsInput },
 
             data: {
-                selectedTags: [],
+                selectedTags: [
+                    'ne-obliviscaris',
+                    'epica',
+                    'shape-of-despair',
+                ],
                 typeahead: true,
                 placeholder: 'Customizable placeholder',
                 limit: 0,
