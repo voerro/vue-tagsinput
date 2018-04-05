@@ -13,7 +13,7 @@
             <input type="text"
                 :placeholder="placeholder"
                 v-model="input"
-                @keyup.enter.prevent="tagFromInput"
+                @keydown.enter.prevent="tagFromInput"
                 @keydown.8="removeLastTag"
                 @keydown.down="nextSearchResult"
                 @keydown.up="prevSearchResult"
