@@ -177,4 +177,4 @@ The `oldTags` property was removed. See the `Setting Selected Tags Programmatica
 
 #### v1.5.0 -> v1.5.1
 
-Renamed `TagsInput` to `VoerroTagsInput` to eliminate possible name conflicts with other packages.
+`TagsInput` was renamed to `VoerroTagsInput` to eliminate possible name conflicts with other packages.
