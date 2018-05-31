@@ -71,6 +71,15 @@
                             </label>
                         </div>
                     </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="allowDuplicates"> 
+                                Allow Duplicates
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="column">
@@ -96,7 +105,8 @@
                         :placeholder="placeholder"
                         :limit="limit"
                         :only-existing-tags="onlyExistingTags"
-                        :delete-on-backspace="deleteOnBackspace"></voerro-tags-input>
+                        :delete-on-backspace="deleteOnBackspace"
+                        :allow-duplicates="allowDuplicates"></voerro-tags-input>
 
                     <hr>
 
@@ -128,6 +138,7 @@
                 limit: 0,
                 onlyExistingTags: false,
                 deleteOnBackspace: true,
+                allowDuplicates: false,
             }
         });
     </script>

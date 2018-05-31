@@ -89,6 +89,11 @@ export default {
             type: Boolean,
             default: true
         },
+
+        allowDuplicates: {
+            type: Boolean,
+            default: false
+        },
     },
 
     data() {
@@ -171,12 +176,7 @@ export default {
             }
 
             // Attach the tag if it hasn't been attached yet
-            let searchSlug = this.makeSlug(slug);
-            let found = this.tags.find((value) => {
-                return searchSlug == this.makeSlug(value);
-            });
-
-            if (!found) {
+            if (!this.tagSelected(slug)) {
                 this.tagBadges.push(text.replace(/\s/g, '&nbsp;'));
                 this.tags.push(slug);
             }
@@ -204,7 +204,7 @@ export default {
                         for (let slug in this.existingTags) {
                             let text = this.existingTags[slug].toLowerCase();
 
-                            if (text.search(input.toLowerCase()) > -1) {
+                            if (text.search(input.toLowerCase()) > -1 && ! this.tagSelected(slug)) {
                                 this.searchResults.push({ slug, text: this.existingTags[slug] });
                             }
                         }
@@ -276,6 +276,26 @@ export default {
 
                 this.clearTags();
             }
+        },
+
+        /**
+        * Check if the tag with the provided slug is already selected
+        */
+        tagSelected(slug) {
+            if (this.allowDuplicates) {
+                return false;
+            }
+
+            if (! slug) {
+                return false;
+            }
+
+            let searchSlug = this.makeSlug(slug);
+            let found = this.tags.find((value) => {
+                return searchSlug == this.makeSlug(value);
+            });
+
+            return !! found;
         }
     }
 }
