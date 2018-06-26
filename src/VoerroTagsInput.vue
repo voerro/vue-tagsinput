@@ -21,7 +21,7 @@
                 @keyup="searchTag"
                 @value="tags">
 
-            <input type="hidden" v-if="elementId" 
+            <input type="hidden" v-if="elementId"
                 :name="elementId"
                 :id="elementId"
                 v-model="hiddenInput">
@@ -64,10 +64,15 @@ export default {
                 return [];
             }
         },
-        
+
         typeahead: {
             type: Boolean,
             default: false
+        },
+
+        typeaheadMinimumCharacters: {
+            type: Number,
+            default: 0
         },
 
         placeholder: {
@@ -84,7 +89,7 @@ export default {
             type: Boolean,
             default: false
         },
-        
+
         deleteOnBackspace: {
             type: Boolean,
             default: true
@@ -105,7 +110,7 @@ export default {
             input: '',
             oldInput: '',
             hiddenInput: '',
-            
+
             searchResults: [],
             searchSelection: 0,
         };
@@ -161,7 +166,7 @@ export default {
             this.searchResults = [];
             this.input = '';
             this.oldInput = '';
-            
+
             this.addTag(tag.slug, tag.text);
         },
 
@@ -200,7 +205,7 @@ export default {
                     this.searchSelection = 0;
                     let input = this.input.trim();
 
-                    if (input.length) {
+                    if (input.length && input.length >= this.typeaheadMinimumCharacters) {
                         for (let slug in this.existingTags) {
                             let text = this.existingTags[slug].toLowerCase();
 
