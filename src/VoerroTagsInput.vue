@@ -75,6 +75,11 @@ export default {
             default: 0
         },
 
+        typeaheadMaxResults: {
+            type: Number,
+            default: 20
+        },
+
         placeholder: {
             type: String,
             default: 'Add a tag'
@@ -221,6 +226,9 @@ export default {
 
                             return 0;
                         });
+
+                        // Shorten Searchresults to desired length
+                        this.searchResults = this.searchResults.slice(0, this.typeaheadMaxResults);
                     }
 
                     this.oldInput = this.input;
