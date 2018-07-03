@@ -140,6 +140,8 @@ Prop | Type | Default | Required | Description
 elementId | String | - | no | id & name for the hidden input
 existingTags | Object | {} | no | An object with existing tags where keys are tag slugs or ids and values are strings to be displayed
 typeahead | Boolean | false | no | Whether the typeahead (autocomplete) functionality should be enabled.
+typeahead-max-results | Number | 0 | no | Maximum number of typeahead results to be shown. 0 - unlimited.
+typeahead-activation-threshold | Number | 1 | no | Show typeahead results only after at least this many characters were entered.
 placeholder | String | 'Add a tag' | no | The placeholder of the tag input.
 limit | Number | 0 | no | Limit the number of tags that can be chosen. 0 = no limit.
 only-existing-tags | Boolean | false | no | Only existing tags can be added/chosen. New tags won't be created.

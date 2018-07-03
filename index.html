@@ -14,6 +14,7 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">@voerro/vue-tagsinput</h1>
+
                 <h2 class="subtitle">
                     Tags input for Vue.js 2 by
                     <a href="http://voerro.com">Voerro</a>
@@ -27,16 +28,11 @@
         <div style="padding: 2rem;">
             <div class="columns">
                 <div class="column is-3">
-                    <h2 class="is-size-4" style="margin-bottom: 1rem;">Options</h2>
+                    <h2 class="is-size-4" style="margin-bottom: 1rem;">
+                        <a href="https://github.com/voerro/vue-tagsinput" target="_blank">Documentation</a>
+                    </h2>
 
-                    <div class="field">
-                        <div class="control">
-                            <label class="checkbox">
-                                <input type="checkbox" v-model="typeahead">
-                                Typeahead/autocomplete on
-                            </label>
-                        </div>
-                    </div>
+                    <h2 class="is-size-4" style="margin-bottom: 1rem;">Options</h2>
 
                     <div class="field">
                         <label class="label">Placeholder</label>
@@ -51,6 +47,32 @@
                     
                         <div class="control">
                             <input class="input" type="text" v-model="limit">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="typeahead"> Typeahead/autocomplete on
+                            </label>
+                        </div>
+                    </div>
+
+                    <div v-show="typeahead" style="margin-bottom: 1rem;">
+                        <div class="field">
+                            <label class="label">Typeahead Max Results</label>
+                        
+                            <div class="control">
+                                <input class="input" type="text" v-model="typeaheadMaxResults">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Typeahead Activation Threshold</label>
+                        
+                            <div class="control">
+                                <input class="input" type="text" v-model="typeaheadActivationThreshold">
+                            </div>
                         </div>
                     </div>
 
@@ -102,6 +124,8 @@
                             'persefone': 'Persefone',
                         }"
                         :typeahead="typeahead"
+                        :typeahead-max-results="typeaheadMaxResults"
+                        :typeahead-activation-threshold="typeaheadActivationThreshold"
                         :placeholder="placeholder"
                         :limit="limit"
                         :only-existing-tags="onlyExistingTags"
@@ -139,6 +163,8 @@
                 onlyExistingTags: false,
                 deleteOnBackspace: true,
                 allowDuplicates: false,
+                typeaheadMaxResults: 20,
+                typeaheadActivationThreshold: 1,
             }
         });
     </script>

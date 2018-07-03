@@ -70,14 +70,14 @@ export default {
             default: false
         },
 
-        typeaheadMinimumCharacters: {
+        typeaheadActivationThreshold: {
             type: Number,
-            default: 0
+            default: 1
         },
 
         typeaheadMaxResults: {
             type: Number,
-            default: 20
+            default: 0
         },
 
         placeholder: {
@@ -210,7 +210,7 @@ export default {
                     this.searchSelection = 0;
                     let input = this.input.trim();
 
-                    if (input.length && input.length >= this.typeaheadMinimumCharacters) {
+                    if (input.length && input.length >= this.typeaheadActivationThreshold) {
                         for (let slug in this.existingTags) {
                             let text = this.existingTags[slug].toLowerCase();
 
@@ -228,7 +228,12 @@ export default {
                         });
 
                         // Shorten Searchresults to desired length
-                        this.searchResults = this.searchResults.slice(0, this.typeaheadMaxResults);
+                        if (this.typeaheadMaxResults > 0) {
+                            this.searchResults = this.searchResults.slice(
+                                0,
+                                this.typeaheadMaxResults
+                            );
+                        }
                     }
 
                     this.oldInput = this.input;
