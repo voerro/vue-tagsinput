@@ -155,8 +155,8 @@ export default {
                 // If we're adding an unexisting tag
                 let text = this.input.trim();
 
-                // If the new tag is not an empty string
-                if (!this.onlyExistingTags && text.length) {
+                // If the new tag is not an empty string and passes validation
+                if (!this.onlyExistingTags && text.length && this.validate(text)) {
                     this.input = '';
 
                     // Determine the tag's slug and text depending on if the tag exists
@@ -186,7 +186,7 @@ export default {
 
         addTag(slug, text) {
             // Check if the limit has been reached
-            if ((this.limit > 0 && this.tags.length >= this.limit) || ! this.validate(text)) {
+            if (this.limit > 0 && this.tags.length >= this.limit) {
                 return false;
             }
 
