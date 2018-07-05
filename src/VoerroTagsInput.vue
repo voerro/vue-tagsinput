@@ -104,6 +104,11 @@ export default {
             type: Boolean,
             default: false
         },
+        
+        validate: {
+            type: Function,
+            default: () => true
+        }
     },
 
     data() {
@@ -181,7 +186,7 @@ export default {
 
         addTag(slug, text) {
             // Check if the limit has been reached
-            if (this.limit > 0 && this.tags.length >= this.limit) {
+            if (this.limit > 0 && this.tags.length >= this.limit && ! this.validate(text)) {
                 return false;
             }
 
