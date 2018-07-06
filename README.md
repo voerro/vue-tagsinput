@@ -148,6 +148,7 @@ only-existing-tags | Boolean | false | no | Only existing tags can be added/chos
 input-class | String | 'tags-input-default-class' | no | Apply a class to make the wrapping div look like an input. For example, you can use 'form-control' for Bootstrap or 'input' for Bulma.
 delete-on-backspace | Boolean | true | no | Whether deleting tags by pressing Backspace is allowed.
 allow-duplicates | Boolean | false | no | Allow users to add the same tags multiple times.
+validate | Function | `text => true` | false | Callback to validate the text with
 
 ## Data
 
