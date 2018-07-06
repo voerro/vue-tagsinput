@@ -28,15 +28,15 @@ import VoerroTagsInput from '@voerro/vue-tagsinput';
 Vue.component('tags-input', VoerroTagsInput);
 ```
 
-Include the `dist/style.css` file on your page to apply the styling. Read the `Styling` section to learn how to modify the appearance.
+Include the `dist/style.css` file on your page to apply the styling. You can use CDN, `require()` it inside your JS code, or `@include` it inside your (S)CSS assets. Read the `Styling` section to learn how to modify the appearance.
 
-## Installation via "CDN"
+## Installation via CDN
 
-If you're not using NPM, you can manually include the `dist/voerro-vue-tagsinput.js` file on your page. Don't forget to include Vue as well.
+If you're not using NPM, you can include the required files into your page manually from a CDN. Don't forget to include Vue as well. For example:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
-<script src="dist/build.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@1.8.0/dist/voerro-vue-tagsinput.js"></script>
 
 <script>
     new Vue({
@@ -46,7 +46,13 @@ If you're not using NPM, you can manually include the `dist/voerro-vue-tagsinput
 </script>
 ```
 
-Include the `dist/style.css` file on your page to apply the styling. Read the `Styling` section to learn how to modify the appearance.
+Include the CSS file on your page to apply the styling. Read the `Styling` section to learn how to modify the appearance.
+
+```
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@1.8.0/dist/style.css">
+```
+
+**IMPORTANT:** Always grab the latest versions of the package from [JSDELIVR](https://www.jsdelivr.com/package/npm/@voerro/vue-tagsinput?path=dist), the ones provided in the examples above might be outdated. Same goes for Vue.js.
 
 ## Usage
 
@@ -148,7 +154,7 @@ only-existing-tags | Boolean | false | no | Only existing tags can be added/chos
 input-class | String | 'tags-input-default-class' | no | Apply a class to make the wrapping div look like an input. For example, you can use 'form-control' for Bootstrap or 'input' for Bulma.
 delete-on-backspace | Boolean | true | no | Whether deleting tags by pressing Backspace is allowed.
 allow-duplicates | Boolean | false | no | Allow users to add the same tags multiple times.
-validate | Function | `text => true` | false | Callback to validate the text with
+validate | Function | `text => true` | false | Callback to validate tags' text with
 
 ## Data
 
