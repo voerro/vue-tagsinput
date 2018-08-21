@@ -11,6 +11,7 @@
             </span>
 
             <input type="text"
+                ref="taginput"
                 :placeholder="placeholder"
                 v-model="input"
                 @keydown.enter.prevent="tagFromInput"
@@ -19,6 +20,8 @@
                 @keydown.up="prevSearchResult"
                 @keyup.esc="ignoreSearchResults"
                 @keyup="searchTag"
+                @focus="onFocus"
+                @blur="hideTypeahead"
                 @value="tags">
 
             <input type="hidden" v-if="elementId"
@@ -31,7 +34,7 @@
             <span v-for="(tag, index) in searchResults"
                 :key="index"
                 v-text="tag.text"
-                @click="tagFromSearch(tag)"
+                @mousedown.prevent="tagFromSearchOnClick(tag)"
                 class="badge"
                 v-bind:class="{
                     'badge-primary': index == searchSelection,
@@ -145,7 +148,7 @@ export default {
     },
 
     methods: {
-        tagFromInput(e) {
+        tagFromInput() {
             // If we're choosing a tag from the search results
             if (this.searchResults.length && this.searchSelection >= 0) {
                 this.tagFromSearch(this.searchResults[this.searchSelection]);
@@ -170,6 +173,12 @@ export default {
                     this.addTag(slug, text);
                 }
             }
+        },
+
+        tagFromSearchOnClick(tag) {
+            this.tagFromSearch(tag);
+
+            this.$refs['taginput'].blur();
         },
 
         tagFromSearch(tag) {
@@ -197,8 +206,8 @@ export default {
             }
         },
 
-        removeLastTag(e) {
-            if (!e.target.value.length && this.deleteOnBackspace) {
+        removeLastTag() {
+            if (!this.input.length && this.deleteOnBackspace) {
                 this.removeTag(this.tags.length - 1);
             }
         },
@@ -208,14 +217,14 @@ export default {
             this.tagBadges.splice(index, 1);
         },
 
-        searchTag(e) {
+        searchTag() {
             if (this.typeahead === true) {
-                if (this.oldInput != this.input) {
+                if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0)) {
                     this.searchResults = [];
                     this.searchSelection = 0;
                     let input = this.input.trim();
 
-                    if (input.length && input.length >= this.typeaheadActivationThreshold) {
+                    if ((input.length && input.length >= this.typeaheadActivationThreshold) || this.typeaheadActivationThreshold == 0) {
                         for (let slug in this.existingTags) {
                             let text = this.existingTags[slug].toLowerCase();
 
@@ -232,7 +241,7 @@ export default {
                             return 0;
                         });
 
-                        // Shorten Searchresults to desired length
+                        // Shorten Search results to desired length
                         if (this.typeaheadMaxResults > 0) {
                             this.searchResults = this.searchResults.slice(
                                 0,
@@ -243,6 +252,18 @@ export default {
 
                     this.oldInput = this.input;
                 }
+            }
+        },
+
+        onFocus() {
+            this.searchTag();
+        },
+
+        hideTypeahead() {
+            if (! this.input.length) {
+                this.$nextTick(() => {
+                    this.ignoreSearchResults();
+                });
             }
         },
 
