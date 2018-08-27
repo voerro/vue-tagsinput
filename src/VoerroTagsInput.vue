@@ -148,6 +148,10 @@ export default {
     },
 
     methods: {
+        escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        },
+
         tagFromInput() {
             // If we're choosing a tag from the search results
             if (this.searchResults.length && this.searchSelection >= 0) {
@@ -228,7 +232,7 @@ export default {
                         for (let slug in this.existingTags) {
                             let text = this.existingTags[slug].toLowerCase();
 
-                            if (text.search(input.toLowerCase()) > -1 && ! this.tagSelected(slug)) {
+                            if (text.search(this.escapeRegExp(input.toLowerCase())) > -1 && ! this.tagSelected(slug)) {
                                 this.searchResults.push({ slug, text: this.existingTags[slug] });
                             }
                         }
