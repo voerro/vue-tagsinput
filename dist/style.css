@@ -100,3 +100,7 @@
 .tags-input input:focus {
     outline: none;
 }
+
+.tags-input input[type="text"] {
+    color: #495057;
+}
