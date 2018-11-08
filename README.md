@@ -156,6 +156,51 @@ delete-on-backspace | Boolean | true | no | Whether deleting tags by pressing Ba
 allow-duplicates | Boolean | false | no | Allow users to add the same tags multiple times.
 validate | Function | `text => true` | false | Callback to validate tags' text with
 
+#### Events
+
+Event | Description
+--- | ---
+@initialized | Fired when the component is completely ready to be worked with. Fired from the Vue.js' `mounted()` method.
+@tag-added | Fired when a new tag is added. The slug of the tag is passed along.
+@tag-removed | Fired when a tag is removed. The slug of the tag is passed along.
+@tags-updated | Fired when a tag is added or removed.
+
+```html
+<voerro-tags-input
+    ...
+    @initialized="onInitialized"
+    @tag-added="onTagAdded"
+    @tag-removed="onTagRemoved"
+    @tags-updated="onTagsUpdated"
+></voerro-tags-input>
+```
+
+```javascript
+<script>
+new Vue({
+    ...
+    
+    methods: {
+        onInitialized() {
+            console.log('Initialized');
+        },
+
+        onTagAdded(slug) {
+            console.log(`Tag added: ${slug}`);
+        },
+
+        onTagRemoved(slug) {
+            console.log(`Tag removed: ${slug}`);
+        },
+
+        onTagsUpdated() {
+            console.log('Tags updated');
+        },
+    }
+});
+</script>
+```
+
 ## Data
 
 The list of selected tags is stored as a string (tags separated with a comma) inside a hidden input with id and name set to the value from the `element-id` props (but only if you've provided this prop).

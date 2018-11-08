@@ -130,13 +130,22 @@
                         :limit="limit"
                         :only-existing-tags="onlyExistingTags"
                         :delete-on-backspace="deleteOnBackspace"
-                        :allow-duplicates="allowDuplicates"></voerro-tags-input>
+                        :allow-duplicates="allowDuplicates"
+                        @initialized="onInitialized"
+                        @tag-added="onTagAdded"
+                        @tag-removed="onTagRemoved"
+                        @tags-updated="onTagsUpdated"
+                    ></voerro-tags-input>
 
                     <hr>
 
                     <h2 class="is-size-5">Selected tags (via v-model):</h2>
 
                     <p v-text="selectedTags"></p>
+
+                    <h2 class="is-size-5" style="margin-top: 1rem;">Events</h2>
+                    
+                    <pre v-text="eventLog"></pre>
                 </div>
             </div>
         </div>
@@ -165,6 +174,25 @@
                 allowDuplicates: false,
                 typeaheadMaxResults: 20,
                 typeaheadActivationThreshold: 1,
+                eventLog: '',
+            },
+
+            methods: {
+                onInitialized() {
+                    this.eventLog += 'Initialized\n';
+                },
+
+                onTagAdded(slug) {
+                    this.eventLog += `Tag added: ${slug}\n`;
+                },
+
+                onTagRemoved(slug) {
+                    this.eventLog += `Tag removed: ${slug}\n`;
+                },
+
+                onTagsUpdated() {
+                    this.eventLog += 'Tags updated\n';
+                },
             }
         });
     </script>

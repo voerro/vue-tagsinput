@@ -131,6 +131,9 @@ export default {
 
     created () {
         this.tagsFromValue();
+
+        // Emit an event
+        this.$emit('initialized');
     },
 
     watch: {
@@ -208,6 +211,10 @@ export default {
                 this.tagBadges.push(text.replace(/\s/g, '&nbsp;'));
                 this.tags.push(slug);
             }
+
+            // Emit events
+            this.$emit('tag-added', slug);
+            this.$emit('tags-updated');
         },
 
         removeLastTag() {
@@ -217,8 +224,14 @@ export default {
         },
 
         removeTag(index) {
+            let slug = this.tags[index];
+
             this.tags.splice(index, 1);
             this.tagBadges.splice(index, 1);
+
+            // Emit events
+            this.$emit('tag-removed', slug);
+            this.$emit('tags-updated');
         },
 
         searchTag() {
