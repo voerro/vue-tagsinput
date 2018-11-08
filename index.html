@@ -102,6 +102,15 @@
                             </label>
                         </div>
                     </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="addTagsOnComma"> 
+                                Add Tags on Comma Keydown
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="column">
@@ -131,6 +140,7 @@
                         :only-existing-tags="onlyExistingTags"
                         :delete-on-backspace="deleteOnBackspace"
                         :allow-duplicates="allowDuplicates"
+                        :add-tags-on-comma="addTagsOnComma"
                         @initialized="onInitialized"
                         @tag-added="onTagAdded"
                         @tag-removed="onTagRemoved"
@@ -172,6 +182,7 @@
                 onlyExistingTags: false,
                 deleteOnBackspace: true,
                 allowDuplicates: false,
+                addTagsOnComma: false,
                 typeaheadMaxResults: 20,
                 typeaheadActivationThreshold: 1,
                 eventLog: '',

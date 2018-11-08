@@ -143,8 +143,8 @@ new Vue({
 
 Prop | Type | Default | Required | Description
 --- | --- | --- | --- | ---
-elementId | String | - | no | id & name for the hidden input
-existingTags | Object | {} | no | An object with existing tags where keys are tag slugs or ids and values are strings to be displayed
+elementId | String | - | no | id & name for the hidden input.
+existingTags | Object | {} | no | An object with existing tags where keys are tag slugs or ids and values are strings to be displayed.
 typeahead | Boolean | false | no | Whether the typeahead (autocomplete) functionality should be enabled.
 typeahead-max-results | Number | 0 | no | Maximum number of typeahead results to be shown. 0 - unlimited.
 typeahead-activation-threshold | Number | 1 | no | Show typeahead results only after at least this many characters were entered. When set to 0, typeahead with all the available tags will be displayed on input focus.
@@ -154,7 +154,8 @@ only-existing-tags | Boolean | false | no | Only existing tags can be added/chos
 input-class | String | 'tags-input-default-class' | no | Apply a class to make the wrapping div look like an input. For example, you can use 'form-control' for Bootstrap or 'input' for Bulma.
 delete-on-backspace | Boolean | true | no | Whether deleting tags by pressing Backspace is allowed.
 allow-duplicates | Boolean | false | no | Allow users to add the same tags multiple times.
-validate | Function | `text => true` | false | Callback to validate tags' text with
+validate | Function | `text => true` | false | Callback to validate tags' text with.
+add-tags-on-comma | Boolean | false | no | Add new tags when comma is pressed.
 
 #### Events
 
@@ -179,7 +180,7 @@ Event | Description
 <script>
 new Vue({
     ...
-    
+
     methods: {
         onInitialized() {
             console.log('Initialized');

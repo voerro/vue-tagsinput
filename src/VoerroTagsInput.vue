@@ -18,6 +18,7 @@
                 @keydown.8="removeLastTag"
                 @keydown.down="nextSearchResult"
                 @keydown.up="prevSearchResult"
+                @keydown="onKeyDown"
                 @keyup.esc="ignoreSearchResults"
                 @keyup="searchTag"
                 @focus="onFocus"
@@ -111,7 +112,12 @@ export default {
         validate: {
             type: Function,
             default: () => true
-        }
+        },
+
+        addTagsOnComma: {
+            type: Boolean,
+            default: false
+        },
     },
 
     data() {
@@ -357,7 +363,23 @@ export default {
             });
 
             return !! found;
-        }
+        },
+
+        /**
+         * Process all the keydown events
+         */
+        onKeyDown(e) {
+            // Insert a new tag on comma keydown if the option is enabled
+            if (e.key == ',') {
+                if (this.addTagsOnComma) {
+                    // The comma shouldn't actually be inserted
+                    e.preventDefault();
+
+                    // Add the inputed tag
+                    this.tagFromInput();
+                }
+            }
+        },
     }
 }
 </script>
