@@ -60,6 +60,17 @@
 
                     <div v-show="typeahead" style="margin-bottom: 1rem;">
                         <div class="field">
+                            <label class="label">Typeahead Style</label>
+                        
+                            <div class="control">
+                                <select class="input" type="text" v-model="typeaheadStyle">
+                                    <option value="badges">Badges</option>
+                                    <option value="dropdown">Dropdown</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
                             <label class="label">Typeahead Max Results</label>
                         
                             <div class="control">
@@ -133,6 +144,7 @@
                             'persefone': 'Persefone',
                         }"
                         :typeahead="typeahead"
+                        :typeahead-style="typeaheadStyle"
                         :typeahead-max-results="typeaheadMaxResults"
                         :typeahead-activation-threshold="typeaheadActivationThreshold"
                         :placeholder="placeholder"
@@ -177,6 +189,7 @@
                     'shape-of-despair',
                 ],
                 typeahead: true,
+                typeaheadStyle: 'badges',
                 placeholder: 'Customizable placeholder',
                 limit: 0,
                 onlyExistingTags: false,

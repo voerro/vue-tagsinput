@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tags-input-root">
         <div :class="wrapperClass + ' tags-input'">
             <span class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
                 v-for="(badge, index) in tagBadges"
@@ -31,17 +31,33 @@
                 v-model="hiddenInput">
         </div>
 
-        <p v-show="searchResults.length" class="typeahead">
-            <span v-for="(tag, index) in searchResults"
+        <!-- Typeahead/Autocomplete -->
+        <div v-show="searchResults.length">
+            <p v-if="typeaheadStyle == 'badges'" class="typeahead-badges">
+                <span v-for="(tag, index) in searchResults"
+                    :key="index"
+                    v-text="tag.text"
+                    @mouseover="searchSelection = index"
+                    @mousedown.prevent="tagFromSearchOnClick(tag)"
+                    class="tags-input-badge"
+                    v-bind:class="{
+                        'tags-input-typeahead-item-default': index != searchSelection,
+                        'tags-input-typeahead-item-highlighted-default': index == searchSelection
+                    }"></span>
+            </p>
+
+            <ul v-else-if="typeaheadStyle == 'dropdown'" class="typeahead-dropdown">
+                <li v-for="(tag, index) in searchResults"
                 :key="index"
                 v-text="tag.text"
+                @mouseover="searchSelection = index"
                 @mousedown.prevent="tagFromSearchOnClick(tag)"
-                class="tags-input-badge"
                 v-bind:class="{
-                    'tags-input-typeahead-badge-default': index != searchSelection,
-                    'tags-input-typeahead-badge-highlighted-default': index == searchSelection
-                }"></span>
-        </p>
+                    'tags-input-typeahead-item-default': index != searchSelection,
+                    'tags-input-typeahead-item-highlighted-default': index == searchSelection
+                }"></li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -67,6 +83,11 @@ export default {
         typeahead: {
             type: Boolean,
             default: false
+        },
+
+        typeaheadStyle: {
+            type: String,
+            default: 'badges'
         },
 
         typeaheadActivationThreshold: {
@@ -383,3 +404,9 @@ export default {
     }
 }
 </script>
+
+<style>
+.tags-input-root {
+    position: relative;
+}
+</style>
