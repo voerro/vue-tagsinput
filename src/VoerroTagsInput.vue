@@ -33,7 +33,7 @@
 
         <!-- Typeahead/Autocomplete -->
         <div v-show="searchResults.length">
-            <p v-if="typeaheadStyle == 'badges'" class="typeahead-badges">
+            <p v-if="typeaheadStyle === 'badges'" :class="`typeahead-${typeaheadStyle}`">
                 <span v-for="(tag, index) in searchResults"
                     :key="index"
                     v-text="tag.text"
@@ -46,7 +46,7 @@
                     }"></span>
             </p>
 
-            <ul v-else-if="typeaheadStyle == 'dropdown'" class="typeahead-dropdown">
+            <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
                 <li v-for="(tag, index) in searchResults"
                 :key="index"
                 v-text="tag.text"
