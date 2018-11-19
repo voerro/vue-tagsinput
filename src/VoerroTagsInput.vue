@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div :class="inputClass + ' tags-input'">
-            <span class="badge badge-pill badge-light"
+        <div :class="wrapperClass + ' tags-input'">
+            <span class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
                 v-for="(badge, index) in tagBadges"
                 :key="index"
             >
@@ -36,10 +36,10 @@
                 :key="index"
                 v-text="tag.text"
                 @mousedown.prevent="tagFromSearchOnClick(tag)"
-                class="badge"
+                class="tags-input-badge"
                 v-bind:class="{
-                    'badge-primary': index == searchSelection,
-                    'badge-dark': index != searchSelection
+                    'tags-input-typeahead-badge-default': index != searchSelection,
+                    'tags-input-typeahead-badge-highlighted-default': index == searchSelection
                 }"></span>
         </p>
     </div>
@@ -49,11 +49,6 @@
 export default {
     props: {
         elementId: String,
-
-        inputClass: {
-            type: String,
-            default: 'tags-input-default-class'
-        },
 
         existingTags: {
             type: Object,
@@ -117,6 +112,11 @@ export default {
         addTagsOnComma: {
             type: Boolean,
             default: false
+        },
+
+        wrapperClass: {
+            type: String,
+            default: 'tags-input-wrapper-default'
         },
     },
 
@@ -383,28 +383,3 @@ export default {
     }
 }
 </script>
-
-<style>
-/* tags-input */
-.tags-input {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.tags-input input {
-    flex: 1;
-    background: transparent;
-    border: none;
-}
-
-.tags-input span {
-    margin-right: 0.3rem;
-    margin-bottom: 0.2rem;
-}
-
-.typeahead > span {
-    cursor: pointer;
-    margin-right: 0.3rem;
-}
-</style>

@@ -1,65 +1,25 @@
-/**
-* Copied from Bootstrap 4
-*/
-.badge {
-    display: inline-block;
-    padding: 0.25em 0.4em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: 0.25rem;
+/* The input */
+.tags-input {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
-.badge:empty {
-    display: none;
+.tags-input input {
+    flex: 1;
+    background: transparent;
+    border: none;
 }
 
-.badge-pill {
-    padding-right: 0.6em;
-    padding-left: 0.6em;
-    border-radius: 10rem;
+.tags-input input:focus {
+    outline: none;
 }
 
-.badge-primary {
-    color: #fff;
-    background-color: #007bff;
+.tags-input input[type="text"] {
+    color: #495057;
 }
 
-.badge-primary[href]:focus, .badge-primary[href]:hover {
-    color: #fff;
-    text-decoration: none;
-    background-color: #0062cc;
-}
-
-.badge-light {
-    color: #212529;
-    background-color: #f8f9fa;
-}
-
-.badge-light[href]:focus, .badge-light[href]:hover {
-    color: #212529;
-    text-decoration: none;
-    background-color: #dae0e5;
-}
-
-.badge-dark {
-    color: #fff;
-    background-color: #343a40;
-}
-
-.badge-dark[href]:focus, .badge-dark[href]:hover {
-    color: #fff;
-    text-decoration: none;
-    background-color: #1d2124;
-}
-
-/**
-* Original styles
-*/
-.tags-input-default-class {
+.tags-input-wrapper-default {
     padding: .5rem .25rem;
 
     background: #fff;
@@ -67,6 +27,11 @@
     border: 1px solid transparent;
     border-radius: .25rem;
     border-color: #dbdbdb;
+}
+
+/* The tag badges & the remove icon */
+.tags-input span {
+    margin-right: 0.3rem;
 }
 
 .tags-input-remove {
@@ -97,10 +62,42 @@
     transform: rotate(-45deg);
 }
 
-.tags-input input:focus {
-    outline: none;
+/* Tag badge styles */
+.tags-input-badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
 }
 
-.tags-input input[type="text"] {
-    color: #495057;
+.tags-input-badge-pill {
+    padding-right: 0.6em;
+    padding-left: 0.6em;
+    border-radius: 10rem;
+}
+
+.tags-input-badge-selected-default {
+    color: #212529;
+    background-color: #f0f1f2;
+}
+
+/* Typeahead - badges */
+.typeahead > span {
+    cursor: pointer;
+    margin-right: 0.3rem;
+}
+
+.tags-input-typeahead-badge-default {
+    color: #fff;
+    background-color: #343a40;
+}
+
+.tags-input-typeahead-badge-highlighted-default {
+    color: #fff;
+    background-color: #007bff;
 }

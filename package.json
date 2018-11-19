@@ -1,6 +1,6 @@
 {
     "name": "@voerro/vue-tagsinput",
-    "version": "1.10.0",
+    "version": "1.11.0",
     "description": "A simple tags input with typeahead made with Vue.js 2",
     "main": "src/main.js",
     "keywords": [
@@ -9,7 +9,8 @@
         "tagsinput",
         "input",
         "tags",
-        "typeahead"
+        "typeahead",
+        "autocomplete"
     ],
     "author": "Alexander Zavyalov <alex@voerro.com> (http://voerro.com)",
     "license": "MIT",
