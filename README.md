@@ -143,7 +143,7 @@ new Vue({
 #### All Available Props
 
 Prop | Type | Default | Description
---- | --- | --- | --- | ---
+--- | --- | --- | ---
 elementId | String | - | id & name for the hidden input.
 existingTags | Object | {} | An object with existing tags where keys are tag slugs or ids and values are strings to be displayed.
 typeahead | Boolean | false | Whether the typeahead (autocomplete) functionality should be enabled.
