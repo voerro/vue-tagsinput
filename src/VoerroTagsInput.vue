@@ -19,8 +19,8 @@
                 @keydown.down="nextSearchResult"
                 @keydown.up="prevSearchResult"
                 @keydown="onKeyDown"
-                @keyup.esc="ignoreSearchResults"
                 @keyup="searchTag"
+                @keyup.esc="ignoreSearchResults"
                 @focus="onFocus"
                 @blur="hideTypeahead"
                 @value="tags">
