@@ -50,7 +50,7 @@ If you're not using NPM, you can include the required files into your page manua
 Include the CSS file on your page to apply the styling. Read the `Styling` section to learn how to customize the appearance.
 
 ```
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@1.8.0/dist/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@1.11.1/dist/style.css">
 ```
 
 **IMPORTANT:** Always grab the latest versions of the package from [JSDELIVR](https://www.jsdelivr.com/package/npm/@voerro/vue-tagsinput?path=dist), the ones provided in the examples above might be outdated. Same goes for Vue.js.
