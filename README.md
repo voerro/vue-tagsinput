@@ -166,6 +166,10 @@ Event | Description
 @tag-added | Fired when a new tag is added. The slug of the tag is passed along.
 @tag-removed | Fired when a tag is removed. The slug of the tag is passed along.
 @tags-updated | Fired when a tag is added or removed.
+@focus | Fired when a the input is focused
+@blur | Fired when a the input is blurred
+@keydown | Fires on a keydown event
+@keyup | Fires on a keyup event
 
 ```html
 <voerro-tags-input
@@ -174,6 +178,10 @@ Event | Description
     @tag-added="onTagAdded"
     @tag-removed="onTagRemoved"
     @tags-updated="onTagsUpdated"
+    @keydown="onKeyDown"
+    @keyup="onKeyUp"
+    @focus="onFocus"
+    @blur="onBlur"
 ></voerro-tags-input>
 ```
 
@@ -197,6 +205,22 @@ new Vue({
 
         onTagsUpdated() {
             console.log('Tags updated');
+        },
+
+        onBlur() {
+            console.log('Input blurred');
+        },
+
+        onFocus() {
+            console.log('Input focused');
+        },
+
+        onKeyUp() {
+            console.log('Key up');
+        },
+
+        onKeyDown() {
+            console.log('Key down');
         },
     }
 });
