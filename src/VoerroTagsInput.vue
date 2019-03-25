@@ -46,7 +46,10 @@
                     }"></span>
             </p>
 
-            <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
+            <ul v-else-if="typeaheadStyle === 'dropdown'"
+              :class="`typeahead-${typeaheadStyle}`"
+              v-bind:style="typeaheadStyleObject"
+            >
                 <li v-for="(tag, index) in searchResults"
                 :key="index"
                 v-text="tag.text"
@@ -138,6 +141,11 @@ export default {
         wrapperClass: {
             type: String,
             default: 'tags-input-wrapper-default'
+        },
+        
+        typeaheadStyleObject: {
+            type: Object,
+            default: {}
         },
     },
 
