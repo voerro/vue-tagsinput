@@ -158,6 +158,7 @@ delete-on-backspace | Boolean | true | Whether deleting tags by pressing Backspa
 allow-duplicates | Boolean | false | Allow users to add the same tags multiple times.
 validate | Function | `text => true` | Callback to validate tags' text with.
 add-tags-on-comma | Boolean | false | Add new tags when comma is pressed.
+sort-search-results | Boolean | true | Whether the search results should be sorted.
 
 #### Events
 
