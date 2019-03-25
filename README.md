@@ -150,6 +150,7 @@ typeahead | Boolean | false | Whether the typeahead (autocomplete) functionality
 typeahead-style | String | 'badges' | The autocomplete prompt style. Possible values: `badges`, `dropdown`.
 typeahead-max-results | Number | 0 | Maximum number of typeahead results to be shown. 0 - unlimited.
 typeahead-activation-threshold | Number | 1 | Show typeahead results only after at least this many characters were entered. When set to 0, typeahead with all the available tags will be displayed on input focus.
+typeaheadStyleObject | Object | {} | Used in combination with typeahead-style `dropdown` to add extra style to the dropdown.
 placeholder | String | 'Add a tag' | The placeholder of the tag input.
 limit | Number | 0 | Limit the number of tags that can be chosen. 0 = no limit.
 only-existing-tags | Boolean | false | Only existing tags can be added/chosen. New tags won't be created.
