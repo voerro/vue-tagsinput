@@ -1,6 +1,6 @@
 <template>
     <div class="tags-input-root">
-        <div :class="wrapperClass + ' tags-input'">
+        <div :class="wrapperClass + ' tags-input'" @click.self="focusInput()">
             <span class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
                 v-for="(badge, index) in tagBadges"
                 :key="index"
@@ -365,7 +365,11 @@ export default {
                 this.clearTags();
             }
         },
-
+        
+        focusInput() {
+            this.$refs.taginput.focus();
+        },
+        
         /**
         * Check if the tag with the provided slug is already selected
         */
