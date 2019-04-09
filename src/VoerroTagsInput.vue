@@ -164,6 +164,10 @@ export default {
     },
 
     watch: {
+        input() {
+            this.$emit('input-changed', this.input);
+        },
+        
         tags() {
             // Updating the hidden input
             this.hiddenInput = this.tags.join(',');
