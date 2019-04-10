@@ -127,7 +127,7 @@ export default {
             type: Boolean,
             default: false
         },
-        
+
         validate: {
             type: Function,
             default: () => true
@@ -142,7 +142,7 @@ export default {
             type: String,
             default: 'tags-input-wrapper-default'
         },
-        
+
         typeaheadStyleObject: {
             type: Object,
             default: {}
@@ -180,7 +180,7 @@ export default {
         input() {
             this.$emit('input-changed', this.input);
         },
-        
+
         tags() {
             // Updating the hidden input
             this.hiddenInput = this.tags.join(',');
@@ -228,8 +228,6 @@ export default {
 
         tagFromSearchOnClick(tag) {
             this.tagFromSearch(tag);
-
-            this.$refs['taginput'].blur();
         },
 
         tagFromSearch(tag) {
@@ -384,11 +382,11 @@ export default {
                 this.clearTags();
             }
         },
-        
+
         focusInput() {
             this.$refs.taginput.focus();
         },
-        
+
         /**
         * Check if the tag with the provided slug is already selected
         */

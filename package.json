@@ -1,6 +1,6 @@
 {
     "name": "@daanfl/vue-tagsinput",
-    "version": "1.11.2",
+    "version": "1.11.3",
     "description": "A simple tags input with typeahead made with Vue.js 2",
     "main": "src/main.js",
     "keywords": [
@@ -12,7 +12,7 @@
         "typeahead",
         "autocomplete"
     ],
-    "author": "Alexander Zavyalov <alex@voerro.com> (http://voerro.com)",
+    "author": "Daan <daan@motivo.nl> (http://voerro.com)",
     "license": "MIT",
     "scripts": {
         "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
@@ -39,5 +39,5 @@
         "webpack": "^3.6.0",
         "webpack-dev-server": "^2.9.1"
     },
-    "repository": "https://github.com/voerro/vue-tagsinput"
+    "repository": "https://github.com/daanfl/vue-tagsinput"
 }
