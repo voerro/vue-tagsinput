@@ -285,12 +285,12 @@ export default {
 
                         // Sort the search results alphabetically
                         if (this.sortSearchResults) {
-                          this.searchResults.sort((a, b) => {
-                              if (a.text < b.text) return -1;
-                              if (a.text > b.text) return 1;
+                            this.searchResults.sort((a, b) => {
+                                if (a.text < b.text) return -1;
+                                if (a.text > b.text) return 1;
 
-                              return 0;
-                          });
+                                return 0;
+                            });
                         }
 
                         // Shorten Search results to desired length
