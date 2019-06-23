@@ -42,7 +42,7 @@ If you're not using NPM, you can include the required files into your page manua
 <script>
     new Vue({
         el: '#app',
-        components: { "tags-input": VoerroTagsInput },
+        components: { "v-tags-input": VoerroTagsInput },
     });
 </script>
 ```

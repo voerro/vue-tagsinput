@@ -137,21 +137,21 @@
                     <voerro-tags-input
                         v-model="selectedTags"
                         element-id="tags"
-                        :existing-tags="{
-                            'children-of-bodom': 'Children of Bodom',
-                            'epica': 'Epica',
-                            'emperor': 'Emperor',
-                            'shape-of-despair': 'Shape of Despair',
-                            'protest-the-hero': 'Protest the Hero',
-                            'my-dying-bride': 'My Dying Bride',
-                            'ne-obliviscaris': 'Ne Obliviscaris',
-                            'belakor': 'Be\'lakor',
-                            'dark-lunacy': 'Dark Lunacy',
-                            'dominia': 'Dominia',
-                            'jason-becker': 'Jason Becker',
-                            'jeff-loomis': 'Jeff Loomis',
-                            'persefone': 'Persefone',
-                        }"
+                        :existing-tags="[
+                            { key: 'children-of-bodom', value: 'Children of Bodom' },
+                            { key: 'epica', value: 'Epica' },
+                            { key: 'emperor', value: 'Emperor' },
+                            { key: 'shape-of-despair', value: 'Shape of Despair' },
+                            { key: 'protest-the-hero', value: 'Protest the Hero' },
+                            { key: 'my-dying-bride', value: 'My Dying Bride' },
+                            { key: 'ne-obliviscaris', value: 'Ne Obliviscaris' },
+                            { key: 'belakor', value: 'Be\'lakor' },
+                            { key: 'dark-lunacy', value: 'Dark Lunacy' },
+                            { key: 'dominia', value: 'Dominia' },
+                            { key: 'jason-becker', value: 'Jason Becker' },
+                            { key: 'jeff-loomis', value: 'Jeff Loomis' },
+                            { key: 'persefone', value: 'Persefone' },
+                        ]"
                         :typeahead="typeahead"
                         :typeahead-style="typeaheadStyle"
                         :typeahead-max-results="typeaheadMaxResults"
@@ -194,9 +194,18 @@
 
             data: {
                 selectedTags: [
-                    'ne-obliviscaris',
-                    'epica',
-                    'shape-of-despair',
+                    {
+                        key: 'ne-obliviscaris',
+                        value: 'Ne Obliviscaris'
+                    },
+                    {
+                        key: 'epica',
+                        value: 'Epica'
+                    },
+                    {
+                        key: 'shape-of-despair',
+                        value: 'Shape of Despair'
+                    },
                 ],
                 typeahead: true,
                 typeaheadStyle: 'badges',
@@ -221,12 +230,12 @@
                     this.logEvent('Initialized\n');
                 },
 
-                onTagAdded(slug) {
-                    this.logEvent(`Tag added: "${slug}"\n`);
+                onTagAdded(tag) {
+                    this.logEvent(`Tag added: "${JSON.stringify(tag)}"\n`);
                 },
 
-                onTagRemoved(slug) {
-                    this.logEvent(`Tag removed: "${slug}"\n`);
+                onTagRemoved(tag) {
+                    this.logEvent(`Tag removed: "${JSON.stringify(tag)}"\n`);
                 },
 
                 onTagsUpdated() {
