@@ -153,7 +153,17 @@ export default {
         caseSensitiveTags: {
             type: Boolean,
             default: false
-        }
+        },
+
+        beforeAddingTag: {
+            type: Function,
+            default: () => true
+        },
+
+        beforeRemovingTag: {
+            type: Function,
+            default: () => true
+        },
     },
 
     data() {
@@ -291,6 +301,10 @@ export default {
          * @returns void | Boolean
          */
         addTag(tag) {
+            if (!this.beforeAddingTag(tag)) {
+                return false;
+            }
+
             // Check if the limit has been reached
             if (this.limit > 0 && this.tags.length >= this.limit) {
                 return false;
@@ -325,6 +339,10 @@ export default {
          */
         removeTag(index) {
             let tag = this.tags[index];
+
+            if (!this.beforeRemovingTag(tag)) {
+                return false;
+            }
 
             this.tags.splice(index, 1);
 

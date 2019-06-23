@@ -151,6 +151,8 @@ validate | Function | `text => true` | Callback to validate tags' text with.
 add-tags-on-comma | Boolean | false | Add new tags when comma is pressed. The search (typeahead) results are ignored.
 add-tags-on-blur | Boolean | false | Add new tags when on the input is blur. The search (typeahead) results are ignored.
 sort-search-results | Boolean | true | Whether the search results should be sorted.
+before-adding-tag | Function | `tag => true` | Callback to perform additional checks and actions before a tag is added. Return `true` to allow a tag to be added or `false` to forbid the action.
+before-removing-tag | Function | `tag => true` | Callback to perform additional checks and actions before a tag is removed. Return `true` to allow a tag to be added or `false` to forbid the action.
 
 #### Events
 
