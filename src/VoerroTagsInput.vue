@@ -148,6 +148,11 @@ export default {
         sortSearchResults: {
             type: Boolean,
             default: true
+        },
+
+        caseSensitiveTags: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -227,10 +232,18 @@ export default {
                         value: text,
                     };
 
-                    for (let tag of this.existingTags) {
-                        let searchQuery = newTag.value.toLowerCase();
+                    const searchQuery = this.escapeRegExp(
+                        this.caseSensitiveTags
+                            ? newTag.value
+                            : newTag.value.toLowerCase()
+                    );
 
-                        if (searchQuery == tag.value.toLowerCase()) {
+                    for (let tag of this.existingTags) {
+                        const compareable = this.caseSensitiveTags
+                            ? tag.value
+                            : tag.value.toLowerCase();
+
+                        if (searchQuery == compareable) {
                             newTag = Object.assign({}, tag);
 
                             break;
@@ -286,11 +299,11 @@ export default {
             // Attach the tag if it hasn't been attached yet
             if (!this.tagSelected(tag)) {
                 this.tags.push(tag);
-            }
 
-            // Emit events
-            this.$emit('tag-added', tag);
-            this.$emit('tags-updated');
+                // Emit events
+                this.$emit('tag-added', tag);
+                this.$emit('tags-updated');
+            }
         },
 
         /**
@@ -337,10 +350,16 @@ export default {
 
                 if ((input.length && input.length >= this.typeaheadActivationThreshold) || this.typeaheadActivationThreshold == 0) {
                     // Find all the existing tags which include the search text
+                    const searchQuery = this.escapeRegExp(
+                        this.caseSensitiveTags ? input : input.toLowerCase()
+                    );
+
                     for (let tag of this.existingTags) {
-                        let searchQuery = this.escapeRegExp(input.toLowerCase());
+                        const compareable = this.caseSensitiveTags
+                            ? tag.value
+                            : tag.value.toLowerCase();
   
-                        if (tag.value.toLowerCase().search(searchQuery) > -1 && ! this.tagSelected(tag)) {
+                        if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag)) {
                             this.searchResults.push(tag);
                         }
                     }
@@ -471,10 +490,16 @@ export default {
                 return false;
             }
 
-            let searchQuery = tag.value.toLowerCase();
+            const searchQuery = this.escapeRegExp(
+                this.caseSensitiveTags ? tag.value : tag.value.toLowerCase()
+            );
 
             for (let selectedTag of this.tags) {
-                if (selectedTag.key == tag.key && selectedTag.value.toLowerCase() == searchQuery) {
+                const compareable = this.caseSensitiveTags
+                    ? selectedTag.value
+                    : selectedTag.value.toLowerCase();
+
+                if (selectedTag.key == tag.key && compareable == searchQuery) {
                     return true;
                 }
             }
