@@ -264,6 +264,10 @@ The `oldTags` property was removed. See the `Setting Selected Tags Programmatica
 
 `TagsInput` was renamed to `VoerroTagsInput` to eliminate possible name conflicts with other packages.
 
+## Contribution
+
+Everyone is welcome to contribute. When making a contribution, please base your branch off of `dev` and merge it into `dev` as well. Thank you!
+
 ## Support
 
 This software is absolutely free to use and is developed in the author's free time. If you found this software useful and would like to say thank you to the author, please consider making a donation. It's not the amount, it's the gesture.
