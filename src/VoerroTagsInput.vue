@@ -36,7 +36,7 @@
             <p v-if="typeaheadStyle === 'badges'" :class="`typeahead-${typeaheadStyle}`">
                 <span v-for="(tag, index) in searchResults"
                     :key="index"
-                    v-text="tag.text"
+                    v-html="tag.text"
                     @mouseover="searchSelection = index"
                     @mousedown.prevent="tagFromSearchOnClick(tag)"
                     class="tags-input-badge"
@@ -49,7 +49,7 @@
             <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
                 <li v-for="(tag, index) in searchResults"
                 :key="index"
-                v-text="tag.text"
+                v-html="tag.text"
                 @mouseover="searchSelection = index"
                 @mousedown.prevent="tagFromSearchOnClick(tag)"
                 v-bind:class="{
