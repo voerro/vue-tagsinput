@@ -175,7 +175,7 @@
 
                     <p v-text="selectedTags"></p>
 
-                    <h2 class="is-size-5" style="margin-top: 1rem;">Events</h2>
+                    <h2 class="is-size-5" style="margin-top: 1rem;">Data Events (new at the top)</h2>
                     
                     <pre v-text="eventLog"></pre>
                 </div>
@@ -213,20 +213,24 @@
             },
 
             methods: {
+                logEvent(text) {
+                    this.eventLog = text + this.eventLog;
+                },
+
                 onInitialized() {
-                    this.eventLog += 'Initialized\n';
+                    this.logEvent('Initialized\n');
                 },
 
                 onTagAdded(slug) {
-                    this.eventLog += `Tag added: ${slug}\n`;
+                    this.logEvent(`Tag added: "${slug}"\n`);
                 },
 
                 onTagRemoved(slug) {
-                    this.eventLog += `Tag removed: ${slug}\n`;
+                    this.logEvent(`Tag removed: "${slug}"\n`);
                 },
 
                 onTagsUpdated() {
-                    this.eventLog += 'Tags updated\n';
+                    this.logEvent('Tags updated\n');
                 },
             }
         });
