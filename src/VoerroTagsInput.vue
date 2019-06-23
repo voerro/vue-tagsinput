@@ -14,7 +14,7 @@
                 ref="taginput"
                 :placeholder="placeholder"
                 v-model="input"
-                @keydown.enter.prevent="tagFromInput"
+                @keydown.enter.prevent="tagFromInput(false)"
                 @keydown.8="removeLastTag"
                 @keydown.down="nextSearchResult"
                 @keydown.up="prevSearchResult"
@@ -135,6 +135,11 @@ export default {
             default: false
         },
 
+        addTagsOnBlur: {
+            type: Boolean,
+            default: false
+        },
+
         wrapperClass: {
             type: String,
             default: 'tags-input-wrapper-default'
@@ -187,9 +192,9 @@ export default {
             return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         },
 
-        tagFromInput() {
+        tagFromInput(ignoreSearchResults = false) {
             // If we're choosing a tag from the search results
-            if (this.searchResults.length && this.searchSelection >= 0) {
+            if (this.searchResults.length && this.searchSelection >= 0 && !ignoreSearchResults) {
                 this.tagFromSearch(this.searchResults[this.searchSelection]);
 
                 this.input = '';
@@ -316,6 +321,11 @@ export default {
         onBlur(e) {
             this.$emit('blur', e)
 
+            if (this.addTagsOnBlur) {
+                // Add the inputed tag
+                this.tagFromInput(true);
+            }
+
             this.hideTypeahead();
         },
 
@@ -421,7 +431,7 @@ export default {
                     e.preventDefault();
 
                     // Add the inputed tag
-                    this.tagFromInput();
+                    this.tagFromInput(true);
                 }
             }
         },

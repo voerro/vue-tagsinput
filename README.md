@@ -156,7 +156,8 @@ only-existing-tags | Boolean | false | Only existing tags can be added/chosen. N
 delete-on-backspace | Boolean | true | Whether deleting tags by pressing Backspace is allowed.
 allow-duplicates | Boolean | false | Allow users to add the same tags multiple times.
 validate | Function | `text => true` | Callback to validate tags' text with.
-add-tags-on-comma | Boolean | false | Add new tags when comma is pressed.
+add-tags-on-comma | Boolean | false | Add new tags when comma is pressed. The search (typeahead) results are ignored.
+add-tags-on-blur | Boolean | false | Add new tags when on the input is blur. The search (typeahead) results are ignored.
 sort-search-results | Boolean | true | Whether the search results should be sorted.
 
 #### Events
