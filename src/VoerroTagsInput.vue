@@ -19,10 +19,10 @@
                 @keydown.down="nextSearchResult"
                 @keydown.up="prevSearchResult"
                 @keydown="onKeyDown"
+                @keyup="onKeyUp"
                 @keyup.esc="ignoreSearchResults"
-                @keyup="searchTag"
                 @focus="onFocus"
-                @blur="hideTypeahead"
+                @blur="onBlur"
                 @value="tags">
 
             <input type="hidden" v-if="elementId"
@@ -36,7 +36,7 @@
             <p v-if="typeaheadStyle === 'badges'" :class="`typeahead-${typeaheadStyle}`">
                 <span v-for="(tag, index) in searchResults"
                     :key="index"
-                    v-text="tag.text"
+                    v-html="tag.text"
                     @mouseover="searchSelection = index"
                     @mousedown.prevent="tagFromSearchOnClick(tag)"
                     class="tags-input-badge"
@@ -49,7 +49,7 @@
             <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
                 <li v-for="(tag, index) in searchResults"
                 :key="index"
-                v-text="tag.text"
+                v-html="tag.text"
                 @mouseover="searchSelection = index"
                 @mousedown.prevent="tagFromSearchOnClick(tag)"
                 v-bind:class="{
@@ -139,6 +139,11 @@ export default {
             type: String,
             default: 'tags-input-wrapper-default'
         },
+
+        sortSearchResults: {
+            type: Boolean,
+            default: true
+        }
     },
 
     data() {
@@ -261,6 +266,7 @@ export default {
             this.$emit('tags-updated');
         },
 
+
         searchTag() {
             if (this.typeahead === true) {
                 if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0)) {
@@ -278,12 +284,14 @@ export default {
                         }
 
                         // Sort the search results alphabetically
-                        this.searchResults.sort((a, b) => {
-                            if (a.text < b.text) return -1;
-                            if (a.text > b.text) return 1;
+                        if (this.sortSearchResults) {
+                            this.searchResults.sort((a, b) => {
+                                if (a.text < b.text) return -1;
+                                if (a.text > b.text) return 1;
 
-                            return 0;
-                        });
+                                return 0;
+                            });
+                        }
 
                         // Shorten Search results to desired length
                         if (this.typeaheadMaxResults > 0) {
@@ -299,8 +307,16 @@ export default {
             }
         },
 
-        onFocus() {
+        onFocus(e) {
+            this.$emit('focus', e)
+            
             this.searchTag();
+        },
+
+        onBlur(e) {
+            this.$emit('blur', e)
+
+            this.hideTypeahead();
         },
 
         hideTypeahead() {
@@ -386,10 +402,18 @@ export default {
             return !! found;
         },
 
+        onKeyUp(e) {
+            this.$emit('keyup', e);
+
+            this.searchTag();
+        },
+
         /**
          * Process all the keydown events
          */
         onKeyDown(e) {
+            this.$emit('keydown', e);
+
             // Insert a new tag on comma keydown if the option is enabled
             if (e.key == ',') {
                 if (this.addTagsOnComma) {

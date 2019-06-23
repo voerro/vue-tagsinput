@@ -42,7 +42,7 @@ If you're not using NPM, you can include the required files into your page manua
 <script>
     new Vue({
         el: '#app',
-        components: { VoerroTagsInput },
+        components: { "tags-input": VoerroTagsInput },
     });
 </script>
 ```
@@ -50,7 +50,7 @@ If you're not using NPM, you can include the required files into your page manua
 Include the CSS file on your page to apply the styling. Read the `Styling` section to learn how to customize the appearance.
 
 ```
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@1.11.1/dist/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@1.11.2/dist/style.css">
 ```
 
 **IMPORTANT:** Always grab the latest versions of the package from [JSDELIVR](https://www.jsdelivr.com/package/npm/@voerro/vue-tagsinput?path=dist), the ones provided in the examples above might be outdated. Same goes for Vue.js.
@@ -157,6 +157,7 @@ delete-on-backspace | Boolean | true | Whether deleting tags by pressing Backspa
 allow-duplicates | Boolean | false | Allow users to add the same tags multiple times.
 validate | Function | `text => true` | Callback to validate tags' text with.
 add-tags-on-comma | Boolean | false | Add new tags when comma is pressed.
+sort-search-results | Boolean | true | Whether the search results should be sorted.
 
 #### Events
 
@@ -166,6 +167,10 @@ Event | Description
 @tag-added | Fired when a new tag is added. The slug of the tag is passed along.
 @tag-removed | Fired when a tag is removed. The slug of the tag is passed along.
 @tags-updated | Fired when a tag is added or removed.
+@focus | Fired when the input is focused
+@blur | Fired when the input is blurred
+@keydown | Fires on a keydown event
+@keyup | Fires on a keyup event
 
 ```html
 <voerro-tags-input
@@ -174,6 +179,10 @@ Event | Description
     @tag-added="onTagAdded"
     @tag-removed="onTagRemoved"
     @tags-updated="onTagsUpdated"
+    @keydown="onKeyDown"
+    @keyup="onKeyUp"
+    @focus="onFocus"
+    @blur="onBlur"
 ></voerro-tags-input>
 ```
 
@@ -197,6 +206,22 @@ new Vue({
 
         onTagsUpdated() {
             console.log('Tags updated');
+        },
+
+        onBlur() {
+            console.log('Input blurred');
+        },
+
+        onFocus() {
+            console.log('Input focused');
+        },
+
+        onKeyUp() {
+            console.log('Key up');
+        },
+
+        onKeyDown() {
+            console.log('Key down');
         },
     }
 });
@@ -239,6 +264,10 @@ The `oldTags` property was removed. See the `Setting Selected Tags Programmatica
 #### v1.5.0 -> v1.5.1
 
 `TagsInput` was renamed to `VoerroTagsInput` to eliminate possible name conflicts with other packages.
+
+## Contribution
+
+Everyone is welcome to contribute. When making a contribution, please base your branch off of `dev` and merge it into `dev` as well. Thank you!
 
 ## Support
 
