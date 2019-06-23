@@ -177,7 +177,7 @@ export default {
     watch: {
         tags() {
             // Updating the hidden input
-            this.hiddenInput = this.tags.join(',');
+            this.hiddenInput = JSON.stringify(this.tags);
 
             // Update the bound v-model value
             this.$emit('input', this.tags);

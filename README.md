@@ -1,4 +1,4 @@
-# Vue Tags Input
+# Voerro Vue Tags Input v2
 
 [![npm (scoped)](https://img.shields.io/npm/v/@voerro/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
 [![npm](https://img.shields.io/npm/dm/@voerro/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
@@ -60,22 +60,22 @@ Include the CSS file on your page to apply the styling. Read the `Styling` secti
 ```html
 <tags-input element-id="tags"
     v-model="selectedTags"
-    :existing-tags="{ 
-        'web-development': 'Web Development',
-        'php': 'PHP',
-        'javascript': 'JavaScript',
-    }"
+    :existing-tags="[
+        { key: 'web-development', value: 'Web Development' },
+        { key: 'php', value: 'PHP' },
+        { key: 'javascript', value: 'JavaScript' },
+    ]"
     :typeahead="true"></tags-input>
 ```
 
 ```html
 <tags-input element-id="tags"
     v-model="selectedTags"
-    :existing-tags="{ 
-        1: 'Web Development',
-        2: 'PHP',
-        3: 'JavaScript',
-    }"
+    :existing-tags="[
+        { key: 1, value: 'Web Development' },
+        { key: 2, value: 'PHP' },
+        { key: 3, value: 'JavaScript' },
+    ]"
     :typeahead="true"></tags-input>
 ```
 
@@ -88,10 +88,6 @@ Remove the `typeahead` property to disable this functionality.
 #### Setting Selected Tags Programmatically
 
 If you need to programmatically (manually) set or change the list of selected tags from "outside" - just set the required value to the variable bound with the component via `v-model`.
-
-Acceptable values:
-- an array of tag slugs or tag strings
-- a string with tags separated via comma)
 
 For example, the variable name is `selectedTags`:
 ```html
@@ -108,13 +104,10 @@ new Vue({
 
     data: {
         selectedTags: [
-            'tags',
-            'selected',
-            'by',
-            'default',
+            { key: 'web-development', value: 'Web Development' },
+            { key: 'php', value: 'PHP' },
+            { key: 'javascript', value: 'JavaScript' },
         ],
-        // ALTERNATIVELY
-        selectedTags: 'tags,selected,by,default',
     }
 });
 ```
@@ -132,9 +125,7 @@ new Vue({
 
     methods: {
         setSelectedTags() {
-            this.selectedTags = ['programmatically', 'selected', 'tags'];
-            // ALTERNATIVELY
-            this.selectedTags = 'programmatically,selected,tags';
+            this.selectedTags = [{ key: 'php', value: 'PHP' }];
         }
     }
 });
@@ -145,7 +136,7 @@ new Vue({
 Prop | Type | Default | Description
 --- | --- | --- | ---
 elementId | String | - | id & name for the hidden input.
-existingTags | Object | {} | An object with existing tags where keys are tag slugs or ids and values are strings to be displayed.
+existing-tags | Array | [] | An array with existing tags in the following format: `[{ key: 'id-or-slug-of-the-tag', value: 'Tag\'s text representation' }, {...}, ...]`
 typeahead | Boolean | false | Whether the typeahead (autocomplete) functionality should be enabled.
 typeahead-style | String | 'badges' | The autocomplete prompt style. Possible values: `badges`, `dropdown`.
 typeahead-max-results | Number | 0 | Maximum number of typeahead results to be shown. 0 - unlimited.
@@ -168,10 +159,10 @@ Event | Description
 @tag-added | Fired when a new tag is added. The slug of the tag is passed along.
 @tag-removed | Fired when a tag is removed. The slug of the tag is passed along.
 @tags-updated | Fired when a tag is added or removed.
-@focus | Fired when the input is focused
-@blur | Fired when the input is blurred
 @keydown | Fires on a keydown event
 @keyup | Fires on a keyup event
+@focus | Fired when the input is focused
+@blur | Fired when the input is blurred
 
 ```html
 <voerro-tags-input
@@ -209,20 +200,20 @@ new Vue({
             console.log('Tags updated');
         },
 
-        onBlur() {
-            console.log('Input blurred');
-        },
-
-        onFocus() {
-            console.log('Input focused');
+        onKeyDown() {
+            console.log('Key down');
         },
 
         onKeyUp() {
             console.log('Key up');
         },
 
-        onKeyDown() {
-            console.log('Key down');
+        onFocus() {
+            console.log('Input focused');
+        },
+
+        onBlur() {
+            console.log('Input blurred');
         },
     }
 });
@@ -231,16 +222,17 @@ new Vue({
 
 ## Data
 
-The list of selected tags is stored as a string (tags separated with a comma) inside a hidden input with id and name set to the value from the `element-id` props (but only if you've provided this prop).
+You can bind the array of selected tags to a variable via `v-model`. A tag object within the array looks like this:
 
-You can also bind the array of selected tags to a variable via `v-model`.
-
-If a tag is listed in `existing-tags`, the tag's slug will be used, otherwise the text entered by user is added.
-
-Example value of the hidden input:
 ```
-web-development,javascript,This is a new tag,php
+{ key: 'web-development', value: 'Web Development' }
 ```
+
+`key` is whatever unique key you use for the tags in your project. It could be a unique slug, it could be a unique numeric id, it could be something else. `value` is the text representation of a tag.
+
+There's also a hidden text input, which has the stringified version of the array of selected tags as its value. The `name` and `id` of the input equal to whatever you set to the `element-id` prop.
+
+The tags that don't exist in the `existing-tags` array will have its `key` equal to an empty string `''`. In your backend you can consider these tags as `to be created`.
 
 ## Styling
 
@@ -258,13 +250,13 @@ When search results are displayed underneath the input, use the `arrow down` and
 
 ## Updating From Older Versions
 
-#### Older versions up to v1.4.0 -> v1.5.0
+#### Older versions up to v1.5.0 -> v1.5.1
 
-The `oldTags` property was removed. See the `Setting Selected Tags Programmatically` section on how to (pre)set the list of existing tags.
+See the `v1` branch for details.
 
-#### v1.5.0 -> v1.5.1
+#### v1.5.1 and above -> v2.*
 
-`TagsInput` was renamed to `VoerroTagsInput` to eliminate possible name conflicts with other packages.
+A pretty serious bug (#53) was fixed in `v2.0.0`. The data format for the `existing-tags` prop and the `v-model` directive has been changed. You can find the new format in this documentation, see above.
 
 ## Contribution
 
