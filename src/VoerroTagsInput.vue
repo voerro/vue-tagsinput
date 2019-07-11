@@ -49,7 +49,7 @@
             <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
                 <li v-for="(tag, index) in searchResults"
                 :key="index"
-                v-html="tag.text"
+                v-html="tag.value"
                 @mouseover="searchSelection = index"
                 @mousedown.prevent="tagFromSearchOnClick(tag)"
                 v-bind:class="{
