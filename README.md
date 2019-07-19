@@ -175,6 +175,7 @@ Event | Description
     @tag-added="onTagAdded"
     @tag-removed="onTagRemoved"
     @tags-updated="onTagsUpdated"
+    @max-reached="onMaxReached"
     @keydown="onKeyDown"
     @keyup="onKeyUp"
     @focus="onFocus"
@@ -202,6 +203,10 @@ new Vue({
 
         onTagsUpdated() {
             console.log('Tags updated');
+        },
+        
+        onMaxReached() {
+            console.log('Max Reached');
         },
 
         onKeyDown() {
