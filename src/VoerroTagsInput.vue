@@ -307,6 +307,7 @@ export default {
 
             // Check if the limit has been reached
             if (this.limit > 0 && this.tags.length >= this.limit) {
+                this.$emit('max-reached');
                 return false;
             }
 
