@@ -162,6 +162,7 @@ Event | Description
 @tag-added | Fired when a new tag is added. The slug of the tag is passed along.
 @tag-removed | Fired when a tag is removed. The slug of the tag is passed along.
 @tags-updated | Fired when a tag is added or removed.
+@max-reached | Fired when the limit of tags is reached
 @keydown | Fires on a keydown event
 @keyup | Fires on a keyup event
 @focus | Fired when the input is focused
@@ -174,6 +175,7 @@ Event | Description
     @tag-added="onTagAdded"
     @tag-removed="onTagRemoved"
     @tags-updated="onTagsUpdated"
+    @max-reached="onMaxReached"
     @keydown="onKeyDown"
     @keyup="onKeyUp"
     @focus="onFocus"
@@ -201,6 +203,10 @@ new Vue({
 
         onTagsUpdated() {
             console.log('Tags updated');
+        },
+        
+        onMaxReached() {
+            console.log('Max Reached');
         },
 
         onKeyDown() {
