@@ -190,6 +190,10 @@ export default {
     },
 
     watch: {
+        input(newVal, oldVal) {
+            this.searchTag(false);
+        },
+
         tags() {
             // Updating the hidden input
             this.hiddenInput = JSON.stringify(this.tags);
@@ -287,11 +291,12 @@ export default {
          */
         tagFromSearch(tag) {
             this.clearSearchResults();
-
-            this.input = '';
-            this.oldInput = '';
-
             this.addTag(tag);
+
+            this.$nextTick(() => {
+                this.input = '';
+                this.oldInput = '';
+            });
         },
 
         /**
@@ -308,7 +313,7 @@ export default {
             // Check if the limit has been reached
             if (this.limit > 0 && this.tags.length >= this.limit) {
                 this.$emit('limit-reached');
-                
+
                 return false;
             }
 
@@ -535,8 +540,6 @@ export default {
          */
         onKeyUp(e) {
             this.$emit('keyup', e);
-
-            this.searchTag();
         },
 
         /**
