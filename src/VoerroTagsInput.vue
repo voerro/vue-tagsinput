@@ -34,6 +34,9 @@
         <!-- Typeahead/Autocomplete -->
         <div v-show="searchResults.length">
             <p v-if="typeaheadStyle === 'badges'" :class="`typeahead-${typeaheadStyle}`">
+                <span class="tags-input-badge typeahead-hide-btn tags-input-typeahead-item-default"
+                    @click.prevent="clearSearchResults">Discard Search Results</span>
+
                 <span v-for="(tag, index) in searchResults"
                     :key="index"
                     v-html="tag.value"
@@ -47,6 +50,9 @@
             </p>
 
             <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
+                <li class="tags-input-typeahead-item-default typeahead-hide-btn"
+                    @mousedown.prevent="clearSearchResults">Discard search results</li>
+
                 <li v-for="(tag, index) in searchResults"
                 :key="index"
                 v-html="tag.value"

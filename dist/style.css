@@ -86,6 +86,12 @@
     background-color: #f0f1f2;
 }
 
+/* Typeahead */
+.typeahead-hide-btn {
+    color: #999 !important;
+    font-style: italic;
+}
+
 /* Typeahead - badges */
 .typeahead-badges > span {
     cursor: pointer;
