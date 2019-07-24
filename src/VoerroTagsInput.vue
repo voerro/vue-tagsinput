@@ -192,6 +192,22 @@ export default {
     watch: {
         input(newVal, oldVal) {
             this.searchTag(false);
+
+            if (newVal.length && newVal != oldVal) {
+                const diff = newVal.substring(oldVal.length, newVal.length);
+
+                if (this.addTagsOnComma) {
+                    newVal = newVal.trim();
+
+                    if (newVal.endsWith(',')) {
+                        // The comma shouldn't actually be inserted
+                        this.input = newVal.substring(0, newVal.length - 1);
+
+                        // Add the inputed tag
+                        this.tagFromInput(true);
+                    }
+                }
+            }
         },
 
         tags() {
@@ -550,17 +566,6 @@ export default {
          */
         onKeyDown(e) {
             this.$emit('keydown', e);
-
-            // Insert a new tag on comma keydown if the option is enabled
-            if (e.key == ',') {
-                if (this.addTagsOnComma) {
-                    // The comma shouldn't actually be inserted
-                    e.preventDefault();
-
-                    // Add the inputed tag
-                    this.tagFromInput(true);
-                }
-            }
         },
 
         /**
