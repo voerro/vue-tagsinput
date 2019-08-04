@@ -279,7 +279,7 @@ export default {
                             ? tag.value
                             : tag.value.toLowerCase();
 
-                        if (searchQuery == compareable) {
+                        if (searchQuery === compareable) {
                             newTag = Object.assign({}, tag);
 
                             break;
@@ -344,8 +344,10 @@ export default {
                 this.tags.push(tag);
 
                 // Emit events
-                this.$emit('tag-added', tag);
-                this.$emit('tags-updated');
+                this.$nextTick(() => {
+                    this.$emit('tag-added', tag);
+                    this.$emit('tags-updated');
+                });
             }
         },
 
@@ -376,8 +378,10 @@ export default {
             this.tags.splice(index, 1);
 
             // Emit events
-            this.$emit('tag-removed', tag);
-            this.$emit('tags-updated');
+            this.$nextTick(() => {
+                this.$emit('tag-removed', tag);
+                this.$emit('tags-updated');
+            });
         },
 
         /**
@@ -546,7 +550,7 @@ export default {
                     ? selectedTag.value
                     : selectedTag.value.toLowerCase();
 
-                if (selectedTag.key == tag.key && compareable == searchQuery) {
+                if (selectedTag.key === tag.key && compareable.search(searchQuery) > -1) {
                     return true;
                 }
             }

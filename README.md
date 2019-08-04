@@ -37,7 +37,7 @@ If you're not using NPM, you can include the required files into your page manua
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.0.1/dist/voerro-vue-tagsinput.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.0.2/dist/voerro-vue-tagsinput.js"></script>
 
 <script>
     new Vue({
@@ -50,7 +50,7 @@ If you're not using NPM, you can include the required files into your page manua
 Include the CSS file on your page to apply the styling. Read the `Styling` section to learn how to customize the appearance.
 
 ```
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.0.1/dist/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.0.2/dist/style.css">
 ```
 
 **IMPORTANT:** Always grab the latest versions of the package from [JSDELIVR](https://www.jsdelivr.com/package/npm/@voerro/vue-tagsinput?path=dist), the ones provided in the examples above might be outdated. Same goes for Vue.js.
@@ -268,6 +268,11 @@ See the `v1` branch for details.
 A pretty serious bug (#53) was fixed in `v2.0.0`. The data format for the `existing-tags` prop and the `v-model` directive has been changed. You can find the new format in this documentation, see above.
 
 ## Changelog
+
+#### v.2.0.2
+
+- Fix: [#43](/voerro/vue-tagsinput/issues/43)
+- Fix: [#62](/voerro/vue-tagsinput/issues/62)
 
 #### v.2.0.1
 
