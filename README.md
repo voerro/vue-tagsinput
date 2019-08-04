@@ -271,8 +271,8 @@ A pretty serious bug (#53) was fixed in `v2.0.0`. The data format for the `exist
 
 #### v.2.0.2
 
-- Fix: [#43](/voerro/vue-tagsinput/issues/43)
-- Fix: [#62](/voerro/vue-tagsinput/issues/62)
+- Fix: [#43](../../issues/43)
+- Fix: [#62](../../issues/62)
 
 #### v.2.0.1
 
