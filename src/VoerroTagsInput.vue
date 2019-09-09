@@ -4,6 +4,7 @@
             <span class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
                 v-for="(tag, index) in tags"
                 :key="index"
+                :class="getTagClass(tag)"
             >
                 <span v-html="tag.value"></span>
 
@@ -70,6 +71,7 @@
 <script>
 export default {
     props: {
+
         elementId: String,
 
         existingTags: {
@@ -130,7 +132,7 @@ export default {
             type: Boolean,
             default: false
         },
-        
+
         validate: {
             type: Function,
             default: () => true
@@ -170,6 +172,11 @@ export default {
             type: Function,
             default: () => true
         },
+
+        getTagClass: {
+            type: Function,
+            default: () => ''
+        }
     },
 
     data() {
@@ -233,7 +240,7 @@ export default {
         /**
          * Remove reserved regex characters from a string so that they don't
          * affect search results
-         * 
+         *
          * @param string
          * @returns String
          */
@@ -243,7 +250,7 @@ export default {
 
         /**
          * Add a tag whether from user input or from search results (typeahead)
-         * 
+         *
          * @param ignoreSearchResults
          * @returns void
          */
@@ -293,7 +300,7 @@ export default {
 
         /**
          * Add a tag from search results when a user clicks on it
-         * 
+         *
          * @param tag
          * @returns void
          */
@@ -307,7 +314,7 @@ export default {
          * Add the selected tag from the search results.
          * Clear search results.
          * Clear user input.
-         * 
+         *
          * @param tag
          * @return void
          */
@@ -323,7 +330,7 @@ export default {
 
         /**
          * Add/Select a tag
-         * 
+         *
          * @param tag
          * @returns void | Boolean
          */
@@ -353,7 +360,7 @@ export default {
 
         /**
          * Remove the last tag in the tags array.
-         * 
+         *
          * @returns void
          */
         removeLastTag() {
@@ -364,7 +371,7 @@ export default {
 
         /**
          * Remove the selected tag at the specified index.
-         * 
+         *
          * @param index
          * @returns void
          */
@@ -386,7 +393,7 @@ export default {
 
         /**
          * Search the currently entered text in the list of existing tags
-         * 
+         *
          * @returns void | Boolean
          */
         searchTag() {
@@ -409,7 +416,7 @@ export default {
                         const compareable = this.caseSensitiveTags
                             ? tag.value
                             : tag.value.toLowerCase();
-  
+
                         if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag)) {
                             this.searchResults.push(tag);
                         }
@@ -440,7 +447,7 @@ export default {
 
         /**
          * Hide the typeahead if there's nothing intered into the input field.
-         * 
+         *
          * @returns void
          */
         hideTypeahead() {
@@ -453,7 +460,7 @@ export default {
 
         /**
          * Select the next search result in typeahead.
-         * 
+         *
          * @returns void
          */
         nextSearchResult() {
@@ -464,7 +471,7 @@ export default {
 
         /**
          * Select the previous search result in typeahead.
-         * 
+         *
          * @returns void
          */
         prevSearchResult() {
@@ -475,7 +482,7 @@ export default {
 
         /**
          * Clear/Empty the search results.
-         * 
+         *
          * @reutrns void
          */
         clearSearchResults() {
@@ -485,7 +492,7 @@ export default {
 
         /**
          * Clear the list of selected tags.
-         * 
+         *
          * @returns void
          */
         clearTags() {
@@ -494,7 +501,7 @@ export default {
 
         /**
          * Replace the currently selected tags with the tags from the value.
-         * 
+         *
          * @returns void
          */
         tagsFromValue() {
@@ -504,7 +511,7 @@ export default {
 
                     return;
                 }
-                
+
                 let tags = this.value;
 
                 // Don't update if nothing has changed
@@ -528,7 +535,7 @@ export default {
 
         /**
          * Check if a tag is already selected.
-         * 
+         *
          * @param tag
          * @returns Boolean
          */
@@ -560,7 +567,7 @@ export default {
 
         /**
          * Process all the keyup events.
-         * 
+         *
          * @param e
          * @returns void
          */
@@ -570,7 +577,7 @@ export default {
 
         /**
          * Process all the keydown events.
-         * 
+         *
          * @param e
          * @returns void
          */
@@ -580,19 +587,19 @@ export default {
 
         /**
          * Process the onfocus event.
-         * 
+         *
          * @param e
          * @returns void
          */
         onFocus(e) {
             this.$emit('focus', e)
-            
+
             this.searchTag();
         },
 
         /**
          * Process the onblur event.
-         * 
+         *
          * @param e
          * @returns void
          */
