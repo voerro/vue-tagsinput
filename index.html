@@ -167,6 +167,15 @@
                             </label>
                         </div>
                     </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="logChangeEvents">
+                                Log Change Events
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="column">
@@ -207,6 +216,7 @@
                         @tag-added="onTagAdded"
                         @tag-removed="onTagRemoved"
                         @tags-updated="onTagsUpdated"
+                        @change="onChange"
                     ></voerro-tags-input>
 
                     <hr>
@@ -262,6 +272,7 @@
                 typeaheadMaxResults: 20,
                 typeaheadActivationThreshold: 1,
                 typeheadAlwaysShow: false,
+                logChangeEvents: false,
                 eventLog: '',
             },
 
@@ -284,6 +295,12 @@
 
                 onTagsUpdated() {
                     this.logEvent('Tags updated\n');
+                },
+
+                onChange(evt) {
+                    if (this.logChangeEvents) {
+                        this.logEvent(`Changed ${JSON.stringify(evt)}\n`);
+                    }
                 },
             }
         });

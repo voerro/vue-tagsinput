@@ -240,6 +240,8 @@ export default {
                         this.tagFromInput(true);
                     }
                 }
+
+                this.$emit('change', newVal);
             }
         },
 
@@ -591,6 +593,15 @@ export default {
             }
 
             return false;
+        },
+
+        /**
+         * Clear the input.
+         * 
+         * @returns void
+         */
+        clearInput() {
+            this.input = '';
         },
 
         /**

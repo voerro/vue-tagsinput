@@ -170,6 +170,7 @@ Event | Description
 @keyup | Fires on a keyup event
 @focus | Fired when the input is focused
 @blur | Fired when the input is blurred
+@change | Fired when the input text changes
 
 ```html
 <voerro-tags-input
@@ -183,6 +184,7 @@ Event | Description
     @keyup="onKeyUp"
     @focus="onFocus"
     @blur="onBlur"
+    @change="onChange"
 ></voerro-tags-input>
 ```
 
@@ -227,6 +229,10 @@ new Vue({
         onBlur() {
             console.log('Input blurred');
         },
+
+        onChange(value) {
+            console.log(`Input changed: ${value}`);
+        }
     }
 });
 </script>
