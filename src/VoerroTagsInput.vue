@@ -151,6 +151,11 @@ export default {
             default: false
         },
 
+        addTagsOnSpace: {
+            type: Boolean,
+            default: false
+        },
+
         addTagsOnBlur: {
             type: Boolean,
             default: false
@@ -213,6 +218,16 @@ export default {
 
             if (newVal.length && newVal != oldVal) {
                 const diff = newVal.substring(oldVal.length, newVal.length);
+
+                if (this.addTagsOnSpace) {
+                    if (newVal.endsWith(' ')) {
+                        // The space shouldn't actually be inserted
+                        this.input = newVal.trim();
+
+                        // Add the inputed tag
+                        this.tagFromInput(true);
+                    }
+                }
 
                 if (this.addTagsOnComma) {
                     newVal = newVal.trim();

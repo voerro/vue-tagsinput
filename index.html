@@ -153,6 +153,15 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
+                                <input type="checkbox" v-model="addTagsOnSpace"> 
+                                Add Tags on Space
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
                                 <input type="checkbox" v-model="addTagsOnBlur"> 
                                 Add Tags on Blur
                             </label>
@@ -192,6 +201,7 @@
                         :delete-on-backspace="deleteOnBackspace"
                         :allow-duplicates="allowDuplicates"
                         :add-tags-on-comma="addTagsOnComma"
+                        :add-tags-on-space="addTagsOnSpace"
                         :add-tags-on-blur="addTagsOnBlur"
                         @initialized="onInitialized"
                         @tag-added="onTagAdded"
@@ -246,6 +256,7 @@
                 deleteOnBackspace: true,
                 allowDuplicates: false,
                 addTagsOnComma: false,
+                addTagsOnSpace: false,
                 addTagsOnBlur: false,
                 typeaheadHideDiscard: false,
                 typeaheadMaxResults: 20,
