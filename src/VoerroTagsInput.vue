@@ -418,6 +418,9 @@ export default {
             this.$nextTick(() => {
                 this.$emit('tag-removed', tag);
                 this.$emit('tags-updated');
+                if (this.typeaheadAlwaysShow) {
+                    this.searchTag();
+                }
             });
         },
 
@@ -518,6 +521,11 @@ export default {
         clearSearchResults() {
             this.searchResults = [];
             this.searchSelection = 0;
+            if (this.typeaheadAlwaysShow) {
+                this.$nextTick(() => {
+                    this.searchTag();
+                });
+            }
         },
 
         /**
@@ -651,6 +659,8 @@ export default {
             }
             if (!this.typeaheadAlwaysShow) {
                 this.hideTypeahead();
+            } else {
+                this.searchTag();
             }
         },
     }
