@@ -106,6 +106,10 @@ export default {
             default: 0
         },
 
+        typeaheadAlwaysShow: {
+            type: Boolean,
+            default: false
+        },
         placeholder: {
             type: String,
             default: 'Add a tag'
@@ -190,7 +194,9 @@ export default {
 
     created () {
         this.tagsFromValue();
-
+        if (this.typeaheadAlwaysShow) {
+            this.searchTag(false);
+        }
         // Emit an event
         this.$emit('initialized');
     },
@@ -226,7 +232,15 @@ export default {
 
         value() {
             this.tagsFromValue();
-        }
+        },
+
+        typeaheadAlwaysShow(newValue) {
+            if (newValue) {
+                this.searchTag(false);
+            } else {
+                this.clearSearchResults();
+            }
+        },
     },
 
     methods: {
@@ -394,12 +408,12 @@ export default {
                 return false;
             }
 
-            if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0)) {
+            if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0) || this.typeaheadAlwaysShow) {
                 this.searchResults = [];
                 this.searchSelection = 0;
                 let input = this.input.trim();
 
-                if ((input.length && input.length >= this.typeaheadActivationThreshold) || this.typeaheadActivationThreshold == 0) {
+                if ((input.length && input.length >= this.typeaheadActivationThreshold) || this.typeaheadActivationThreshold == 0 || this.typeaheadAlwaysShow) {
                     // Find all the existing tags which include the search text
                     const searchQuery = this.escapeRegExp(
                         this.caseSensitiveTags ? input : input.toLowerCase()
@@ -603,8 +617,9 @@ export default {
                 // Add the inputed tag
                 this.tagFromInput(true);
             }
-
-            this.hideTypeahead();
+            if (!this.typeaheadAlwaysShow) {
+                this.hideTypeahead();
+            }
         },
     }
 }
