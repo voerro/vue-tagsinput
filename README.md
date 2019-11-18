@@ -141,6 +141,8 @@ typeahead | Boolean | false | Whether the typeahead (autocomplete) functionality
 typeahead-style | String | 'badges' | The autocomplete prompt style. Possible values: `badges`, `dropdown`.
 typeahead-max-results | Number | 0 | Maximum number of typeahead results to be shown. 0 - unlimited.
 typeahead-activation-threshold | Number | 1 | Show typeahead results only after at least this many characters were entered. When set to 0, typeahead with all the available tags will be displayed on input focus.
+typeahead-always-show | Boolean | false | Always show typeahead, even if not focused or under typeahead-activation-threshold.
+typeahead-hide-discard | Boolean | false | Hides the 'Discard Search Results' option.
 placeholder | String | 'Add a tag' | The placeholder of the tag input.
 limit | Number | 0 | Limit the number of tags that can be chosen. 0 = no limit.
 only-existing-tags | Boolean | false | Only existing tags can be added/chosen. New tags won't be created.
@@ -149,6 +151,7 @@ delete-on-backspace | Boolean | true | Whether deleting tags by pressing Backspa
 allow-duplicates | Boolean | false | Allow users to add the same tags multiple times.
 validate | Function | `text => true` | Callback to validate tags' text with.
 add-tags-on-comma | Boolean | false | Add new tags when comma is pressed. The search (typeahead) results are ignored.
+add-tags-on-space | Boolean | false | Add new tags when space is pressed. The search (typeahead) results are ignored.
 add-tags-on-blur | Boolean | false | Add new tags when on the input is blur. The search (typeahead) results are ignored.
 sort-search-results | Boolean | true | Whether the search results should be sorted.
 before-adding-tag | Function | `tag => true` | Callback to perform additional checks and actions before a tag is added. Return `true` to allow a tag to be added or `false` to forbid the action.
@@ -167,6 +170,7 @@ Event | Description
 @keyup | Fires on a keyup event
 @focus | Fired when the input is focused
 @blur | Fired when the input is blurred
+@change | Fired when the input text changes
 
 ```html
 <voerro-tags-input
@@ -180,6 +184,7 @@ Event | Description
     @keyup="onKeyUp"
     @focus="onFocus"
     @blur="onBlur"
+    @change="onChange"
 ></voerro-tags-input>
 ```
 
@@ -224,6 +229,10 @@ new Vue({
         onBlur() {
             console.log('Input blurred');
         },
+
+        onChange(value) {
+            console.log(`Input changed: ${value}`);
+        }
     }
 });
 </script>

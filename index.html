@@ -58,6 +58,24 @@
                         </div>
                     </div>
 
+                    <div class="field">
+                      <div class="control">
+                        <label class="checkbox">
+                          <input type="checkbox" v-model="typeheadAlwaysShow">
+                          Always show Typeahead
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <div class="control">
+                        <label class="checkbox">
+                          <input type="checkbox" v-model="typeaheadHideDiscard">
+                          Hide 'Discard Search Results' button
+                        </label>
+                      </div>
+                    </div>
+
                     <div v-show="typeahead" style="margin-bottom: 1rem;">
                         <div class="field">
                             <label class="label">Typeahead Style</label>
@@ -135,8 +153,26 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
+                                <input type="checkbox" v-model="addTagsOnSpace"> 
+                                Add Tags on Space
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
                                 <input type="checkbox" v-model="addTagsOnBlur"> 
                                 Add Tags on Blur
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="logChangeEvents">
+                                Log Change Events
                             </label>
                         </div>
                     </div>
@@ -165,6 +201,8 @@
                         :typeahead-style="typeaheadStyle"
                         :typeahead-max-results="typeaheadMaxResults"
                         :typeahead-activation-threshold="typeaheadActivationThreshold"
+                        :typeahead-always-show="typeheadAlwaysShow"
+                        :typeahead-hide-discard="typeaheadHideDiscard"
                         :placeholder="placeholder"
                         :limit="limit"
                         :only-existing-tags="onlyExistingTags"
@@ -172,11 +210,13 @@
                         :delete-on-backspace="deleteOnBackspace"
                         :allow-duplicates="allowDuplicates"
                         :add-tags-on-comma="addTagsOnComma"
+                        :add-tags-on-space="addTagsOnSpace"
                         :add-tags-on-blur="addTagsOnBlur"
                         @initialized="onInitialized"
                         @tag-added="onTagAdded"
                         @tag-removed="onTagRemoved"
                         @tags-updated="onTagsUpdated"
+                        @change="onChange"
                     ></voerro-tags-input>
 
                     <hr>
@@ -226,9 +266,13 @@
                 deleteOnBackspace: true,
                 allowDuplicates: false,
                 addTagsOnComma: false,
+                addTagsOnSpace: false,
                 addTagsOnBlur: false,
+                typeaheadHideDiscard: false,
                 typeaheadMaxResults: 20,
                 typeaheadActivationThreshold: 1,
+                typeheadAlwaysShow: false,
+                logChangeEvents: false,
                 eventLog: '',
             },
 
@@ -251,6 +295,12 @@
 
                 onTagsUpdated() {
                     this.logEvent('Tags updated\n');
+                },
+
+                onChange(evt) {
+                    if (this.logChangeEvents) {
+                        this.logEvent(`Changed ${JSON.stringify(evt)}\n`);
+                    }
                 },
             }
         });

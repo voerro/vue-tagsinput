@@ -34,7 +34,7 @@
         <!-- Typeahead/Autocomplete -->
         <div v-show="searchResults.length">
             <p v-if="typeaheadStyle === 'badges'" :class="`typeahead-${typeaheadStyle}`">
-                <span class="tags-input-badge typeahead-hide-btn tags-input-typeahead-item-default"
+                <span v-if="!typeaheadHideDiscard" class="tags-input-badge typeahead-hide-btn tags-input-typeahead-item-default"
                     @click.prevent="clearSearchResults">Discard Search Results</span>
 
                 <span v-for="(tag, index) in searchResults"
@@ -50,7 +50,7 @@
             </p>
 
             <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
-                <li class="tags-input-typeahead-item-default typeahead-hide-btn"
+                <li v-if="!typeaheadHideDiscard" class="tags-input-typeahead-item-default typeahead-hide-btn"
                     @mousedown.prevent="clearSearchResults">Discard search results</li>
 
                 <li v-for="(tag, index) in searchResults"
@@ -106,6 +106,16 @@ export default {
             default: 0
         },
 
+        typeaheadAlwaysShow: {
+            type: Boolean,
+            default: false
+        },
+
+        typeaheadHideDiscard: {
+            type: Boolean,
+            default: false
+        },
+
         placeholder: {
             type: String,
             default: 'Add a tag'
@@ -137,6 +147,11 @@ export default {
         },
 
         addTagsOnComma: {
+            type: Boolean,
+            default: false
+        },
+
+        addTagsOnSpace: {
             type: Boolean,
             default: false
         },
@@ -190,7 +205,9 @@ export default {
 
     created () {
         this.tagsFromValue();
-
+        if (this.typeaheadAlwaysShow) {
+            this.searchTag(false);
+        }
         // Emit an event
         this.$emit('initialized');
     },
@@ -201,6 +218,16 @@ export default {
 
             if (newVal.length && newVal != oldVal) {
                 const diff = newVal.substring(oldVal.length, newVal.length);
+
+                if (this.addTagsOnSpace) {
+                    if (newVal.endsWith(' ')) {
+                        // The space shouldn't actually be inserted
+                        this.input = newVal.trim();
+
+                        // Add the inputed tag
+                        this.tagFromInput(true);
+                    }
+                }
 
                 if (this.addTagsOnComma) {
                     newVal = newVal.trim();
@@ -213,6 +240,8 @@ export default {
                         this.tagFromInput(true);
                     }
                 }
+
+                this.$emit('change', newVal);
             }
         },
 
@@ -226,7 +255,15 @@ export default {
 
         value() {
             this.tagsFromValue();
-        }
+        },
+
+        typeaheadAlwaysShow(newValue) {
+            if (newValue) {
+                this.searchTag(false);
+            } else {
+                this.clearSearchResults();
+            }
+        },
     },
 
     methods: {
@@ -381,6 +418,9 @@ export default {
             this.$nextTick(() => {
                 this.$emit('tag-removed', tag);
                 this.$emit('tags-updated');
+                if (this.typeaheadAlwaysShow) {
+                    this.searchTag();
+                }
             });
         },
 
@@ -394,12 +434,12 @@ export default {
                 return false;
             }
 
-            if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0)) {
+            if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0) || this.typeaheadAlwaysShow) {
                 this.searchResults = [];
                 this.searchSelection = 0;
                 let input = this.input.trim();
 
-                if ((input.length && input.length >= this.typeaheadActivationThreshold) || this.typeaheadActivationThreshold == 0) {
+                if ((input.length && input.length >= this.typeaheadActivationThreshold) || this.typeaheadActivationThreshold == 0 || this.typeaheadAlwaysShow) {
                     // Find all the existing tags which include the search text
                     const searchQuery = this.escapeRegExp(
                         this.caseSensitiveTags ? input : input.toLowerCase()
@@ -481,6 +521,11 @@ export default {
         clearSearchResults() {
             this.searchResults = [];
             this.searchSelection = 0;
+            if (this.typeaheadAlwaysShow) {
+                this.$nextTick(() => {
+                    this.searchTag();
+                });
+            }
         },
 
         /**
@@ -559,6 +604,15 @@ export default {
         },
 
         /**
+         * Clear the input.
+         * 
+         * @returns void
+         */
+        clearInput() {
+            this.input = '';
+        },
+
+        /**
          * Process all the keyup events.
          * 
          * @param e
@@ -603,8 +657,11 @@ export default {
                 // Add the inputed tag
                 this.tagFromInput(true);
             }
-
-            this.hideTypeahead();
+            if (!this.typeaheadAlwaysShow) {
+                this.hideTypeahead();
+            } else {
+                this.searchTag();
+            }
         },
     }
 }
