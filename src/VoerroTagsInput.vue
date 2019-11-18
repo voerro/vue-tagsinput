@@ -205,9 +205,11 @@ export default {
 
     created () {
         this.tagsFromValue();
+
         if (this.typeaheadAlwaysShow) {
             this.searchTag(false);
         }
+
         // Emit an event
         this.$emit('initialized');
     },
@@ -394,7 +396,7 @@ export default {
          * @returns void
          */
         removeLastTag() {
-            if (!this.input.length && this.deleteOnBackspace) {
+            if (!this.input.length && this.deleteOnBackspace && this.tags.length) {
                 this.removeTag(this.tags.length - 1);
             }
         },
@@ -418,6 +420,7 @@ export default {
             this.$nextTick(() => {
                 this.$emit('tag-removed', tag);
                 this.$emit('tags-updated');
+
                 if (this.typeaheadAlwaysShow) {
                     this.searchTag();
                 }
@@ -521,6 +524,7 @@ export default {
         clearSearchResults() {
             this.searchResults = [];
             this.searchSelection = 0;
+
             if (this.typeaheadAlwaysShow) {
                 this.$nextTick(() => {
                     this.searchTag();
@@ -657,6 +661,7 @@ export default {
                 // Add the inputed tag
                 this.tagFromInput(true);
             }
+
             if (!this.typeaheadAlwaysShow) {
                 this.hideTypeahead();
             } else {
