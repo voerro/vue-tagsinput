@@ -5,7 +5,7 @@
                 v-for="(tag, index) in tags"
                 :key="index"
             >
-                <span v-html="tag.value"></span>
+                <span v-html="tag[valueField]"></span>
 
                 <i href="#" class="tags-input-remove" @click.prevent="removeTag(index)"></i>
             </span>
@@ -23,6 +23,7 @@
                 @keyup.esc="clearSearchResults"
                 @focus="onFocus"
                 @blur="onBlur"
+                :disabled="disabled"
                 @value="tags">
 
             <input type="hidden" v-if="elementId"
@@ -40,7 +41,7 @@
 
                 <span v-for="(tag, index) in searchResults"
                     :key="index"
-                    v-html="tag.value"
+                    v-html="tag[currentValue]"
                     @mouseover="searchSelection = index"
                     @mousedown.prevent="tagFromSearchOnClick(tag)"
                     class="tags-input-badge"
@@ -57,7 +58,7 @@
 
                 <li v-for="(tag, index) in searchResults"
                 :key="index"
-                v-html="tag.value"
+                v-html="tag[currentValue]"
                 @mouseover="searchSelection = index"
                 @mousedown.prevent="tagFromSearchOnClick(tag)"
                 v-bind:class="{
@@ -73,7 +74,22 @@
 export default {
     props: {
         elementId: String,
-
+        keyField: {
+            type: String,
+            default: 'id'
+        },
+        valueField: {
+            type: String,
+            default: 'name'
+        },
+        remoteKey: {
+            type: String,
+            default: 'id'
+        },
+        remoteValue: {
+            type: String,
+            default: 'name'
+        },
         existingTags: {
             type: Array,
             default: () => {
@@ -87,7 +103,10 @@ export default {
                 return [];
             }
         },
-
+        disabled: {
+            type: Boolean,
+            default: false
+        },
         typeahead: {
             type: Boolean,
             default: false
@@ -122,7 +141,7 @@ export default {
             type: String,
             default: 'Add a tag'
         },
-        
+
         discardSearchText: {
             type: String,
             default: 'Discard Search Results'
@@ -147,7 +166,7 @@ export default {
             type: Boolean,
             default: false
         },
-        
+
         validate: {
             type: Function,
             default: () => true
@@ -209,7 +228,14 @@ export default {
             selectedTag: -1,
         };
     },
-
+    computed: {
+        currentValue() {
+            return (this.remoteValue ? this.remoteValue : this.valueField)
+        },
+        currentKey() {
+            return (this.remoteKey ? this.remoteKey : this.keyField)
+        }
+    },
     created () {
         this.tagsFromValue();
 
@@ -279,7 +305,7 @@ export default {
         /**
          * Remove reserved regex characters from a string so that they don't
          * affect search results
-         * 
+         *
          * @param string
          * @returns String
          */
@@ -289,7 +315,7 @@ export default {
 
         /**
          * Add a tag whether from user input or from search results (typeahead)
-         * 
+         *
          * @param ignoreSearchResults
          * @returns void
          */
@@ -316,14 +342,14 @@ export default {
 
                     const searchQuery = this.escapeRegExp(
                         this.caseSensitiveTags
-                            ? newTag.value
-                            : newTag.value.toLowerCase()
+                            ? newTag[this.valueField]
+                            : newTag[this.valueField].toLowerCase()
                     );
 
                     for (let tag of this.existingTags) {
                         const compareable = this.caseSensitiveTags
-                            ? tag.value
-                            : tag.value.toLowerCase();
+                            ? tag[this.valueField]
+                            : tag[this.valueField].toLowerCase();
 
                         if (searchQuery === compareable) {
                             newTag = Object.assign({}, tag);
@@ -339,7 +365,7 @@ export default {
 
         /**
          * Add a tag from search results when a user clicks on it
-         * 
+         *
          * @param tag
          * @returns void
          */
@@ -353,13 +379,16 @@ export default {
          * Add the selected tag from the search results.
          * Clear search results.
          * Clear user input.
-         * 
+         *
          * @param tag
          * @return void
          */
         tagFromSearch(tag) {
             this.clearSearchResults();
-            this.addTag(tag);
+            let newTag = {};
+            newTag[this.keyField]=tag[this.currentKey]
+            newTag[this.valueField]=tag[this.currentValue]
+            this.addTag(newTag);
 
             this.$nextTick(() => {
                 this.input = '';
@@ -369,7 +398,7 @@ export default {
 
         /**
          * Add/Select a tag
-         * 
+         *
          * @param tag
          * @returns void | Boolean
          */
@@ -399,7 +428,7 @@ export default {
 
         /**
          * Remove the last tag in the tags array.
-         * 
+         *
          * @returns void
          */
         removeLastTag() {
@@ -410,7 +439,7 @@ export default {
 
         /**
          * Remove the selected tag at the specified index.
-         * 
+         *
          * @param index
          * @returns void
          */
@@ -436,7 +465,7 @@ export default {
 
         /**
          * Search the currently entered text in the list of existing tags
-         * 
+         *
          * @returns void | Boolean
          */
         searchTag() {
@@ -457,9 +486,9 @@ export default {
 
                     for (let tag of this.existingTags) {
                         const compareable = this.caseSensitiveTags
-                            ? tag.value
-                            : tag.value.toLowerCase();
-  
+                            ? tag[this.currentValue]
+                            : tag[this.currentValue].toLowerCase();
+
                         if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag)) {
                             this.searchResults.push(tag);
                         }
@@ -468,8 +497,8 @@ export default {
                     // Sort the search results alphabetically
                     if (this.sortSearchResults) {
                         this.searchResults.sort((a, b) => {
-                            if (a.value < b.value) return -1;
-                            if (a.value > b.value) return 1;
+                            if (a[this.currentValue] < b[this.currentValue]) return -1;
+                            if (a[this.currentValue] > b[this.currentValue]) return 1;
 
                             return 0;
                         });
@@ -490,7 +519,7 @@ export default {
 
         /**
          * Hide the typeahead if there's nothing intered into the input field.
-         * 
+         *
          * @returns void
          */
         hideTypeahead() {
@@ -503,7 +532,7 @@ export default {
 
         /**
          * Select the next search result in typeahead.
-         * 
+         *
          * @returns void
          */
         nextSearchResult() {
@@ -514,7 +543,7 @@ export default {
 
         /**
          * Select the previous search result in typeahead.
-         * 
+         *
          * @returns void
          */
         prevSearchResult() {
@@ -525,7 +554,7 @@ export default {
 
         /**
          * Clear/Empty the search results.
-         * 
+         *
          * @reutrns void
          */
         clearSearchResults() {
@@ -541,7 +570,7 @@ export default {
 
         /**
          * Clear the list of selected tags.
-         * 
+         *
          * @returns void
          */
         clearTags() {
@@ -550,7 +579,7 @@ export default {
 
         /**
          * Replace the currently selected tags with the tags from the value.
-         * 
+         *
          * @returns void
          */
         tagsFromValue() {
@@ -560,7 +589,7 @@ export default {
 
                     return;
                 }
-                
+
                 let tags = this.value;
 
                 // Don't update if nothing has changed
@@ -584,7 +613,7 @@ export default {
 
         /**
          * Check if a tag is already selected.
-         * 
+         *
          * @param tag
          * @returns Boolean
          */
@@ -596,17 +625,25 @@ export default {
             if (! tag) {
                 return false;
             }
-
+            var searchField;
+            var searchKey;
+            if (this.currentValue!=this.valueField && tag.hasOwnProperty(this.currentValue)) {
+                searchField= this.currentValue
+                searchKey=this.currentKey
+            } else {
+                searchField= this.valueField
+                searchKey=this.keyField
+            }
             const searchQuery = this.escapeRegExp(
-                this.caseSensitiveTags ? tag.value : tag.value.toLowerCase()
+                this.caseSensitiveTags ? tag[searchField] : tag[searchField].toLowerCase()
             );
 
             for (let selectedTag of this.tags) {
                 const compareable = this.caseSensitiveTags
-                    ? selectedTag.value
-                    : selectedTag.value.toLowerCase();
+                    ? selectedTag[this.valueField]
+                    : selectedTag[this.valueField].toLowerCase();
 
-                if (selectedTag.key === tag.key && compareable.search(searchQuery) > -1) {
+                if (selectedTag[this.keyField] === tag[searchKey] && compareable.search(searchQuery) > -1) {
                     return true;
                 }
             }
@@ -616,7 +653,7 @@ export default {
 
         /**
          * Clear the input.
-         * 
+         *
          * @returns void
          */
         clearInput() {
@@ -625,7 +662,7 @@ export default {
 
         /**
          * Process all the keyup events.
-         * 
+         *
          * @param e
          * @returns void
          */
@@ -635,7 +672,7 @@ export default {
 
         /**
          * Process all the keydown events.
-         * 
+         *
          * @param e
          * @returns void
          */
@@ -645,19 +682,19 @@ export default {
 
         /**
          * Process the onfocus event.
-         * 
+         *
          * @param e
          * @returns void
          */
         onFocus(e) {
             this.$emit('focus', e)
-            
+
             this.searchTag();
         },
 
         /**
          * Process the onblur event.
-         * 
+         *
          * @param e
          * @returns void
          */
