@@ -35,7 +35,8 @@
         <div v-show="searchResults.length">
             <p v-if="typeaheadStyle === 'badges'" :class="`typeahead-${typeaheadStyle}`">
                 <span v-if="!typeaheadHideDiscard" class="tags-input-badge typeahead-hide-btn tags-input-typeahead-item-default"
-                    @click.prevent="clearSearchResults">Discard Search Results</span>
+                    @click.prevent="clearSearchResults"
+                    v-text="discardSearchText"></span>
 
                 <span v-for="(tag, index) in searchResults"
                     :key="index"
@@ -51,7 +52,8 @@
 
             <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
                 <li v-if="!typeaheadHideDiscard" class="tags-input-typeahead-item-default typeahead-hide-btn"
-                    @mousedown.prevent="clearSearchResults">Discard search results</li>
+                    @mousedown.prevent="clearSearchResults"
+                    v-text="discardSearchText"></li>
 
                 <li v-for="(tag, index) in searchResults"
                 :key="index"
@@ -119,6 +121,11 @@ export default {
         placeholder: {
             type: String,
             default: 'Add a tag'
+        },
+        
+        discardSearchText: {
+            type: String,
+            default: 'Discard Search Results'
         },
 
         limit: {
