@@ -14,6 +14,7 @@
                 ref="taginput"
                 :placeholder="placeholder"
                 v-model="input"
+                v-if="showInputfield" 
                 @keydown.enter.prevent="tagFromInput(false)"
                 @keydown.8="removeLastTag"
                 @keydown.down="nextSearchResult"
@@ -133,6 +134,11 @@ export default {
             default: 0
         },
 
+        hideInputOnLimit: {
+            type: Boolean,
+            default: false
+        },
+
         onlyExistingTags: {
             type: Boolean,
             default: false
@@ -219,6 +225,13 @@ export default {
 
         // Emit an event
         this.$emit('initialized');
+    },
+
+    computed: {
+        showInputfield() {
+            if ( this.hideInputOnLimit && this.tags.length >= this.limit ) return false;
+            return true;
+        }
     },
 
     watch: {
