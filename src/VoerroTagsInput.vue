@@ -67,7 +67,7 @@
             </ul>
         </div>
     </div>
-</template>false
+</template>
 
 <script>
 export default {
