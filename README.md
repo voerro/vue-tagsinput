@@ -146,6 +146,7 @@ typeahead-hide-discard | Boolean | false | Hides the 'Discard Search Results' op
 placeholder | String | 'Add a tag' | The placeholder of the tag input.
 discard-search-text | String | 'Discard Search Results' | The 'Discard Search Results' button text.
 limit | Number | 0 | Limit the number of tags that can be chosen. 0 = no limit.
+hide-input-on-limit | Boolean | false | Hide the input field when the tags limit is reached.
 only-existing-tags | Boolean | false | Only existing tags can be added/chosen. New tags won't be created.
 case-sensitive-tags | Boolean | false | Determines whether tags are case sensitive. Setting this to `true` would allow tags like `php`, `PHP`, `PhP`, and so on to be added at the same time.
 delete-on-backspace | Boolean | true | Whether deleting tags by pressing Backspace is allowed.

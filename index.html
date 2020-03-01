@@ -53,27 +53,36 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
-                                <input type="checkbox" v-model="typeahead"> Typeahead/autocomplete on
+                                <input type="checkbox" v-model="hideInputOnLimit">
+                                Hide Input on Limit
                             </label>
                         </div>
                     </div>
 
                     <div class="field">
-                      <div class="control">
-                        <label class="checkbox">
-                          <input type="checkbox" v-model="typeheadAlwaysShow">
-                          Always show Typeahead
-                        </label>
-                      </div>
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="typeahead"> Typeahead/autocomplete on
+                            </label>
+                        </div>
                     </div>
 
-                    <div class="field">
-                      <div class="control">
-                        <label class="checkbox">
-                          <input type="checkbox" v-model="typeaheadHideDiscard">
-                          Hide 'Discard Search Results' button
-                        </label>
-                      </div>
+                    <div v-show="typeahead" class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" v-model="typeheadAlwaysShow">
+                                Always show Typeahead
+                            </label>
+                        </div>
+                    </div>
+
+                    <div v-show="typeahead" class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                            <input type="checkbox" v-model="typeaheadHideDiscard">
+                            Hide 'Discard Search Results' button
+                            </label>
+                        </div>
                     </div>
 
                     <div v-show="typeahead" style="margin-bottom: 1rem;">
@@ -212,6 +221,7 @@
                         :add-tags-on-comma="addTagsOnComma"
                         :add-tags-on-space="addTagsOnSpace"
                         :add-tags-on-blur="addTagsOnBlur"
+                        :hide-input-on-limit="hideInputOnLimit"
                         @initialized="onInitialized"
                         @tag-added="onTagAdded"
                         @tag-removed="onTagRemoved"
@@ -269,6 +279,7 @@
                 addTagsOnComma: false,
                 addTagsOnSpace: false,
                 addTagsOnBlur: false,
+                hideInputOnLimit: false,
                 typeaheadHideDiscard: false,
                 typeaheadMaxResults: 20,
                 typeaheadActivationThreshold: 1,
