@@ -10,7 +10,9 @@
             >
                 <span v-html="tag.value"></span>
 
-                <i href="#" class="tags-input-remove" @click.prevent="removeTag(index)"></i>
+                <a href="#"
+                    class="tags-input-remove"
+                    @click.prevent="removeTag(index)"></a>
             </span>
 
             <input type="text"
