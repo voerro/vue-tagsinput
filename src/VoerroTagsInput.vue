@@ -643,7 +643,7 @@ export default {
                     ? selectedTag.value
                     : selectedTag.value.toLowerCase();
 
-                if (selectedTag.key === tag.key && compareable.search(searchQuery) > -1) {
+                if (selectedTag.key === tag.key && compareable.length == searchQuery.length && compareable.search(searchQuery) > -1) {
                     return true;
                 }
             }

@@ -287,6 +287,7 @@ A pretty serious bug ([#53](../../issues/53)) was fixed in `v2.0.0`. The data fo
 - New option: `typeahead-show-on-focus`. It is enabled by default and will make the typeahead (badges or dropdown) visible whenever the input field is focused and if there are any tags suggestions.
 - Adding `active` class to the wrapper element when the input field is focused. If you're using the default (provided) `style.css` file, note that your tags input will now get a "glow" around it when focused.
 - Fix: [#50](../../issues/50)
+- Fix: Incorrect check for duplicate tags
 
 #### v.2.1.0
 
