@@ -145,6 +145,7 @@ typeahead-always-show | Boolean | false | Always show typeahead, even if not foc
 typeahead-show-on-focus | Boolean | true | Show typeahead on input field focus.
 typeahead-hide-discard | Boolean | false | Hides the 'Discard Search Results' option.
 placeholder | String | 'Add a tag' | The placeholder of the tag input.
+typeahead-url | String | '' | If the option is set, the URL will be used for AJAX search/typeahead. Use the `:search` wildcard wherever you want the search query to go, for example `http://example.com/tags?search=:search`. The returned data must be in the `existing-tags` format.
 discard-search-text | String | 'Discard Search Results' | The 'Discard Search Results' button text.
 limit | Number | 0 | Limit the number of tags that can be chosen. 0 = no limit.
 hide-input-on-limit | Boolean | false | Hide the input field when the tags limit is reached.
@@ -288,6 +289,7 @@ A pretty serious bug ([#53](../../issues/53)) was fixed in `v2.0.0`. The data fo
 - Adding `active` class to the wrapper element when the input field is focused. If you're using the default (provided) `style.css` file, note that your tags input will now get a "glow" around it when focused.
 - Fix: [#50](../../issues/50)
 - Fix: Incorrect check for duplicate tags
+- Added AJAX search with the `typeahead-url` option. Solves [#60](../../issues/60).
 
 #### v.2.1.0
 

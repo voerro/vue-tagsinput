@@ -130,6 +130,11 @@ export default {
             default: false
         },
 
+        typeaheadUrl: {
+            type: String,
+            default: ''
+        },
+
         placeholder: {
             type: String,
             default: 'Add a tag'
@@ -488,36 +493,66 @@ export default {
                         this.caseSensitiveTags ? input : input.toLowerCase()
                     );
 
-                    for (let tag of this.existingTags) {
-                        const compareable = this.caseSensitiveTags
-                            ? tag.value
-                            : tag.value.toLowerCase();
-  
-                        if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag)) {
-                            this.searchResults.push(tag);
+                    // AJAX search
+                    if (this.typeaheadUrl.length > 0) {
+                        this.existingTags.splice();
+                        const xhttp = new XMLHttpRequest();
+                        const that = this;
+
+                        xhttp.onreadystatechange = function () {
+                            if (this.readyState == 4 && this.status == 200) {
+                                that.existingTags = JSON.parse(xhttp.responseText);
+
+                                that.doSearch(searchQuery);
+                            }
                         }
-                    }
 
-                    // Sort the search results alphabetically
-                    if (this.sortSearchResults) {
-                        this.searchResults.sort((a, b) => {
-                            if (a.value < b.value) return -1;
-                            if (a.value > b.value) return 1;
-
-                            return 0;
-                        });
-                    }
-
-                    // Shorten Search results to desired length
-                    if (this.typeaheadMaxResults > 0) {
-                        this.searchResults = this.searchResults.slice(
-                            0,
-                            this.typeaheadMaxResults
-                        );
+                        const endpoint = this.typeaheadUrl.replace(':search', searchQuery);
+                        xhttp.open('GET', endpoint, true);
+                        xhttp.send();
+                    } else {
+                        // Search the existing collection
+                        this.doSearch(searchQuery);
                     }
                 }
 
                 this.oldInput = this.input;
+            }
+        },
+
+        /**
+         * Perform the actual search
+         * 
+         * @param string searchQuery
+         * @return void
+         */
+        doSearch(searchQuery) {
+            for (let tag of this.existingTags) {
+                const compareable = this.caseSensitiveTags
+                    ? tag.value
+                    : tag.value.toLowerCase();
+
+                if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag)) {
+                    this.searchResults.push(tag);
+                }
+            }
+
+            // Sort the search results alphabetically
+            if (this.sortSearchResults) {
+                this.searchResults.sort((a, b) => {
+                    if (a.value < b.value) return -1;
+                    if (a.value > b.value) return 1;
+
+                    return 0;
+                });
+            }
+
+            // Shorten Search results to desired length
+            if (this.typeaheadMaxResults > 0) {
+                this.searchResults = this.searchResults.slice(
+                    0,
+                    this.typeaheadMaxResults
+                );
             }
         },
 
@@ -643,7 +678,7 @@ export default {
                     ? selectedTag.value
                     : selectedTag.value.toLowerCase();
 
-                if (selectedTag.key === tag.key && compareable.length == searchQuery.length && compareable.search(searchQuery) > -1) {
+                if (selectedTag.key === tag.key && this.escapeRegExp(compareable).length == searchQuery.length && compareable.search(searchQuery) > -1) {
                     return true;
                 }
             }
