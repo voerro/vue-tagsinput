@@ -79,6 +79,15 @@
                     <div v-show="typeahead" class="field">
                         <div class="control">
                             <label class="checkbox">
+                                <input type="checkbox" v-model="typeaheadShowOnFocus">
+                                Show Typeahead on focus
+                            </label>
+                        </div>
+                    </div>
+
+                    <div v-show="typeahead" class="field">
+                        <div class="control">
+                            <label class="checkbox">
                             <input type="checkbox" v-model="typeaheadHideDiscard">
                             Hide 'Discard Search Results' button
                             </label>
@@ -211,6 +220,7 @@
                         :typeahead-max-results="typeaheadMaxResults"
                         :typeahead-activation-threshold="typeaheadActivationThreshold"
                         :typeahead-always-show="typeheadAlwaysShow"
+                        :typeahead-show-on-focus="typeaheadShowOnFocus"
                         :typeahead-hide-discard="typeaheadHideDiscard"
                         :placeholder="placeholder"
                         :limit="limit"
@@ -284,6 +294,7 @@
                 typeaheadMaxResults: 20,
                 typeaheadActivationThreshold: 1,
                 typeheadAlwaysShow: false,
+                typeaheadShowOnFocus: true,
                 logChangeEvents: false,
                 eventLog: '',
             },

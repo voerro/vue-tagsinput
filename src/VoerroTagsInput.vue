@@ -23,6 +23,7 @@
                 @keyup="onKeyUp"
                 @keyup.esc="clearSearchResults"
                 @focus="onFocus"
+                @click="onClick"
                 @blur="onBlur"
                 @value="tags">
 
@@ -53,7 +54,7 @@
 
             <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
                 <li v-if="!typeaheadHideDiscard" class="tags-input-typeahead-item-default typeahead-hide-btn"
-                    @mousedown.prevent="clearSearchResults"
+                    @click.prevent="clearSearchResults"
                     v-text="discardSearchText"></li>
 
                 <li v-for="(tag, index) in searchResults"
@@ -112,6 +113,11 @@ export default {
         typeaheadAlwaysShow: {
             type: Boolean,
             default: false
+        },
+
+        typeaheadShowOnFocus: {
+            type: Boolean,
+            default: true
         },
 
         typeaheadHideDiscard: {
@@ -222,9 +228,17 @@ export default {
         if (this.typeaheadAlwaysShow) {
             this.searchTag(false);
         }
+    },
 
+    mounted () {
         // Emit an event
         this.$emit('initialized');
+        
+        document.addEventListener('click', (e) => {
+            if (e.target !== this.$refs['taginput']) {
+                this.clearSearchResults();
+            }
+        });
     },
 
     computed: {
@@ -456,7 +470,7 @@ export default {
                 return false;
             }
 
-            if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0) || this.typeaheadAlwaysShow) {
+            if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0) || this.typeaheadAlwaysShow || this.typeaheadShowOnFocus) {
                 this.searchResults = [];
                 this.searchSelection = 0;
                 let input = this.input.trim();
@@ -549,6 +563,8 @@ export default {
                     this.searchTag();
                 });
             }
+
+            this.$refs['taginput'].focus();
         },
 
         /**
@@ -662,8 +678,18 @@ export default {
          * @returns void
          */
         onFocus(e) {
-            this.$emit('focus', e)
-            
+            this.$emit('focus', e);  
+        },
+
+        /**
+         * Process the onClick event.
+         * 
+         * @param e
+         * @returns void
+         */
+        onClick(e) {
+            this.$emit('click', e);
+
             this.searchTag();
         },
 
