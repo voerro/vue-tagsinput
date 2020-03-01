@@ -29,6 +29,12 @@
     border-color: #dbdbdb;
 }
 
+.tags-input-wrapper-default.active {
+    border: 1px solid #8bbafe;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    outline: 0 none;
+}
+
 /* The tag badges & the remove icon */
 .tags-input span {
     margin-right: 0.3rem;

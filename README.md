@@ -269,17 +269,32 @@ wrapper-class | tags-input-wrapper-default | Outer appearance of the input - a w
 
 When search results are displayed underneath the input, use the `arrow down` and `arrow up` keys on the keyboard to move the selection. Press `Enter` to select a tag. Press `Esc` to discard the search results and then `Enter` to add a new tag the way you've typed it.
 
-## Updating From Older Versions
+## Breaking Changes
 
-#### Older versions up to v1.5.0 -> v1.5.1
+#### v1.0.0 ... v1.5.0 -> v1.5.1
 
 See the `v1` branch for details.
 
 #### v1.5.1 and above -> v2.*
 
-A pretty serious bug (#53) was fixed in `v2.0.0`. The data format for the `existing-tags` prop and the `v-model` directive has been changed. You can find the new format in this documentation, see above.
+A pretty serious bug ([#53](../../issues/53)) was fixed in `v2.0.0`. The data format for the `existing-tags` prop and the `v-model` directive has been changed. You can find the new format in this documentation, see above.
 
 ## Changelog
+
+#### v.2.2.0
+
+- New option: `hide-input-on-limit`
+- New option: `typeahead-show-on-focus`. It is enabled by default and will make the typeahead (badges or dropdown) visible whenever the input field is focused and if there are any tags suggestions.
+- Adding `active` class to the wrapper element when the input field is focused. If you're using the default (provided) `style.css` file, note that your tags input will now get a "glow" around it when focused.
+
+#### v.2.1.0
+
+- New option: `typeahead-always-show`
+- New option: `typeahead-hide-discard`
+- New option: `add-tags-on-space`
+- New event: `change`
+- "Discard Search Results" string (option text) is now customizable 
+- Fixed a minor bug with removing tags on backspace press
 
 #### v.2.0.2
 

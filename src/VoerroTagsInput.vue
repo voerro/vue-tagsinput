@@ -1,6 +1,9 @@
 <template>
     <div class="tags-input-root" style="position: relative;">
-        <div :class="wrapperClass + ' tags-input'">
+        <div :class="{
+            [wrapperClass + ' tags-input']: true,
+            'active': isActive,
+        }">
             <span class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
                 v-for="(tag, index) in tags"
                 :key="index"
@@ -37,7 +40,7 @@
         <div v-show="searchResults.length">
             <p v-if="typeaheadStyle === 'badges'" :class="`typeahead-${typeaheadStyle}`">
                 <span v-if="!typeaheadHideDiscard" class="tags-input-badge typeahead-hide-btn tags-input-typeahead-item-default"
-                    @click.prevent="clearSearchResults"
+                    @click.prevent="clearSearchResults(true)"
                     v-text="discardSearchText"></span>
 
                 <span v-for="(tag, index) in searchResults"
@@ -54,7 +57,7 @@
 
             <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
                 <li v-if="!typeaheadHideDiscard" class="tags-input-typeahead-item-default typeahead-hide-btn"
-                    @click.prevent="clearSearchResults"
+                    @click.prevent="clearSearchResults(true)"
                     v-text="discardSearchText"></li>
 
                 <li v-for="(tag, index) in searchResults"
@@ -219,6 +222,8 @@ export default {
             searchSelection: 0,
 
             selectedTag: -1,
+
+            isActive: false,
         };
     },
 
@@ -554,7 +559,7 @@ export default {
          * 
          * @reutrns void
          */
-        clearSearchResults() {
+        clearSearchResults(returnFocus = false) {
             this.searchResults = [];
             this.searchSelection = 0;
 
@@ -564,7 +569,9 @@ export default {
                 });
             }
 
-            this.$refs['taginput'].focus();
+            if (returnFocus) {
+                this.$refs['taginput'].focus();
+            }
         },
 
         /**
@@ -678,7 +685,9 @@ export default {
          * @returns void
          */
         onFocus(e) {
-            this.$emit('focus', e);  
+            this.$emit('focus', e);
+
+            this.isActive = true;
         },
 
         /**
@@ -689,6 +698,8 @@ export default {
          */
         onClick(e) {
             this.$emit('click', e);
+
+            this.isActive = true;
 
             this.searchTag();
         },
@@ -712,6 +723,8 @@ export default {
             } else {
                 this.searchTag();
             }
+
+            this.isActive = false;
         },
     }
 }
