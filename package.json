@@ -18,9 +18,7 @@
         "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
         "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
     },
-    "dependencies": {
-        "vue": "^2.5.0"
-    },
+    "dependencies": {},
     "browserslist": [
         "> 1%",
         "last 2 versions",
@@ -34,10 +32,12 @@
         "cross-env": "^5.0.5",
         "css-loader": "^0.28.7",
         "file-loader": "^1.1.4",
-        "vue-loader": "^13.0.5",
-        "vue-template-compiler": "^2.4.4",
-        "webpack": "^3.6.0",
-        "webpack-dev-server": "^3.1.11"
+        "vue": "^2.6.11",
+        "vue-loader": "^15.9.0",
+        "vue-template-compiler": "^2.6.11",
+        "webpack": "^4.41.6",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.10.3"
     },
     "repository": "https://github.com/voerro/vue-tagsinput"
 }
