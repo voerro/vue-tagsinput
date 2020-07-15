@@ -8,8 +8,9 @@
                 v-for="(tag, index) in tags"
                 :key="index"
             >
-                <span v-html="tag.value"></span>
-
+                <slot name="tag" :tag="tag" :index="index">
+                    <span v-html="tag.value"></span>
+                </slot>
                 <a href="#"
                     class="tags-input-remove"
                     @click.prevent="removeTag(index)"></a>
