@@ -7,6 +7,7 @@
             <span class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
                 v-for="(tag, index) in tags"
                 :key="index"
+                v-bind:class="tag.class || ''"
             >
                 <span v-html="tag.value"></span>
 
@@ -51,10 +52,10 @@
                     @mouseover="searchSelection = index"
                     @mousedown.prevent="tagFromSearchOnClick(tag)"
                     class="tags-input-badge"
-                    v-bind:class="{
+                    v-bind:class="[{
                         'tags-input-typeahead-item-default': index != searchSelection,
                         'tags-input-typeahead-item-highlighted-default': index == searchSelection
-                    }"></span>
+                    }, tag.class || '' ]"></span>
             </p>
 
             <ul v-else-if="typeaheadStyle === 'dropdown'" :class="`typeahead-${typeaheadStyle}`">
