@@ -36,7 +36,7 @@ Include the `dist/style.css` file on your page to apply the styling. You can use
 If you're not using NPM, you can include the required files into your page manually from a CDN. Don't forget to include Vue as well. For example:
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.2.0/dist/voerro-vue-tagsinput.js"></script>
 
 <script>
@@ -265,6 +265,21 @@ Certain classes/styles can be overridden via component props on a per instance b
 Prop | Default class | Area
 --- | --- | ---
 wrapper-class | tags-input-wrapper-default | Outer appearance of the input - a wrapper providing a border and padding around the selected tags. If you're using CSS frameworks, you could use the frameworks' native classes, e.g. `form-control` for Bootstrap or `input` for Bulma.
+
+You can also customize selected tags' badges using the `selected-tag` slot, for example like this:
+
+```html
+<tags-input ...>
+    <template v-slot:selected-tag="{ tag, index, removeTag }">
+        <span v-html="tag.value"></span>
+
+        <a href="#"
+            class="tags-input-remove"
+            @click.prevent="removeTag(index)"></a>
+    </template>
+</tags-input>
+```
+
 
 ## Using Typeahead (Autocomplete)
 
