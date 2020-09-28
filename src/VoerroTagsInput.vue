@@ -247,6 +247,8 @@ export default {
     },
 
     created () {
+        this.typeaheadTags = this.existingTags;
+
         this.tagsFromValue();
 
         if (this.typeaheadAlwaysShow) {
@@ -304,6 +306,12 @@ export default {
             }
         },
 
+        existingTags(newVal) {
+            this.typeaheadTags.splice();
+
+            this.typeaheadTags = newVal;
+        },
+
         tags() {
             // Updating the hidden input
             this.hiddenInput = JSON.stringify(this.tags);
@@ -357,7 +365,7 @@ export default {
                 if (!this.onlyExistingTags && text.length && this.validate(text)) {
                     this.input = '';
 
-                    // Determine if the inputted tag exists in the existingTags
+                    // Determine if the inputted tag exists in the typeagedTags
                     // array
                     let newTag = {
                         key: '',
@@ -370,7 +378,7 @@ export default {
                             : newTag.value.toLowerCase()
                     );
 
-                    for (let tag of this.existingTags) {
+                    for (let tag of this.typeaheadTags) {
                         const compareable = this.escapeRegExp(
                             this.caseSensitiveTags
                                 ? tag.value
@@ -509,13 +517,13 @@ export default {
 
                     // AJAX search
                     if (this.typeaheadUrl.length > 0) {
-                        this.existingTags.splice();
+                        this.typeaheadTags.splice();
                         const xhttp = new XMLHttpRequest();
                         const that = this;
 
                         xhttp.onreadystatechange = function () {
                             if (this.readyState == 4 && this.status == 200) {
-                                that.existingTags = JSON.parse(xhttp.responseText);
+                                that.typeaheadTags = JSON.parse(xhttp.responseText);
 
                                 that.doSearch(searchQuery);
                             }
@@ -541,7 +549,7 @@ export default {
          * @return void
          */
         doSearch(searchQuery) {
-            for (let tag of this.existingTags) {
+            for (let tag of this.typeaheadTags) {
                 const compareable = this.caseSensitiveTags
                     ? tag.value
                     : tag.value.toLowerCase();
