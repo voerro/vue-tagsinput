@@ -93,6 +93,9 @@
     padding-left: 0.6em;
     border-radius: 10em;
 }
+.tags-input-badge-pill.disabled {
+    padding-right: 0.6em;
+}
 
 .tags-input-badge-selected-default {
     color: #212529;

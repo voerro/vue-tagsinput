@@ -3,10 +3,12 @@
         <div :class="{
             [wrapperClass + ' tags-input']: true,
             'active': isActive,
+            'disabled': disabled,
         }">
             <span v-for="(tag, index) in tags"
                 :key="index"
                 class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
+                :class="{ 'disabled': disabled }"
             >
                 <slot name="selected-tag"
                     :tag="tag"
@@ -15,7 +17,8 @@
                 >
                     <span v-html="tag.value"></span>
 
-                    <a href="#"
+                    <a v-show="!disabled"
+                        href="#"
                         class="tags-input-remove"
                         @click.prevent="removeTag(index)"></a>
                 </slot>
@@ -105,6 +108,11 @@ export default {
             default: () => {
                 return [];
             }
+        },
+
+        disabled: {
+            type: Boolean,
+            default: false
         },
 
         typeahead: {
@@ -269,7 +277,7 @@ export default {
 
     computed: {
         hideInputField() {
-            return (this.hideInputOnLimit && this.limit > 0 && this.tags.length >= this.limit);
+            return (this.hideInputOnLimit && this.limit > 0 && this.tags.length >= this.limit) || this.disabled;
         }
     },
 
@@ -431,9 +439,14 @@ export default {
          * Add/Select a tag
          * 
          * @param tag
+         * @param force
          * @returns void | Boolean
          */
-        addTag(tag) {
+        addTag(tag, force = false) {
+            if (this.disabled && !force) {
+                return;
+            }
+
             if (!this.beforeAddingTag(tag)) {
                 return false;
             }
@@ -475,6 +488,10 @@ export default {
          * @returns void
          */
         removeTag(index) {
+            if (this.disabled) {
+                return;
+            }
+
             let tag = this.tags[index];
 
             if (!this.beforeRemovingTag(tag)) {
@@ -665,7 +682,7 @@ export default {
                 this.clearTags();
 
                 for (let tag of tags) {
-                    this.addTag(tag);
+                    this.addTag(tag, true);
                 }
             } else {
                 if (this.tags.length == 0) {

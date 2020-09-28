@@ -136,6 +136,7 @@ new Vue({
 Prop | Type | Default | Description
 --- | --- | --- | ---
 elementId | String | - | id & name for the hidden input.
+disabled | Boolean | false | Disable the element. You won't be able to add new tags and remove the existing ones.
 existing-tags | Array | [] | An array with existing tags in the following format: `[{ key: 'id-or-slug-of-the-tag', value: 'Tag\'s text representation' }, {...}, ...]`
 typeahead | Boolean | false | Whether the typeahead (autocomplete) functionality should be enabled.
 typeahead-style | String | 'badges' | The autocomplete prompt style. Possible values: `badges`, `dropdown`.
@@ -273,7 +274,8 @@ You can also customize selected tags' badges using the `selected-tag` slot, for 
     <template v-slot:selected-tag="{ tag, index, removeTag }">
         <span v-html="tag.value"></span>
 
-        <a href="#"
+        <a v-show="!disabled"
+            href="#"
             class="tags-input-remove"
             @click.prevent="removeTag(index)"></a>
     </template>
