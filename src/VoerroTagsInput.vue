@@ -359,9 +359,11 @@ export default {
                     );
 
                     for (let tag of this.existingTags) {
-                        const compareable = this.caseSensitiveTags
-                            ? tag.value
-                            : tag.value.toLowerCase();
+                        const compareable = this.escapeRegExp(
+                            this.caseSensitiveTags
+                                ? tag.value
+                                : tag.value.toLowerCase()
+                        );
 
                         if (searchQuery === compareable) {
                             newTag = Object.assign({}, tag);
