@@ -134,5 +134,5 @@
 
 .tags-input-typeahead-item-highlighted-default {
     color: #fff;
-    background-color: #007bff;
+    background-color: #007bff !important;
 }
