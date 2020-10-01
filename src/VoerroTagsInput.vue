@@ -15,7 +15,7 @@
                     :index="index"
                     :removeTag="removeTag"
                 >
-                    <span v-html="tag.value"></span>
+                    <span v-html="tag[textField]"></span>
 
                     <a v-show="!disabled"
                         href="#"
@@ -59,7 +59,7 @@
 
                 <span v-for="(tag, index) in searchResults"
                     :key="index"
-                    v-html="tag.value"
+                    v-html="tag[textField]"
                     @mouseover="searchSelection = index"
                     @mousedown.prevent="tagFromSearchOnClick(tag)"
                     class="tags-input-badge"
@@ -79,7 +79,7 @@
 
                 <li v-for="(tag, index) in searchResults"
                     :key="index"
-                    v-html="tag.value"
+                    v-html="tag[textField]"
                     @mouseover="searchSelection = index"
                     @mousedown.prevent="tagFromSearchOnClick(tag)"
                     v-bind:class="{
@@ -108,6 +108,16 @@ export default {
             default: () => {
                 return [];
             }
+        },
+
+        idField: {
+            type: String,
+            default: 'key',
+        },
+
+        textField: {
+            type: String,
+            default: 'value',
         },
 
         disabled: {
@@ -382,15 +392,15 @@ export default {
 
                     const searchQuery = this.escapeRegExp(
                         this.caseSensitiveTags
-                            ? newTag.value
-                            : newTag.value.toLowerCase()
+                            ? newTag[this.textField]
+                            : newTag[this.textField].toLowerCase()
                     );
 
                     for (let tag of this.typeaheadTags) {
                         const compareable = this.escapeRegExp(
                             this.caseSensitiveTags
-                                ? tag.value
-                                : tag.value.toLowerCase()
+                                ? tag[this.textField]
+                                : tag[this.textField].toLowerCase()
                         );
 
                         if (searchQuery === compareable) {
@@ -568,8 +578,8 @@ export default {
         doSearch(searchQuery) {
             for (let tag of this.typeaheadTags) {
                 const compareable = this.caseSensitiveTags
-                    ? tag.value
-                    : tag.value.toLowerCase();
+                    ? tag[this.textField]
+                    : tag[this.textField].toLowerCase();
 
                 if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag)) {
                     this.searchResults.push(tag);
@@ -579,8 +589,8 @@ export default {
             // Sort the search results alphabetically
             if (this.sortSearchResults) {
                 this.searchResults.sort((a, b) => {
-                    if (a.value < b.value) return -1;
-                    if (a.value > b.value) return 1;
+                    if (a[this.textField] < b[this.textField]) return -1;
+                    if (a[this.textField] > b[this.textField]) return 1;
 
                     return 0;
                 });
@@ -709,15 +719,15 @@ export default {
             }
 
             const searchQuery = this.escapeRegExp(
-                this.caseSensitiveTags ? tag.value : tag.value.toLowerCase()
+                this.caseSensitiveTags ? tag[this.textField] : tag[this.textField].toLowerCase()
             );
 
             for (let selectedTag of this.tags) {
                 const compareable = this.caseSensitiveTags
-                    ? selectedTag.value
-                    : selectedTag.value.toLowerCase();
+                    ? selectedTag[this.textField]
+                    : selectedTag[this.textField].toLowerCase();
 
-                if (selectedTag.key === tag.key && this.escapeRegExp(compareable).length == searchQuery.length && compareable.search(searchQuery) > -1) {
+                if (selectedTag[this.idField] === tag[this.idField] && this.escapeRegExp(compareable).length == searchQuery.length && compareable.search(searchQuery) > -1) {
                     return true;
                 }
             }

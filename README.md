@@ -81,9 +81,7 @@ Include the CSS file on your page to apply the styling. Read the `Styling` secti
 
 `element-id` will be applied to `id` and `name` attributes of the hidden input that contains the list of the selected tags as its value. Optionally you can also use the `v-model` directive to bind a variable to the array of selected tags.
 
-`existing-tags` is the list of the existing on your website tags. Include it even if you're not using typeahead.
-
-Remove the `typeahead` property to disable this functionality.
+`existing-tags` is the list of all the existing/valid tags. Include it even if you're not using typeahead.
 
 #### Setting Selected Tags Programmatically
 
@@ -131,6 +129,32 @@ new Vue({
 });
 ```
 
+#### Existing And Selected Tags Collections
+
+As you've noticed in the examples above, an item from a tag collection looks like this:
+
+```
+{ key: 'web-development', value: 'Web Development' }
+```
+
+In reality, you're not limited to what your tag objects should look like. You can name your fields however you want, just don't forget to tell the component the correct field names. To customize the `key` field name, set the `id-field` prop. To customize the `value` field name, set the `text-field` prop. For example:
+
+```html
+<tags-input element-id="tags"
+    v-model="selectedTags"
+    :existing-tags="[
+        { id: 1, name: 'Web Development' },
+        { id: 2, name: 'PHP' },
+        { id: 3, name: 'JavaScript' },
+    ]"
+    id-field="id"
+    text-field="name"></tags-input>
+```
+
+Note that the selected tags collection should have the same `id` and `text` field names as the existing tags collection.
+
+Your tag options can also have other (extra) fields, for example when you fetch data from your DB and pass it directly to the component as is. This is perfectly fine and won't create any problems.
+
 #### All Available Props
 
 Prop | Type | Default | Description
@@ -138,6 +162,8 @@ Prop | Type | Default | Description
 elementId | String | - | id & name for the hidden input.
 disabled | Boolean | false | Disable the element. You won't be able to add new tags and remove the existing ones.
 existing-tags | Array | [] | An array with existing tags in the following format: `[{ key: 'id-or-slug-of-the-tag', value: 'Tag\'s text representation' }, {...}, ...]`
+id-field | String | 'key' | The name of the "id" field in your existing and selected tags collections
+text-field | String | 'value' | The name of the "text" field in your existing and selected tags collections
 typeahead | Boolean | false | Whether the typeahead (autocomplete) functionality should be enabled.
 typeahead-style | String | 'badges' | The autocomplete prompt style. Possible values: `badges`, `dropdown`.
 typeahead-max-results | Number | 0 | Maximum number of typeahead results to be shown. 0 - unlimited.
@@ -251,9 +277,9 @@ You can bind the array of selected tags to a variable via `v-model`. A tag objec
 { key: 'web-development', value: 'Web Development' }
 ```
 
-`key` is whatever unique key you use for the tags in your project. It could be a unique slug, it could be a unique numeric id, it could be something else. `value` is the text representation of a tag.
+`key` is whatever unique key you use for the tags in your project. It could be a unique slug, it could be a unique numeric id, it could be something else. `value` is the text representation of a tag. If you've set custom field names via `id-field` and `text-field` props - use those instead of `key` and `value`.
 
-There's also a hidden text input, which has the stringified version of the array of selected tags as its value. The `name` and `id` of the input equal to whatever you set to the `element-id` prop.
+There's also a hidden text input, which by default has the stringified version of the array of selected tags as its value. The `name` and `id` of the input equal to whatever you set to the `element-id` prop.
 
 The tags that don't exist in the `existing-tags` array will have its `key` equal to an empty string `''`. In your backend you can consider these tags as `to be created`.
 
