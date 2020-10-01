@@ -330,7 +330,7 @@ See the `v1` branch for details.
 
 A pretty serious bug ([#53](../../issues/53)) was fixed in `v2.0.0`. The data format for the `existing-tags` prop and the `v-model` directive has been changed. You can find the new format in this documentation, see above.
 
-#### v2.3.0 and above -> v2.4.0
+#### v2.3.0 -> v2.4.0
 
 Multiple hidden fields instead of one, so that your backend treats the selected tags as an array.
 
