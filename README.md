@@ -164,6 +164,7 @@ disabled | Boolean | false | Disable the element. You won't be able to add new t
 existing-tags | Array | [] | An array with existing tags in the following format: `[{ key: 'id-or-slug-of-the-tag', value: 'Tag\'s text representation' }, {...}, ...]`
 id-field | String | 'key' | The name of the "id" field in your existing and selected tags collections
 text-field | String | 'value' | The name of the "text" field in your existing and selected tags collections
+value-fields | String | null | A comma-separated list of fields to be included in the hidden inputs' values. These make up data that will be returned with the form as FormData. `null` means "include all fields".
 typeahead | Boolean | false | Whether the typeahead (autocomplete) functionality should be enabled.
 typeahead-style | String | 'badges' | The autocomplete prompt style. Possible values: `badges`, `dropdown`.
 typeahead-max-results | Number | 0 | Maximum number of typeahead results to be shown. 0 - unlimited.
@@ -271,6 +272,8 @@ new Vue({
 
 ## Data
 
+### v-model
+
 You can bind the array of selected tags to a variable via `v-model`. A tag object within the array looks like this:
 
 ```
@@ -279,9 +282,13 @@ You can bind the array of selected tags to a variable via `v-model`. A tag objec
 
 `key` is whatever unique key you use for the tags in your project. It could be a unique slug, it could be a unique numeric id, it could be something else. `value` is the text representation of a tag. If you've set custom field names via `id-field` and `text-field` props - use those instead of `key` and `value`.
 
-There's also a hidden text input, which by default has the stringified version of the array of selected tags as its value. The `name` and `id` of the input equal to whatever you set to the `element-id` prop.
+### Form Data
 
-The tags that don't exist in the `existing-tags` array will have its `key` equal to an empty string `''`. In your backend you can consider these tags as `to be created`.
+There's also a hidden text input for each selected tag so that you could easily convert that to FormData. The `name` and `id` of the input equal to whatever you set to the `element-id` prop.
+
+The value of each input equals to a stringified version of a tag object. Note that the tags that don't exist in the `existing-tags` array will have its `key` equal to an empty string `''`. In your backend you can consider these tags as `to be created`.
+
+If you don't need whole tag objects, you can specify which tag fields you want to be returned with the `value-fields` prop. Provide a comma-separated list of fields or a single field name. If you specify a single field, you'll get that field values alone instead of stringified objects.
 
 ## Styling
 
@@ -324,6 +331,12 @@ See the `v1` branch for details.
 A pretty serious bug ([#53](../../issues/53)) was fixed in `v2.0.0`. The data format for the `existing-tags` prop and the `v-model` directive has been changed. You can find the new format in this documentation, see above.
 
 ## Changelog
+
+#### v.2.4.0
+
+- New options: `id-field` and `text-field`
+- **IMPORTANT**: multiple hidden fields instead of one, so that your backend treats the selected tags as an array
+- New option: `value-fields`
 
 #### v.2.3.0
 

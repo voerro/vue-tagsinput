@@ -41,10 +41,14 @@
                 @blur="onBlur"
                 @value="tags">
 
-            <input type="hidden" v-if="elementId"
-                :name="elementId"
-                :id="elementId"
-                v-model="hiddenInput">
+            <template v-if="elementId">
+                <input v-for="(tag, index) in tags"
+                    :key="index"
+                    type="hidden"
+                    :name="`${elementId}[]`"
+                    :id="elementId"
+                    :value="hiddenInputValue(tag)">
+            </template>
         </div>
 
         <!-- Typeahead/Autocomplete -->
@@ -118,6 +122,11 @@ export default {
         textField: {
             type: String,
             default: 'value',
+        },
+
+        valueFields: {
+            type: String,
+            default: null,
         },
 
         disabled: {
@@ -812,6 +821,30 @@ export default {
 
             this.isActive = false;
         },
+
+        hiddenInputValue(tag) {
+            // Return all fields
+            if (!this.valueFields) {
+                return JSON.stringify(tag);
+            }
+
+            const fields = this.valueFields.replace(/\s/, '').split(',');
+
+            // A single field
+            if (fields.length === 1) {
+                return tag[fields[0]];
+            } else {
+                // Specified fields
+                return JSON.stringify(
+                    Object.assign(
+                        {},
+                        ...fields.map(field => ({ [field]: tag[field] }))
+                    )
+                );
+            }
+
+            return JSON.stringify(tag);
+        }
     }
 }
 </script>
