@@ -46,7 +46,6 @@
                     :key="index"
                     type="hidden"
                     :name="`${elementId}[]`"
-                    :id="elementId"
                     :value="hiddenInputValue(tag)">
             </template>
         </div>
