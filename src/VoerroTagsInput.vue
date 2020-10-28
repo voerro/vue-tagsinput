@@ -41,13 +41,13 @@
                 @blur="onBlur"
                 @value="tags">
 
-            <template v-if="elementId">
+            <div style="display: none;" v-if="elementId">
                 <input v-for="(tag, index) in tags"
                     :key="index"
                     type="hidden"
                     :name="`${elementId}[]`"
                     :value="hiddenInputValue(tag)">
-            </template>
+            </div>
         </div>
 
         <!-- Typeahead/Autocomplete -->
