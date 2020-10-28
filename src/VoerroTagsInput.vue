@@ -177,7 +177,7 @@ export default {
             type: String,
             default: 'Add a tag'
         },
-        
+
         discardSearchText: {
             type: String,
             default: 'Discard Search Results'
@@ -336,6 +336,8 @@ export default {
             this.typeaheadTags.splice();
 
             this.typeaheadTags = newVal;
+
+            this.searchTag()
         },
 
         tags() {
