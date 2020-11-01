@@ -273,7 +273,7 @@ export default {
     },
 
     created () {
-        this.typeaheadTags = this.existingTags;
+        this.typeaheadTags = this.cloneArray(this.existingTags);
 
         this.tagsFromValue();
 
@@ -335,9 +335,9 @@ export default {
         existingTags(newVal) {
             this.typeaheadTags.splice();
 
-            this.typeaheadTags = newVal;
+            this.typeaheadTags = this.cloneArray(newVal);
 
-            this.searchTag()
+            this.searchTag();
         },
 
         tags() {
@@ -845,6 +845,10 @@ export default {
             }
 
             return JSON.stringify(tag);
+        },
+
+        cloneArray(arr) {
+            return arr.map(el => Object.assign({}, el));
         }
     }
 }
