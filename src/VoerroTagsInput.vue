@@ -95,6 +95,8 @@
 </template>
 
 <script>
+import latinize from 'latinize';
+
 export default {
     props: {
         elementId: String,
@@ -241,6 +243,11 @@ export default {
         caseSensitiveTags: {
             type: Boolean,
             default: false
+        },
+
+        latinizeTags: {
+          type: Boolean,
+          default: false
         },
 
         beforeAddingTag: {
@@ -400,17 +407,19 @@ export default {
                         value: text,
                     };
 
+                    const queryTerm = this.latinizeTags ? latinize(newTag[this.textField]) : newTag[this.textField];
                     const searchQuery = this.escapeRegExp(
                         this.caseSensitiveTags
-                            ? newTag[this.textField]
-                            : newTag[this.textField].toLowerCase()
+                            ? queryTerm
+                            : queryTerm.toLowerCase()
                     );
 
                     for (let tag of this.typeaheadTags) {
+                        const compareableTerm = this.latinizeTags ? latinize(tag[this.textField]) : tag[this.textField];
                         const compareable = this.escapeRegExp(
                             this.caseSensitiveTags
-                                ? tag[this.textField]
-                                : tag[this.textField].toLowerCase()
+                                ? compareableTerm
+                                : compareableTerm.toLowerCase()
                         );
 
                         if (searchQuery === compareable) {
@@ -548,8 +557,9 @@ export default {
 
                 if ((input.length && input.length >= this.typeaheadActivationThreshold) || this.typeaheadActivationThreshold == 0 || this.typeaheadAlwaysShow) {
                     // Find all the existing tags which include the search text
+                    const queryTerm = this.latinizeTags ? latinize(input) : input;
                     const searchQuery = this.escapeRegExp(
-                        this.caseSensitiveTags ? input : input.toLowerCase()
+                        this.caseSensitiveTags ? queryTerm : queryTerm.toLowerCase()
                     );
 
                     // AJAX search
@@ -587,9 +597,10 @@ export default {
          */
         doSearch(searchQuery) {
             for (let tag of this.typeaheadTags) {
+                const compareableTerm = this.latinizeTags ? latinize(tag[this.textField]) : tag[this.textField];
                 const compareable = this.caseSensitiveTags
-                    ? tag[this.textField]
-                    : tag[this.textField].toLowerCase();
+                    ? compareableTerm
+                    : compareableTerm.toLowerCase();
 
                 if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag)) {
                     this.searchResults.push(tag);
@@ -728,14 +739,16 @@ export default {
                 return false;
             }
 
+            const queryTerm = this.latinizeTags ? latinize(tag[this.textField]) : tag[this.textField];
             const searchQuery = this.escapeRegExp(
-                this.caseSensitiveTags ? tag[this.textField] : tag[this.textField].toLowerCase()
+                this.caseSensitiveTags ? queryTerm : queryTerm.toLowerCase()
             );
 
             for (let selectedTag of this.tags) {
+                const compareableTerm = this.latinizeTags ? latinize(selectedTag[this.textField]) : selectedTag[this.textField];
                 const compareable = this.caseSensitiveTags
-                    ? selectedTag[this.textField]
-                    : selectedTag[this.textField].toLowerCase();
+                    ? compareableTerm
+                    : compareableTerm.toLowerCase();
 
                 if (selectedTag[this.idField] === tag[this.idField] && this.escapeRegExp(compareable).length == searchQuery.length && compareable.search(searchQuery) > -1) {
                     return true;

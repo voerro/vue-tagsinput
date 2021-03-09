@@ -142,6 +142,15 @@
                     </div>
 
                     <div class="field">
+                      <div class="control">
+                          <label class="checkbox">
+                              <input type="checkbox" v-model="latinizeTags"> 
+                              Tags are latinized (ignore accents)
+                          </label>
+                      </div>
+                  </div>
+
+                    <div class="field">
                         <div class="control">
                             <label class="checkbox">
                                 <input type="checkbox" v-model="deleteOnBackspace"> 
@@ -203,6 +212,7 @@
                         :existing-tags="[
                             { key: 'children-of-bodom', value: 'Children of Bodom' },
                             { key: 'epica', value: 'Epica' },
+                            { key: 'epica', value: 'Épica' },
                             { key: 'emperor', value: 'Emperor' },
                             { key: 'shape-of-despair', value: 'Shape of Despair' },
                             { key: 'protest-the-hero', value: 'Protest the Hero' },
@@ -210,6 +220,7 @@
                             { key: 'ne-obliviscaris', value: 'Ne Obliviscaris' },
                             { key: 'belakor', value: 'Be\'lakor' },
                             { key: 'dark-lunacy', value: 'Dark Lunacy' },
+                            { key: 'dark-lunacy', value: 'Dark Lunâcy' },
                             { key: 'dominia', value: 'Dominia' },
                             { key: 'jason-becker', value: 'Jason Becker' },
                             { key: 'jeff-loomis', value: 'Jeff Loomis' },
@@ -226,6 +237,7 @@
                         :limit="limit"
                         :only-existing-tags="onlyExistingTags"
                         :case-sensitive-tags="caseSensitiveTags"
+                        :latinize-tags="latinizeTags"
                         :delete-on-backspace="deleteOnBackspace"
                         :allow-duplicates="allowDuplicates"
                         :add-tags-on-comma="addTagsOnComma"
@@ -284,6 +296,7 @@
                 limit: 0,
                 onlyExistingTags: false,
                 caseSensitiveTags: false,
+                latinizeTags: false,
                 deleteOnBackspace: true,
                 allowDuplicates: false,
                 addTagsOnComma: false,
