@@ -82,7 +82,7 @@
 
                 <li v-for="(tag, index) in searchResults"
                     :key="index"
-                    v-html="tag[textField]"
+                    v-html="tag[displayField] || tag[textField]"
                     @mouseover="searchSelection = index"
                     @mousedown.prevent="tagFromSearchOnClick(tag)"
                     v-bind:class="{
@@ -121,6 +121,11 @@ export default {
         textField: {
             type: String,
             default: 'value',
+        },
+        
+        displayField: {
+          type: String,
+          default: 'display',
         },
 
         valueFields: {
