@@ -590,8 +590,9 @@ export default {
                 const compareable = this.caseSensitiveTags
                     ? tag[this.textField]
                     : tag[this.textField].toLowerCase();
+                const keys = this.searchResults.map((res) => (res.key));
 
-                if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag)) {
+                if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag) && ! keys.includes(tag.key)) {
                     this.searchResults.push(tag);
                 }
             }
