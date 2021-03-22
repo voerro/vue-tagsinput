@@ -26,6 +26,8 @@
 
             <input type="text"
                 ref="taginput"
+                :id="inputId"
+                :name="inputId"
                 :placeholder="placeholder"
                 :value="input"
                 @input="e => input = e.target.value"
@@ -101,6 +103,8 @@
 export default {
     props: {
         elementId: String,
+
+        inputId: String,
 
         existingTags: {
             type: Array,

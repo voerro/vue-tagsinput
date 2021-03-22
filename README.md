@@ -159,7 +159,8 @@ Your tag options can also have other (extra) fields, for example when you fetch 
 
 Prop | Type | Default | Description
 --- | --- | --- | ---
-elementId | String | - | id & name for the hidden input.
+element-id | String | - | name for the hidden form input with the value.
+input-id | String | - | id & name for the visible input.
 disabled | Boolean | false | Disable the element. You won't be able to add new tags and remove the existing ones.
 existing-tags | Array | [] | An array with existing tags in the following format: `[{ key: 'id-or-slug-of-the-tag', value: 'Tag\'s text representation' }, {...}, ...]`
 id-field | String | 'key' | The name of the "id" field in your existing and selected tags collections
