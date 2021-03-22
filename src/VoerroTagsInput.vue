@@ -27,8 +27,11 @@
             <input type="text"
                 ref="taginput"
                 :placeholder="placeholder"
-                v-model="input"
+                :value="input"
+                @input="e => input = e.target.value"
                 v-show="!hideInputField"
+                @compositionstart="composing=true"
+                @compositionend="composing=false"
                 @keydown.enter.prevent="tagFromInput(false)"
                 @keydown.8="removeLastTag"
                 @keydown.down="nextSearchResult"
@@ -269,6 +272,7 @@ export default {
             selectedTag: -1,
 
             isActive: false,
+            composing: false,
         };
     },
 
@@ -380,6 +384,8 @@ export default {
          * @returns void
          */
         tagFromInput(ignoreSearchResults = false) {
+            if (this.composing) return;
+
             // If we're choosing a tag from the search results
             if (this.searchResults.length && this.searchSelection >= 0 && !ignoreSearchResults) {
                 this.tagFromSearch(this.searchResults[this.searchSelection]);
