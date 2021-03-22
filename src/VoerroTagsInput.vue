@@ -337,7 +337,7 @@ export default {
         },
 
         existingTags(newVal) {
-            this.typeaheadTags.splice();
+            this.typeaheadTags.splice(0);
 
             this.typeaheadTags = this.cloneArray(newVal);
 
@@ -560,7 +560,7 @@ export default {
 
                     // AJAX search
                     if (this.typeaheadUrl.length > 0) {
-                        this.typeaheadTags.splice();
+                        this.typeaheadTags.splice(0);
                         const xhttp = new XMLHttpRequest();
                         const that = this;
 
