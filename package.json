@@ -33,11 +33,11 @@
         "css-loader": "^0.28.11",
         "file-loader": "^1.1.11",
         "vue": "^2.6.12",
-        "vue-loader": "^15.9.3",
+        "vue-loader": "^15.9.6",
         "vue-template-compiler": "^2.6.12",
-        "webpack": "^4.44.2",
+        "webpack": "^4.46.0",
         "webpack-cli": "^3.3.12",
-        "webpack-dev-server": "^3.11.0"
+        "webpack-dev-server": "^3.11.2"
     },
     "repository": "https://github.com/voerro/vue-tagsinput"
 }
