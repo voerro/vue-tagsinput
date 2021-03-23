@@ -37,7 +37,7 @@ If you're not using NPM, you can include the required files into your page manua
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.4.3/dist/voerro-vue-tagsinput.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.5.0/dist/voerro-vue-tagsinput.js"></script>
 
 <script>
     new Vue({
@@ -50,7 +50,7 @@ If you're not using NPM, you can include the required files into your page manua
 Include the CSS file on your page to apply the styling. Read the `Styling` section to learn how to customize the appearance.
 
 ```
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.4.3/dist/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.5.0/dist/style.css">
 ```
 
 **IMPORTANT:** Always grab the latest versions of the package from [JSDELIVR](https://www.jsdelivr.com/package/npm/@voerro/vue-tagsinput?path=dist), the ones provided in the examples above might be outdated. Same goes for Vue.js.
@@ -159,7 +159,8 @@ Your tag options can also have other (extra) fields, for example when you fetch 
 
 Prop | Type | Default | Description
 --- | --- | --- | ---
-elementId | String | - | id & name for the hidden input.
+element-id | String | - | name for the hidden form input with the value.
+input-id | String | - | id & name for the visible input.
 disabled | Boolean | false | Disable the element. You won't be able to add new tags and remove the existing ones.
 existing-tags | Array | [] | An array with existing tags in the following format: `[{ key: 'id-or-slug-of-the-tag', value: 'Tag\'s text representation' }, {...}, ...]`
 id-field | String | 'key' | The name of the "id" field in your existing and selected tags collections
