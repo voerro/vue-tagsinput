@@ -557,7 +557,6 @@ export default {
             }
 
             if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0) || this.typeaheadAlwaysShow || this.typeaheadShowOnFocus) {
-                this.searchResults = [];
                 this.searchSelection = 0;
                 let input = this.input.trim();
 
@@ -601,6 +600,8 @@ export default {
          * @return void
          */
         doSearch(searchQuery) {
+            this.searchResults = [];
+            
             for (let tag of this.typeaheadTags) {
                 const compareable = this.caseSensitiveTags
                     ? tag[this.textField]
