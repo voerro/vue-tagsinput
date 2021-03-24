@@ -26,9 +26,14 @@
 
             <input type="text"
                 ref="taginput"
+                :id="inputId"
+                :name="inputId"
                 :placeholder="placeholder"
-                v-model="input"
+                :value="input"
+                @input="e => input = e.target.value"
                 v-show="!hideInputField"
+                @compositionstart="composing=true"
+                @compositionend="composing=false"
                 @keydown.enter.prevent="tagFromInput(false)"
                 @keydown.8="removeLastTag"
                 @keydown.down="nextSearchResult"
@@ -100,6 +105,8 @@ import latinize from 'latinize';
 export default {
     props: {
         elementId: String,
+
+        inputId: String,
 
         existingTags: {
             type: Array,
@@ -276,6 +283,7 @@ export default {
             selectedTag: -1,
 
             isActive: false,
+            composing: false,
         };
     },
 
@@ -340,7 +348,7 @@ export default {
         },
 
         existingTags(newVal) {
-            this.typeaheadTags.splice();
+            this.typeaheadTags.splice(0);
 
             this.typeaheadTags = this.cloneArray(newVal);
 
@@ -387,6 +395,8 @@ export default {
          * @returns void
          */
         tagFromInput(ignoreSearchResults = false) {
+            if (this.composing) return;
+
             // If we're choosing a tag from the search results
             if (this.searchResults.length && this.searchSelection >= 0 && !ignoreSearchResults) {
                 this.tagFromSearch(this.searchResults[this.searchSelection]);
@@ -403,8 +413,8 @@ export default {
                     // Determine if the inputted tag exists in the typeagedTags
                     // array
                     let newTag = {
-                        key: '',
-                        value: text,
+                        [this.idField]: '',
+                        [this.textField]: text
                     };
 
                     const queryTerm = this.latinizeTags ? latinize(newTag[this.textField]) : newTag[this.textField];
@@ -564,7 +574,7 @@ export default {
 
                     // AJAX search
                     if (this.typeaheadUrl.length > 0) {
-                        this.typeaheadTags.splice();
+                        this.typeaheadTags.splice(0);
                         const xhttp = new XMLHttpRequest();
                         const that = this;
 
@@ -601,8 +611,9 @@ export default {
                 const compareable = this.caseSensitiveTags
                     ? compareableTerm
                     : compareableTerm.toLowerCase();
+                const ids = this.searchResults.map((res) => (res[this.idField]));
 
-                if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag)) {
+                if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag) && ! ids.includes(tag[this.idField])) {
                     this.searchResults.push(tag);
                 }
             }
