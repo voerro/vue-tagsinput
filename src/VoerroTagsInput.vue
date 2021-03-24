@@ -132,7 +132,7 @@ export default {
 
         displayField: {
           type: String,
-          default: 'display',
+          default: null,
         },
 
         valueFields: {
