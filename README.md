@@ -89,7 +89,7 @@ If you need to programmatically (manually) set or change the list of selected ta
 
 For example, the variable name is `selectedTags`:
 ```html
-<tags-input element-id="tags" 
+<tags-input element-id="tags"
     v-model="selectedTags"></tags-input>
 ```
 
@@ -165,6 +165,7 @@ disabled | Boolean | false | Disable the element. You won't be able to add new t
 existing-tags | Array | [] | An array with existing tags in the following format: `[{ key: 'id-or-slug-of-the-tag', value: 'Tag\'s text representation' }, {...}, ...]`
 id-field | String | 'key' | The name of the "id" field in your existing and selected tags collections
 text-field | String | 'value' | The name of the "text" field in your existing and selected tags collections
+display-field | String | null | The name of the "display" field in your existing and selected tags collections. Overrides your tag's "text" field to display additional data in dropdown lists.
 value-fields | String | null | A comma-separated list of fields to be included in the hidden inputs' values. These make up data that will be returned with the form as FormData. `null` means "include all fields".
 typeahead | Boolean | false | Whether the typeahead (autocomplete) functionality should be enabled.
 typeahead-style | String | 'badges' | The autocomplete prompt style. Possible values: `badges`, `dropdown`.
@@ -242,7 +243,7 @@ new Vue({
         onTagsUpdated() {
             console.log('Tags updated');
         },
-        
+
         onLimitReached() {
             console.log('Max Reached');
         },
@@ -364,7 +365,7 @@ Multiple hidden fields instead of one, so that your backend treats the selected 
 - New option: `typeahead-hide-discard`
 - New option: `add-tags-on-space`
 - New event: `change`
-- "Discard Search Results" string (option text) is now customizable 
+- "Discard Search Results" string (option text) is now customizable
 - Fixed a minor bug with removing tags on backspace press
 
 #### v.2.2.0
