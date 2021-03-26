@@ -252,7 +252,7 @@ export default {
             default: false
         },
 
-        latinizeTags: {
+        ignoreDiacritics: {
           type: Boolean,
           default: false
         },
@@ -417,15 +417,14 @@ export default {
                         [this.textField]: text
                     };
 
-                    const queryTerm = this.latinizeTags ? latinize(newTag[this.textField]) : newTag[this.textField];
                     const searchQuery = this.escapeRegExp(
                         this.caseSensitiveTags
-                            ? queryTerm
-                            : queryTerm.toLowerCase()
+                            ? newTag[this.textField]
+                            : newTag[this.textField].toLowerCase()
                     );
 
                     for (let tag of this.typeaheadTags) {
-                        const compareableTerm = this.latinizeTags ? latinize(tag[this.textField]) : tag[this.textField];
+                        const compareableTerm = this.ignoreDiacritics ? latinize(tag[this.textField]) : tag[this.textField];
                         const compareable = this.escapeRegExp(
                             this.caseSensitiveTags
                                 ? compareableTerm
@@ -567,7 +566,7 @@ export default {
 
                 if ((input.length && input.length >= this.typeaheadActivationThreshold) || this.typeaheadActivationThreshold == 0 || this.typeaheadAlwaysShow) {
                     // Find all the existing tags which include the search text
-                    const queryTerm = this.latinizeTags ? latinize(input) : input;
+                    const queryTerm = this.ignoreDiacritics ? latinize(input) : input;
                     const searchQuery = this.escapeRegExp(
                         this.caseSensitiveTags ? queryTerm : queryTerm.toLowerCase()
                     );
@@ -607,7 +606,7 @@ export default {
          */
         doSearch(searchQuery) {
             for (let tag of this.typeaheadTags) {
-                const compareableTerm = this.latinizeTags ? latinize(tag[this.textField]) : tag[this.textField];
+                const compareableTerm = this.ignoreDiacritics ? latinize(tag[this.textField]) : tag[this.textField];
                 const compareable = this.caseSensitiveTags
                     ? compareableTerm
                     : compareableTerm.toLowerCase();
@@ -750,13 +749,13 @@ export default {
                 return false;
             }
 
-            const queryTerm = this.latinizeTags ? latinize(tag[this.textField]) : tag[this.textField];
+            const queryTerm = this.ignoreDiacritics ? latinize(tag[this.textField]) : tag[this.textField];
             const searchQuery = this.escapeRegExp(
                 this.caseSensitiveTags ? queryTerm : queryTerm.toLowerCase()
             );
 
             for (let selectedTag of this.tags) {
-                const compareableTerm = this.latinizeTags ? latinize(selectedTag[this.textField]) : selectedTag[this.textField];
+                const compareableTerm = this.ignoreDiacritics ? latinize(selectedTag[this.textField]) : selectedTag[this.textField];
                 const compareable = this.caseSensitiveTags
                     ? compareableTerm
                     : compareableTerm.toLowerCase();

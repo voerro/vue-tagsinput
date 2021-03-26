@@ -180,7 +180,7 @@ limit | Number | 0 | Limit the number of tags that can be chosen. 0 = no limit.
 hide-input-on-limit | Boolean | false | Hide the input field when the tags limit is reached.
 only-existing-tags | Boolean | false | Only existing tags can be added/chosen. New tags won't be created.
 case-sensitive-tags | Boolean | false | Determines whether tags are case sensitive. Setting this to `true` would allow tags like `php`, `PHP`, `PhP`, and so on to be added at the same time.
-latinize-tags | Boolean | false | Determines whether the accents in words are ignored or not. Setting this to `true` would ignore the differences between words like `voila` and `voilà`.
+ignore-diacritics | Boolean | false | Determines whether the accents in words are ignored or not. Setting this to `true` would ignore the differences between words like `voila` and `voilà`.
 delete-on-backspace | Boolean | true | Whether deleting tags by pressing Backspace is allowed.
 allow-duplicates | Boolean | false | Allow users to add the same tags multiple times.
 validate | Function | `text => true` | Callback to validate tags' text with.
