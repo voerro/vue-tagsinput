@@ -87,7 +87,7 @@
 
                 <li v-for="(tag, index) in searchResults"
                     :key="index"
-                    v-html="tag[displayField] || tag[textField]"
+                    v-html="getDisplayField(tag)"
                     @mouseover="searchSelection = index"
                     @mousedown.prevent="tagFromSearchOnClick(tag)"
                     v-bind:class="{
@@ -862,6 +862,18 @@ export default {
             }
 
             return JSON.stringify(tag);
+        },
+
+        getDisplayField(tag) {
+            const hasDisplayField = this.displayField !== undefined
+                && this.displayField !== null
+                && tag[this.displayField] !== undefined
+                && tag[this.displayField] !== null
+                && tag[this.displayField] !== '';
+
+            return hasDisplayField
+                ? tag[this.displayField]
+                : tag[this.textField];
         },
 
         cloneArray(arr) {
