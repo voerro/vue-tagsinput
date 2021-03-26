@@ -110,6 +110,10 @@
 
 /* Typeahead - badges */
 .typeahead-badges > span {
+    margin-top: .5em;
+}
+
+.typeahead-badges > span {
     cursor: pointer;
     margin-right: 0.3em;
 }
