@@ -557,6 +557,10 @@ export default {
             }
 
             if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0) || this.typeaheadAlwaysShow || this.typeaheadShowOnFocus) {
+                if (!this.typeaheadUrl.length) {
+                    this.searchResults = [];
+                }
+
                 this.searchSelection = 0;
                 let input = this.input.trim();
 
