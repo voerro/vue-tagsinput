@@ -60,7 +60,6 @@
     width: 75%;
     left: 0.15em;
     background: #5dc282;
-    
     height: 2px;
     margin-top: -1px;
 }
@@ -100,6 +99,16 @@
 .tags-input-badge-selected-default {
     color: #212529;
     background-color: #f0f1f2;
+}
+
+.tags-input-badge-draggable {
+    cursor: move;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 /* Typeahead */
