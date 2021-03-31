@@ -577,7 +577,7 @@ export default {
 
                     // AJAX search
                     if (this.typeaheadCallback) {
-                        this.typeaheadCallback()
+                        this.typeaheadCallback(searchQuery)
                             .then((results) => {
                                 this.typeaheadTags = results;
                             });

@@ -176,7 +176,7 @@ typeahead-show-on-focus | Boolean | true | Show typeahead on input field focus.
 typeahead-hide-discard | Boolean | false | Hides the 'Discard Search Results' option.
 placeholder | String | 'Add a tag' | The placeholder of the tag input.
 typeahead-url | String | '' | If the option is set, the URL will be used for AJAX search/typeahead. Use the `:search` wildcard wherever you want the search query to go, for example `http://example.com/tags?search=:search`. The returned data must be in the `existing-tags` format.
-typeahead-callback | Function | null | An optional callback to implement custom search/typeahead functionality. For example, this is useful when you want to implement custom AJAX calls with headers and other options. Must return a Promise that resolves with data in the `existing-tags` format.
+typeahead-callback | Function | null | An optional callback to implement custom search/typeahead functionality. Accepts search query as a parameter. For example, this is useful when you want to implement custom AJAX calls with headers and other options. Must return a Promise that resolves with data in the `existing-tags` format.
 discard-search-text | String | 'Discard Search Results' | The 'Discard Search Results' button text.
 limit | Number | 0 | Limit the number of tags that can be chosen. 0 = no limit.
 hide-input-on-limit | Boolean | false | Hide the input field when the tags limit is reached.
