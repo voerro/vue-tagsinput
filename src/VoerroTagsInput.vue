@@ -185,6 +185,11 @@ export default {
             default: ''
         },
 
+        typeaheadCallback: {
+            type: Function,
+            default: null
+        },
+
         placeholder: {
             type: String,
             default: 'Add a tag'
@@ -557,7 +562,7 @@ export default {
             }
 
             if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0) || this.typeaheadAlwaysShow || this.typeaheadShowOnFocus) {
-                if (!this.typeaheadUrl.length) {
+                if (!this.typeaheadUrl.length && !this.typeaheadCallback) {
                     this.searchResults = [];
                 }
 
@@ -571,7 +576,12 @@ export default {
                     );
 
                     // AJAX search
-                    if (this.typeaheadUrl.length > 0) {
+                    if (this.typeaheadCallback) {
+                        this.typeaheadCallback()
+                            .then((results) => {
+                                this.typeaheadTags = results;
+                            });
+                    } else if (this.typeaheadUrl.length > 0) {
                         this.typeaheadTags.splice(0);
                         const xhttp = new XMLHttpRequest();
                         const that = this;
