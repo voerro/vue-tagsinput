@@ -1,10 +1,6 @@
 <template>
     <div class="tags-input-root" style="position: relative;">
-        <div :class="{
-            [wrapperClass + ' tags-input']: true,
-            'active': isActive,
-            'disabled': disabled,
-        }">
+        <div :class="getWrapperClass()">
             <span v-for="(tag, index) in tags"
                 :key="index"
                 class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
@@ -241,8 +237,8 @@ export default {
         },
 
         wrapperClass: {
-            type: String,
-            default: 'tags-input-wrapper-default'
+            type: [String, Object],
+            default: {'tags-input-wrapper-default': true }
         },
 
         sortSearchResults: {
@@ -878,6 +874,24 @@ export default {
             return hasDisplayField
                 ? tag[this.displayField]
                 : tag[this.textField];
+        },
+
+        getWrapperClass() {
+          const defaultClass = {
+            'tags-input': true,
+            'active': this.isActive,
+            'disabled': this.disabled
+          }
+
+          if(typeof this.wrapperClass === 'string') {
+            const wrapperClassObj = this.wrapperClass.split(/\s+/).reduce((res, cur) => {
+              res[cur] = true
+              return res
+            }, {})
+            return Object.assign({}, defaultClass, wrapperClassObj)
+          } else {
+            return Object.assign({}, defaultClass, this.wrapperClass)
+          }
         },
 
         cloneArray(arr) {
