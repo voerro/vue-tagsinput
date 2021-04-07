@@ -617,13 +617,17 @@ export default {
             this.searchResults = [];
 
             for (let tag of this.typeaheadTags) {
-                const compareable = this.caseSensitiveTags
-                    ? tag[this.textField]
-                    : tag[this.textField].toLowerCase();
-                const ids = this.searchResults.map((res) => (res[this.idField]));
-
-                if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag) && ! ids.includes(tag[this.idField])) {
+                if (this.typeaheadUrl.length > 0) {
                     this.searchResults.push(tag);
+                } else {
+                    const compareable = this.caseSensitiveTags
+                        ? tag[this.textField]
+                        : tag[this.textField].toLowerCase();
+                    const ids = this.searchResults.map((res) => (res[this.idField]));
+
+                    if (compareable.search(searchQuery) > -1 && ! this.tagSelected(tag) && ! ids.includes(tag[this.idField])) {
+                        this.searchResults.push(tag);
+                    }
                 }
             }
 
