@@ -562,12 +562,12 @@ export default {
             }
 
             if (this.oldInput != this.input || (!this.searchResults.length && this.typeaheadActivationThreshold == 0) || this.typeaheadAlwaysShow || this.typeaheadShowOnFocus) {
-                if (!this.typeaheadUrl.length && !this.typeaheadCallback) {
-                    this.searchResults = [];
-                }
-
                 this.searchSelection = 0;
                 let input = this.input.trim();
+
+                if (!input.length && !this.typeaheadCallback) {
+                    this.searchResults = [];
+                }
 
                 if ((input.length && input.length >= this.typeaheadActivationThreshold) || this.typeaheadActivationThreshold == 0 || this.typeaheadAlwaysShow) {
                     // Find all the existing tags which include the search text
