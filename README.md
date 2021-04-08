@@ -191,6 +191,7 @@ add-tags-on-blur | Boolean | false | Add new tags when on the input is blur. The
 sort-search-results | Boolean | true | Whether the search results should be sorted.
 before-adding-tag | Function | `tag => true` | Callback to perform additional checks and actions before a tag is added. Return `true` to allow a tag to be added or `false` to forbid the action.
 before-removing-tag | Function | `tag => true` | Callback to perform additional checks and actions before a tag is removed. Return `true` to allow a tag to be added or `false` to forbid the action.
+is-draggable | Boolean | false | Enable draggable sorting of tags.
 
 #### Events
 

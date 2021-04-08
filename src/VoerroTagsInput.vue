@@ -5,24 +5,26 @@
             'active': isActive,
             'disabled': disabled,
         }">
-            <span v-for="(tag, index) in tags"
-                :key="index"
-                class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
-                :class="{ 'disabled': disabled }"
-            >
-                <slot name="selected-tag"
-                    :tag="tag"
-                    :index="index"
-                    :removeTag="removeTag"
+            <draggable v-model="tags" :disabled='!isDraggable' @start="drag=true" @end="drag=false" style="width:100%;">
+                <span v-for="(tag, index) in tags"
+                    :key="index"
+                    class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
+                    :class="[{ 'disabled': disabled }, { 'tags-input-badge-draggable': isDraggable }]"
                 >
-                    <span v-html="tag[textField]"></span>
+                    <slot name="selected-tag"
+                        :tag="tag"
+                        :index="index"
+                        :removeTag="removeTag"
+                    >
+                        <span v-html="tag[textField]"></span>
 
-                    <a v-show="!disabled"
-                        href="#"
-                        class="tags-input-remove"
-                        @click.prevent="removeTag(index)"></a>
-                </slot>
-            </span>
+                        <a v-show="!disabled"
+                            href="#"
+                            class="tags-input-remove"
+                            @click.prevent="removeTag(index)"></a>
+                    </slot>
+                </span>
+            </draggable>
 
             <input type="text"
                 ref="taginput"
@@ -100,7 +102,11 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 export default {
+    components: {
+        draggable,
+    },
     props: {
         elementId: String,
 
@@ -268,6 +274,11 @@ export default {
         beforeRemovingTag: {
             type: Function,
             default: () => true
+        },
+
+        isDraggable: {
+            type: Boolean,
+            default: false
         },
     },
 
