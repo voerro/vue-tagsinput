@@ -5,7 +5,7 @@
             'active': isActive,
             'disabled': disabled,
         }">
-            <draggable v-model="tags" :disabled='!isDraggable' @start="drag=true" @end="drag=false">
+            <draggable v-model="tags" :disabled='!isDraggable' @start="drag=true" @end="drag=false" style="width:100%;">
                 <span v-for="(tag, index) in tags"
                     :key="index"
                     class="tags-input-badge tags-input-badge-pill tags-input-badge-selected-default"
