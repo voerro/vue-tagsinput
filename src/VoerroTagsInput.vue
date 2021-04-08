@@ -429,11 +429,10 @@ export default {
                     );
 
                     for (let tag of this.typeaheadTags) {
-                        const compareableTerm = this.ignoreDiacritics ? latinize(tag[this.textField]) : tag[this.textField];
                         const compareable = this.escapeRegExp(
                             this.caseSensitiveTags
-                                ? compareableTerm
-                                : compareableTerm.toLowerCase()
+                                ? tag[this.textField]
+                                : tag[this.textField].toLowerCase()
                         );
 
                         if (searchQuery === compareable) {
