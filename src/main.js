@@ -1,5 +1,7 @@
 import VoerroTagsInput from './VoerroTagsInput.vue'
 
-window.VoerroTagsInput = VoerroTagsInput;
+if (typeof window !== 'undefined') {
+    window.VoerroTagsInput = VoerroTagsInput;
+}
 
 export default VoerroTagsInput;
