@@ -354,8 +354,6 @@ export default {
             this.typeaheadTags.splice(0);
 
             this.typeaheadTags = this.cloneArray(newVal);
-
-            this.searchTag();
         },
 
         tags() {
