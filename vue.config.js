@@ -1,18 +1,7 @@
 const isProduction = process.env.NODE_ENV === 'production';
 
-module.exports = {
-    // needed to generate
+const optionsNeededToGenerateDeclarationFiles = {
     parallel: false,
-    outputDir: 'dist',
-    indexPath: 'index.html',
-    devServer: {
-        historyApiFallback: true,
-        overlay: {
-            warnings: true,
-            errors: true,
-        },
-    },
-    productionSourceMap: true,
     configureWebpack: (config) => {
         config.module.rules.forEach((rule) => {
             if (rule.use) {
@@ -57,4 +46,18 @@ module.exports = {
                 })
         }
     },
+};
+
+module.exports = {
+    outputDir: 'dist',
+    indexPath: 'index.html',
+    devServer: {
+        historyApiFallback: true,
+        overlay: {
+            warnings: true,
+            errors: true,
+        },
+    },
+    productionSourceMap: true,
+    ...optionsNeededToGenerateDeclarationFiles,
 };
