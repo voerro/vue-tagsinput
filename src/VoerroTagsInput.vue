@@ -101,10 +101,7 @@
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-
-export interface Tag {
-    [key: string]: string;
-}
+import { Tag } from './Tag';
 
 export default Vue.extend({
     props: {
@@ -898,3 +895,8 @@ export default Vue.extend({
     }
 });
 </script>
+
+<style lang="scss" scoped>
+@import './style.scss';
+
+</style>
