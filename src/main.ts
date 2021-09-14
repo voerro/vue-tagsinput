@@ -1,7 +1,8 @@
+/* This file is the main entrypoint for development */
+
 import Vue from 'vue';
 import App from './App.vue';
 
-// @ts-ignore
 import 'bulma/bulma.sass';
 
 new Vue({
