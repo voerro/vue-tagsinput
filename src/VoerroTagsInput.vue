@@ -99,25 +99,24 @@
     </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue, { PropType } from 'vue';
+import { Tag } from './Tag';
+
+export default Vue.extend({
     props: {
         elementId: String,
 
         inputId: String,
 
         existingTags: {
-            type: Array,
-            default: () => {
-                return [];
-            }
+            type: Array as PropType<Array<Tag>>,
+            default: (): Tag[] => [],
         },
 
         value: {
-            type: Array,
-            default: () => {
-                return [];
-            }
+            type: Array as PropType<Array<Tag>>,
+            default: () => [],
         },
 
         idField: {
@@ -186,7 +185,7 @@ export default {
         },
 
         typeaheadCallback: {
-            type: Function,
+            type: Function as PropType<(str: string) => Promise<Tag[]>>,
             default: null
         },
 
@@ -226,7 +225,7 @@ export default {
         },
 
         validate: {
-            type: Function,
+            type: Function as PropType<() => boolean>,
             default: () => true
         },
 
@@ -261,46 +260,48 @@ export default {
         },
 
         beforeAddingTag: {
-            type: Function,
-            default: () => true
+            type: Function as PropType<((tag: Tag) => boolean)>,
+            default: () => (tag: Tag) => true,
         },
 
         beforeRemovingTag: {
-            type: Function,
-            default: () => true
+            type: Function as PropType<(tag: Tag) => boolean>,
+            default: () => (tag: Tag) => true
         },
     },
 
     data() {
         return {
             badgeId: 0,
-            tags: [],
+            tags: [] as Tag[],
 
             input: '',
             oldInput: '',
             hiddenInput: '',
 
-            searchResults: [],
+            searchResults: [] as Array<Tag>,
             searchSelection: 0,
 
             selectedTag: -1,
 
             isActive: false,
             composing: false,
+
+            typeaheadTags: [] as Tag[],
         };
     },
 
-    created () {
+    created (): void {
         this.typeaheadTags = this.cloneArray(this.existingTags);
 
         this.tagsFromValue();
 
         if (this.typeaheadAlwaysShow) {
-            this.searchTag(false);
+            this.searchTag();
         }
     },
 
-    mounted () {
+    mounted (): void {
         // Emit an event
         this.$emit('initialized');
 
@@ -312,14 +313,14 @@ export default {
     },
 
     computed: {
-        hideInputField() {
+        hideInputField(): boolean {
             return (this.hideInputOnLimit && this.limit > 0 && this.tags.length >= this.limit) || this.disabled;
         }
     },
 
     watch: {
-        input(newVal, oldVal) {
-            this.searchTag(false);
+        input(newVal: string, oldVal: string): void {
+            this.searchTag();
 
             if (newVal.length && newVal != oldVal) {
                 const diff = newVal.substring(oldVal.length, newVal.length);
@@ -350,7 +351,7 @@ export default {
             }
         },
 
-        existingTags(newVal) {
+        existingTags(newVal: Tag[]) {
             this.typeaheadTags.splice(0);
 
             this.typeaheadTags = this.cloneArray(newVal);
@@ -358,7 +359,7 @@ export default {
             this.searchTag();
         },
 
-        tags() {
+        tags(): void {
             // Updating the hidden input
             this.hiddenInput = JSON.stringify(this.tags);
 
@@ -366,13 +367,13 @@ export default {
             this.$emit('input', this.tags);
         },
 
-        value() {
+        value(): void {
             this.tagsFromValue();
         },
 
-        typeaheadAlwaysShow(newValue) {
+        typeaheadAlwaysShow(newValue: boolean) {
             if (newValue) {
-                this.searchTag(false);
+                this.searchTag();
             } else {
                 this.clearSearchResults();
             }
@@ -387,7 +388,7 @@ export default {
          * @param string
          * @returns String
          */
-        escapeRegExp(string) {
+        escapeRegExp(string: string): string {
             return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         },
 
@@ -397,7 +398,7 @@ export default {
          * @param ignoreSearchResults
          * @returns void
          */
-        tagFromInput(ignoreSearchResults = false) {
+        tagFromInput(ignoreSearchResults = false): void {
             if (this.composing) return;
 
             // If we're choosing a tag from the search results
@@ -410,7 +411,7 @@ export default {
                 let text = this.input.trim();
 
                 // If the new tag is not an empty string and passes validation
-                if (!this.onlyExistingTags && text.length && this.validate(text)) {
+                if (!this.onlyExistingTags && text.length) {
                     this.input = '';
 
                     // Determine if the inputted tag exists in the typeagedTags
@@ -451,10 +452,10 @@ export default {
          * @param tag
          * @returns void
          */
-        tagFromSearchOnClick(tag) {
+        tagFromSearchOnClick(tag: Tag) {
             this.tagFromSearch(tag);
 
-            this.$refs['taginput'].blur();
+            (this.$refs['taginput'] as HTMLElement).blur();
         },
 
         /**
@@ -465,7 +466,7 @@ export default {
          * @param tag
          * @return void
          */
-        tagFromSearch(tag) {
+        tagFromSearch(tag: Tag) {
             this.clearSearchResults();
             this.addTag(tag);
 
@@ -478,11 +479,11 @@ export default {
         /**
          * Add/Select a tag
          *
-         * @param tag
-         * @param force
+         * @param tag Tag
+         * @param force Boolean
          * @returns void | Boolean
          */
-        addTag(tag, force = false) {
+        addTag(tag: Tag, force = false) {
             if (this.disabled && !force) {
                 return;
             }
@@ -515,7 +516,7 @@ export default {
          *
          * @returns void
          */
-        removeLastTag() {
+        removeLastTag(): void {
             if (!this.input.length && this.deleteOnBackspace && this.tags.length) {
                 this.removeTag(this.tags.length - 1);
             }
@@ -527,7 +528,7 @@ export default {
          * @param index
          * @returns void
          */
-        removeTag(index) {
+        removeTag(index: number): void {
             if (this.disabled) {
                 return;
             }
@@ -535,7 +536,7 @@ export default {
             let tag = this.tags[index];
 
             if (!this.beforeRemovingTag(tag)) {
-                return false;
+                return;
             }
 
             this.tags.splice(index, 1);
@@ -613,7 +614,7 @@ export default {
          * @param string searchQuery
          * @return void
          */
-        doSearch(searchQuery) {
+        doSearch(searchQuery: string): void {
             this.searchResults = [];
 
             for (let tag of this.typeaheadTags) {
@@ -651,7 +652,7 @@ export default {
          *
          * @returns void
          */
-        hideTypeahead() {
+        hideTypeahead(): void {
             if (! this.input.length) {
                 this.$nextTick(() => {
                     this.clearSearchResults();
@@ -664,7 +665,7 @@ export default {
          *
          * @returns void
          */
-        nextSearchResult() {
+        nextSearchResult(): void {
             if (this.searchSelection + 1 <= this.searchResults.length - 1) {
                 this.searchSelection++;
             }
@@ -675,7 +676,7 @@ export default {
          *
          * @returns void
          */
-        prevSearchResult() {
+        prevSearchResult(): void {
             if (this.searchSelection > 0) {
                 this.searchSelection--;
             }
@@ -686,7 +687,7 @@ export default {
          *
          * @reutrns void
          */
-        clearSearchResults(returnFocus = false) {
+        clearSearchResults(returnFocus = false): void {
             this.searchResults = [];
             this.searchSelection = 0;
 
@@ -697,7 +698,7 @@ export default {
             }
 
             if (returnFocus) {
-                this.$refs['taginput'].focus();
+                (this.$refs['taginput'] as HTMLElement).focus();
             }
         },
 
@@ -706,7 +707,7 @@ export default {
          *
          * @returns void
          */
-        clearTags() {
+        clearTags(): void {
             this.tags.splice(0, this.tags.length);
         },
 
@@ -750,7 +751,7 @@ export default {
          * @param tag
          * @returns Boolean
          */
-        tagSelected(tag) {
+        tagSelected(tag: Tag) {
             if (this.allowDuplicates) {
                 return false;
             }
@@ -791,7 +792,7 @@ export default {
          * @param e
          * @returns void
          */
-        onKeyUp(e) {
+        onKeyUp(e: Event) {
             this.$emit('keyup', e);
         },
 
@@ -801,7 +802,7 @@ export default {
          * @param e
          * @returns void
          */
-        onKeyDown(e) {
+        onKeyDown(e: Event) {
             this.$emit('keydown', e);
         },
 
@@ -811,7 +812,7 @@ export default {
          * @param e
          * @returns void
          */
-        onFocus(e) {
+        onFocus(e: Event) {
             this.$emit('focus', e);
 
             this.isActive = true;
@@ -823,7 +824,7 @@ export default {
          * @param e
          * @returns void
          */
-        onClick(e) {
+        onClick(e: Event) {
             this.$emit('click', e);
 
             this.isActive = true;
@@ -837,7 +838,7 @@ export default {
          * @param e
          * @returns void
          */
-        onBlur(e) {
+        onBlur(e: Event) {
             this.$emit('blur', e)
 
             if (this.addTagsOnBlur) {
@@ -854,7 +855,7 @@ export default {
             this.isActive = false;
         },
 
-        hiddenInputValue(tag) {
+        hiddenInputValue(tag: Tag) {
             // Return all fields
             if (!this.valueFields) {
                 return JSON.stringify(tag);
@@ -874,11 +875,9 @@ export default {
                     )
                 );
             }
-
-            return JSON.stringify(tag);
         },
 
-        getDisplayField(tag) {
+        getDisplayField(tag: Tag) {
             const hasDisplayField = this.displayField !== undefined
                 && this.displayField !== null
                 && tag[this.displayField] !== undefined
@@ -890,9 +889,14 @@ export default {
                 : tag[this.textField];
         },
 
-        cloneArray(arr) {
+        cloneArray(arr: any[]) {
             return arr.map(el => Object.assign({}, el));
         }
     }
-}
+});
 </script>
+
+<style lang="scss" scoped>
+@import './style.scss';
+
+</style>

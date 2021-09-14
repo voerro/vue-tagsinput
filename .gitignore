@@ -1,5 +1,6 @@
 .DS_Store
-node_modules/
+dist
+node_modules
 npm-debug.log
 yarn-error.log
 notes
@@ -10,3 +11,5 @@ notes
 *.ntvs*
 *.njsproj
 *.sln
+
+*.tgz

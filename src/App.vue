@@ -1,48 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
-
-    <title>@voerro/vue-tagsinput</title>
-    
-    <link rel="stylesheet" href="dist/style.css">
-    <link rel="stylesheet" href="demo/css/bulma.min.css">
-
-    <style>
-        .mb-1 {
-            margin-bottom: 1rem;
-        }
-
-        .tags-input-root .typeahead-dropdown .row {
-            display: flex;
-            padding: .25rem 0;
-        }
-
-        .tags-input-root .typeahead-dropdown .row > .icon {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 100%;
-            font-size: 1.5rem;
-            background: #ffffff;
-            color: #000000;
-            margin-right: 1rem;
-        }
-
-        .tags-input-root .typeahead-dropdown .row > .text {
-            flex: 1;
-        }
-
-        .tags-input-root .typeahead-dropdown .row > .text > .name {
-            font-weight: 600;
-        }
-
-        .tags-input-root .typeahead-dropdown .row > .text > .address {
-            font-size: .8rem;
-        }
-    </style>
-</head>
-<body>
+<template>
+<div>
     <section class="hero is-info">
         <div class="hero-body">
             <div class="container">
@@ -270,7 +227,7 @@
                         @tag-removed="onTagRemoved"
                         @tags-updated="onTagsUpdated"
                         @change="onChange"
-                        discard-search-text="Add New Tag"
+                        discard-search-text="Discard search results"
                     ></voerro-tags-input>
 
                     <hr>
@@ -312,83 +269,82 @@
             </div>
         </div>
     </div>
+</div>
+</template>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script>
-    <script src="dist/voerro-vue-tagsinput.js"></script>
+<script lang="ts">
+import Vue from 'vue';
+import { Tag } from './Tag';
+import VoerroTagsInput from './VoerroTagsInput.vue';
 
-    <script>
-        new Vue({
-            el: '#voerro-tags-input-demo-vqk6etkfjrcpsjg5',
-
-            components: { VoerroTagsInput },
-
-            data: {
-                selectedTags: [
-                    {
-                        key: 'ne-obliviscaris',
-                        value: 'Ne Obliviscaris'
-                    },
-                    {
-                        key: 'epica',
-                        value: 'Epica'
-                    },
-                    {
-                        key: 'shape-of-despair',
-                        value: 'Shape of Despair'
-                    },
-                ],
-                typeahead: true,
-                typeaheadStyle: 'badges',
-                placeholder: 'Customizable placeholder',
-                limit: 0,
-                onlyExistingTags: false,
-                caseSensitiveTags: false,
-                deleteOnBackspace: true,
-                allowDuplicates: false,
-                addTagsOnComma: false,
-                addTagsOnSpace: false,
-                addTagsOnBlur: false,
-                hideInputOnLimit: false,
-                typeaheadHideDiscard: false,
-                typeaheadMaxResults: 20,
-                typeaheadActivationThreshold: 1,
-                typeheadAlwaysShow: false,
-                typeaheadShowOnFocus: true,
-                logChangeEvents: false,
-                eventLog: '',
-
-                // Display fields demo
-                selectedTags2: [],
+export default Vue.extend({
+    components: {
+        VoerroTagsInput,
+    },
+    data: () => ({
+        selectedTags: [
+            {
+                key: 'ne-obliviscaris',
+                value: 'Ne Obliviscaris'
             },
+            {
+                key: 'epica',
+                value: 'Epica'
+            },
+            {
+                key: 'shape-of-despair',
+                value: 'Shape of Despair'
+            },
+        ] as Tag[],
+        typeahead: true,
+        typeaheadStyle: 'badges',
+        placeholder: 'Customizable placeholder',
+        limit: 0,
+        onlyExistingTags: false,
+        caseSensitiveTags: false,
+        deleteOnBackspace: true,
+        allowDuplicates: false,
+        addTagsOnComma: false,
+        addTagsOnSpace: false,
+        addTagsOnBlur: false,
+        hideInputOnLimit: false,
+        typeaheadHideDiscard: false,
+        typeaheadMaxResults: 20,
+        typeaheadActivationThreshold: 1,
+        typeheadAlwaysShow: false,
+        typeaheadShowOnFocus: true,
+        logChangeEvents: false,
 
-            methods: {
-                logEvent(text) {
-                    this.eventLog = text + this.eventLog;
-                },
+        // Display fields demo
+        eventLog: '',
+        selectedTags2: [] as Tag[],
+    }),
+    methods: {
+        logEvent(text: string) {
+            this.eventLog = text + this.eventLog;
+        },
 
-                onInitialized() {
-                    this.logEvent('Initialized\n');
-                },
+        onInitialized() {
+            this.logEvent('Initialized\n');
+        },
 
-                onTagAdded(tag) {
-                    this.logEvent(`Tag added: "${JSON.stringify(tag)}"\n`);
-                },
+        onTagAdded(tag: Tag) {
+            this.logEvent(`Tag added: "${JSON.stringify(tag)}"\n`);
+        },
 
-                onTagRemoved(tag) {
-                    this.logEvent(`Tag removed: "${JSON.stringify(tag)}"\n`);
-                },
+        onTagRemoved(tag: Tag) {
+            this.logEvent(`Tag removed: "${JSON.stringify(tag)}"\n`);
+        },
 
-                onTagsUpdated() {
-                    this.logEvent('Tags updated\n');
-                },
+        onTagsUpdated() {
+            this.logEvent('Tags updated\n');
+        },
 
-                onChange(evt) {
-                    if (this.logChangeEvents) {
-                        this.logEvent(`Changed ${JSON.stringify(evt)}\n`);
-                    }
-                },
+        onChange(evt: Event) {
+            if (this.logChangeEvents) {
+                this.logEvent(`Changed ${JSON.stringify(evt)}\n`);
             }
-        });
-    </script>
-</body>
-</html>
+        },
+    }
+})
+</script>
