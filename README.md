@@ -29,7 +29,7 @@ import VoerroTagsInput from '@voerro/vue-tagsinput';
 Vue.component('tags-input', VoerroTagsInput);
 ```
 
-Include the `dist/style.css` file on your page to apply the styling. You can use CDN, `require()` it inside your JS code, or `@include` it inside your (S)CSS assets. Read the `Styling` section to learn how to customize the appearance.
+Include the `dist/VoerroTagsInput.css` file on your page to apply the styling. You can use CDN, `require()` it inside your JS code, or `@include` it inside your (S)CSS assets. Read the `Styling` section to learn how to customize the appearance.
 
 ## Installation via CDN
 
@@ -333,11 +333,24 @@ See the `v1` branch for details.
 
 A pretty serious bug ([#53](../../issues/53)) was fixed in `v2.0.0`. The data format for the `existing-tags` prop and the `v-model` directive has been changed. You can find the new format in this documentation, see above.
 
+#### v2.4.x -> 3.0.0
+
+- Changed style imports. From 'dist/styles.css' to 'dist/VoerroTagsInput.css'
+- package main entry point change to import commonjs output
+
+
 #### v2.3.0 -> v2.4.0
 
 Multiple hidden fields instead of one, so that your backend treats the selected tags as an array.
 
 ## Changelog
+
+#### v.3.0.0
+- Changed style imports. From 'dist/styles.css' to 'dist/VoerroTagsInput.css'
+- package main entry point change to import commonjs output
+- Added type definitions
+- Added vue cli for building and bundling
+- Fixed bugs raised with added TS support
 
 #### v.2.4.0
 
