@@ -2,7 +2,7 @@
     "name": "@voerro/vue-tagsinput",
     "version": "2.7.1",
     "description": "A simple tags input with typeahead made with Vue.js 2",
-    "main": "src/main.js",
+    "main": "dist/voerro-vue-tagsinput.js",
     "keywords": [
         "vue",
         "vuejs",
@@ -15,29 +15,24 @@
     "author": "Alexander Zavyalov <alex@voerro.com> (http://voerro.com)",
     "license": "MIT",
     "scripts": {
+        "serve": "vue-cli-service serve",
         "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-        "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+        "build": "cross-env NODE_ENV=production webpack --progress"
     },
-    "dependencies": {},
     "browserslist": [
         "> 1%",
         "last 2 versions",
         "not ie <= 8"
     ],
     "devDependencies": {
-        "babel-core": "^6.26.3",
-        "babel-loader": "^7.1.5",
-        "babel-preset-env": "^1.7.0",
-        "babel-preset-stage-3": "^6.24.1",
-        "cross-env": "^5.2.1",
-        "css-loader": "^0.28.11",
-        "file-loader": "^1.1.11",
-        "vue": "^2.6.12",
-        "vue-loader": "^15.9.6",
-        "vue-template-compiler": "^2.6.12",
-        "webpack": "^4.46.0",
-        "webpack-cli": "^3.3.12",
-        "webpack-dev-server": "^3.11.2"
+        "@vue/cli": "^4.5.13",
+        "cross-env": "^7.0.3",
+        "typescript": "^4.4.3",
+        "vue-loader": "^15.9.8",
+        "vue-template-compiler": "^2.6.14"
+    },
+    "peerDependencies": {
+        "vue": "^2.6.14"
     },
     "repository": "https://github.com/voerro/vue-tagsinput"
 }
