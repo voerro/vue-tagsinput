@@ -21,28 +21,72 @@ or
 npm i @voerro/vue-tagsinput --save
 ```
 
-Then register the component with Vue:
+Register the component with Vue globally:
 
 ```javascript
-import VoerroTagsInput from '@voerro/vue-tagsinput';
+import { VoerroTagsInput } from '@voerro/vue-tagsinput';
 
 Vue.component('tags-input', VoerroTagsInput);
 ```
 
-Include the `dist/VoerroTagsInput.css` file on your page to apply the styling. You can use CDN, `require()` it inside your JS code, or `@include` it inside your (S)CSS assets. Read the `Styling` section to learn how to customize the appearance.
+or
+
+Use the included plugin
+
+```javascript
+import VoerroTagsInputPlugin from '@voerro/vue-tagsinput';
+
+Vue.use(VoerroTagsInputPlugin);
+```
+
+or
+
+Use in an component
+
+```javascript
+import { VoerroTagsInput } from '@voerro/vue-tagsinput';
+
+export default Vue.extend({
+    components: {
+        VoerroTagsInput,
+    },
+    setup() {
+        ...
+    },
+});
+```
+
+import `@voerro/vue-tagsinput/dist/VoerroTagsInput.css` into your code. You can use CDN, `require()` or `import` it inside your JS code, or `@include` it inside your (S)CSS assets. Read the `Styling` section to learn how to customize the appearance.
 
 ## Installation via CDN
 
 If you're not using NPM, you can include the required files into your page manually from a CDN. Don't forget to include Vue as well. For example:
 
+Using plugin
+
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.7.1/dist/voerro-vue-tagsinput.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@3.0.0/dist/VoerroTagsInput.umd.min.js"></script>
+
+<script>
+    Vue.use(VoerroTagsInput.default);
+    new Vue({
+        el: '#app',
+        ...
+    });
+</script>
+```
+
+Using component
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@3.0.0/dist/VoerroTagsInput.umd.min.js"></script>
 
 <script>
     new Vue({
         el: '#app',
-        components: { "tags-input": VoerroTagsInput },
+        components: { "tags-input": VoerroTagsInput.VoerroTagsInput },
     });
 </script>
 ```
@@ -50,7 +94,7 @@ If you're not using NPM, you can include the required files into your page manua
 Include the CSS file on your page to apply the styling. Read the `Styling` section to learn how to customize the appearance.
 
 ```
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.7.1/dist/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@3.0.0/dist/VoerroTagsInput.css.css">
 ```
 
 **IMPORTANT:** Always grab the latest versions of the package from [JSDELIVR](https://www.jsdelivr.com/package/npm/@voerro/vue-tagsinput?path=dist), the ones provided in the examples above might be outdated. Same goes for Vue.js.
