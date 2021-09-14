@@ -1,6 +1,9 @@
-import VoerroTagsInput from './VoerroTagsInput.vue'
+import Vue from 'vue';
+import App from './App.vue';
 
 // @ts-ignore
-window.VoerroTagsInput = VoerroTagsInput;
+import 'bulma/bulma.sass';
 
-export default VoerroTagsInput;
+new Vue({
+    render: (h) => h(App),
+}).$mount('#app');
