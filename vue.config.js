@@ -48,14 +48,6 @@ module.exports = {
             });
         if (isProduction) {
             const TSCONFIG_PATH = './tsconfig.production.json';
-            // config.module
-            //     .rule('ts')
-            //     .use('ts-loader')
-            //     .merge({
-            //         options: {
-            //             configFile: TSCONFIG_PATH,
-            //         }
-            //     });
                 config
                 .plugin('fork-ts-checker')
                 .tap(args => {
