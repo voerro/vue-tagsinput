@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run serve",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name 'VoerroTagsInput' ./src/index.ts"
+    "build": "vue-cli-service build --target lib --name 'VoerroTagsInput' ./src/index.ts",
+    "build:demo": "vue-cli-service build"
   },
   "main": "dist/VoerroTagsInput.common.js",
   "buildEntry": "src/",
