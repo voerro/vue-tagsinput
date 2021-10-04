@@ -1,15 +1,26 @@
 {
-  "name": "@voerro/vue-tagsinput",
-  "version": "3.0.0",
+  "name": "@seriouslag/vue-tagsinput",
+  "version": "4.0.0",
   "description": "A simple tags input with typeahead made with Vue.js 2",
-  "author": "Alexander Zavyalov <alex@voerro.com> (http://voerro.com)",
+  "contributors": [
+    {
+      "name": "Alexander Zavyalov",
+      "email": "alex@voerro.com",
+      "url": "http://voerro.com"
+    },
+    {
+      "name": "Landon Gavin",
+      "email": "hi@landongavin.com",
+      "url": "https://landongavin.dev"
+    }
+  ],
   "scripts": {
     "start": "npm run serve",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name 'VoerroTagsInput' ./src/index.ts",
+    "build": "vue-cli-service build --target lib --name 'TagsInput' ./src/index.ts",
     "build:demo": "vue-cli-service build"
   },
-  "main": "dist/VoerroTagsInput.common.js",
+  "main": "dist/TagsInput.common.js",
   "buildEntry": "src/",
   "types": "dist/index.d.ts",
   "files": [
@@ -22,19 +33,19 @@
     "LICENSE"
   ],
   "dependencies": {
-    "core-js": "^3.6.5"
+    "core-js": "^3.18.1"
   },
   "devDependencies": {
     "@types/webpack-env": "^1.16.2",
-    "@vue/cli": "^4.5.13",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-service": "^4.5.13",
+    "@vue/cli": "~4.5.13",
+    "@vue/cli-plugin-babel": "~4.5.13",
+    "@vue/cli-plugin-typescript": "~4.5.13",
+    "@vue/cli-service": "~4.5.13",
     "bulma": "^0.9.3",
     "cache-loader": "^4.1.0",
     "cross-env": "^7.0.3",
-    "sass": "^1.40.1",
-    "sass-loader": "^10.2.0",
+    "sass": "^1.42.1",
+    "sass-loader": "version-10",
     "typescript": "^4.4.3",
     "vue-template-compiler": "^2.6.14"
   },
@@ -49,12 +60,14 @@
   "keywords": [
     "vue",
     "vuejs",
+    "vue2",
     "tagsinput",
     "input",
     "tags",
     "typeahead",
     "autocomplete"
   ],
-  "license": "MIT",
-  "repository": "https://github.com/voerro/vue-tagsinput"
+  "license" : "SEE LICENSE IN LICENSE",
+  "repository": "https://github.com/seriouslag/vue-tagsinput",
+  "homepage": "https://github.com/seriouslag/vue-tagsinput#readme"
 }
