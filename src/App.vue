@@ -3,23 +3,22 @@
     <section class="hero is-info">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">@voerro/vue-tagsinput</h1>
+                <h1 class="title">@seriouslag/vue-tagsinput</h1>
 
                 <h2 class="subtitle">
-                    Tags input for Vue.js 2 by
-                    <a href="http://voerro.com">Voerro</a>
+                    Tags input for Vue.js 2
                 </h2>
             </div>
         </div>
     </section>
 
-    <div id="voerro-tags-input-demo-vqk6etkfjrcpsjg5">
+    <div id="tags-input-demo-vqk6etkfjrcpsjg5">
 
         <div style="padding: 2rem;">
             <div class="columns">
                 <div class="column is-3">
                     <h2 class="is-size-4" style="margin-bottom: 1rem;">
-                        <a href="https://github.com/voerro/vue-tagsinput" target="_blank">Documentation</a>
+                        <a href="https://github.com/seriouslag/vue-tagsinput" target="_blank">Documentation</a>
                     </h2>
 
                     <h2 class="is-size-4" style="margin-bottom: 1rem;">Options</h2>
@@ -187,7 +186,7 @@
                 </div>
 
                 <div class="column is-9">
-                    <voerro-tags-input
+                    <tags-input
                         v-model="selectedTags"
                         element-id="tags"
                         :existing-tags="[
@@ -228,7 +227,7 @@
                         @tags-updated="onTagsUpdated"
                         @change="onChange"
                         discard-search-text="Discard search results"
-                    ></voerro-tags-input>
+                    ></tags-input>
 
                     <hr>
 
@@ -248,7 +247,7 @@
                         The `display-field` prop in action. You can provide any custom HTML for your dropdown rows and style them any way you want.
                     </p>
 
-                    <voerro-tags-input
+                    <tags-input
                         v-model="selectedTags2"
                         element-id="tags2"
                         :existing-tags="[
@@ -264,7 +263,7 @@
                         :only-existing-tags="true"
                         :case-sensitive-tags="false"
                         display-field="display"
-                    ></voerro-tags-input>
+                    ></tags-input>
                 </div>
             </div>
         </div>
@@ -275,11 +274,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import { Tag } from './Tag';
-import VoerroTagsInput from './VoerroTagsInput.vue';
+import TagsInput from './TagsInput.vue';
 
 export default Vue.extend({
     components: {
-        VoerroTagsInput,
+        TagsInput,
     },
     data: () => ({
         selectedTags: [

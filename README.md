@@ -1,32 +1,32 @@
-# Voerro Vue Tags Input v2
+# Vue Tags Input v4
 
-[![npm (scoped)](https://img.shields.io/npm/v/@voerro/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
-[![npm](https://img.shields.io/npm/dm/@voerro/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
-[![MIT](https://img.shields.io/github/license/AlexMordred/vue-tagsinput.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+Forked from [voerro/vue-tagsinput](https://github.com/voerro/vue-tagsinput)
+
+[![npm (scoped)](https://img.shields.io/npm/v/@seriouslag/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@seriouslag/vue-tagsinput)
+[![npm](https://img.shields.io/npm/dm/@seriouslag/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@seriouslag/vue-tagsinput)
+[![MIT](https://img.shields.io/github/license/seriouslag/vue-tagsinput.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 A simple tags input with typeahead built with Vue.js 2.
 
 ![](demo.gif)
 ![](demo2.gif)
 
-[**Live Demo**](https://voerro.github.io/vue-tagsinput/)
-
 ## Installation via NPM
 
 ```
-npm i @voerro/vue-tagsinput --save-dev
+npm i @seriouslag/vue-tagsinput --save-dev
 ```
 or
 ```
-npm i @voerro/vue-tagsinput --save
+npm i @seriouslag/vue-tagsinput --save
 ```
 
 Register the component with Vue globally:
 
 ```javascript
-import { VoerroTagsInput } from '@voerro/vue-tagsinput';
+import { TagsInput } from '@seriouslag/vue-tagsinput';
 
-Vue.component('tags-input', VoerroTagsInput);
+Vue.component('tags-input', TagsInput);
 ```
 
 or
@@ -34,9 +34,9 @@ or
 Use the included plugin
 
 ```javascript
-import VoerroTagsInputPlugin from '@voerro/vue-tagsinput';
+import TagsInputPlugin from '@seriouslag/vue-tagsinput';
 
-Vue.use(VoerroTagsInputPlugin);
+Vue.use(TagsInputPlugin);
 ```
 
 or
@@ -44,11 +44,11 @@ or
 Use in an component
 
 ```javascript
-import { VoerroTagsInput } from '@voerro/vue-tagsinput';
+import { TagsInput } from '@seriouslag/vue-tagsinput';
 
 export default Vue.extend({
     components: {
-        VoerroTagsInput,
+        TagsInput,
     },
     setup() {
         ...
@@ -56,7 +56,7 @@ export default Vue.extend({
 });
 ```
 
-import `@voerro/vue-tagsinput/dist/VoerroTagsInput.css` into your code. You can use CDN, `require()` or `import` it inside your JS code, or `@include` it inside your (S)CSS assets. Read the `Styling` section to learn how to customize the appearance.
+import `@seriouslag/vue-tagsinput/dist/TagsInput.css` into your code. You can use CDN, `require()` or `import` it inside your JS code, or `@include` it inside your (S)CSS assets. Read the `Styling` section to learn how to customize the appearance.
 
 ## Installation via CDN
 
@@ -66,10 +66,10 @@ Using plugin
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@3.0.0/dist/VoerroTagsInput.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@seriouslag/vue-tagsinput@4.0.0/dist/TagsInput.umd.min.js"></script>
 
 <script>
-    Vue.use(VoerroTagsInput.default);
+    Vue.use(TagsInput.default);
     new Vue({
         el: '#app',
         ...
@@ -81,12 +81,12 @@ Using component
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@3.0.0/dist/VoerroTagsInput.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@seriouslag/vue-tagsinput@4.0.0/dist/TagsInput.umd.min.js"></script>
 
 <script>
     new Vue({
         el: '#app',
-        components: { "tags-input": VoerroTagsInput.VoerroTagsInput },
+        components: { "tags-input": TagsInput.TagsInput },
     });
 </script>
 ```
@@ -94,10 +94,10 @@ Using component
 Include the CSS file on your page to apply the styling. Read the `Styling` section to learn how to customize the appearance.
 
 ```
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@3.0.0/dist/VoerroTagsInput.css.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@seriouslag/vue-tagsinput@4.0.0/dist/TagsInput.css.css">
 ```
 
-**IMPORTANT:** Always grab the latest versions of the package from [JSDELIVR](https://www.jsdelivr.com/package/npm/@voerro/vue-tagsinput?path=dist), the ones provided in the examples above might be outdated. Same goes for Vue.js.
+**IMPORTANT:** Always grab the latest versions of the package from [JSDELIVR](https://www.jsdelivr.com/package/npm/@seriouslag/vue-tagsinput?path=dist), the ones provided in the examples above might be outdated. Same goes for Vue.js.
 
 ## Usage
 
@@ -142,7 +142,7 @@ You can pre-set the value of this variable:
 new Vue({
     el: '#app',
 
-    components: { VoerroTagsInput },
+    components: { TagsInput },
 
     data: {
         selectedTags: [
@@ -159,7 +159,7 @@ new Vue({
 new Vue({
     el: '#app',
 
-    components: { VoerroTagsInput },
+    components: { TagsInput },
 
     data: {
         selectedTags: [],
@@ -252,7 +252,7 @@ Event | Description
 @change | Fired when the input text changes
 
 ```html
-<voerro-tags-input
+<tags-input
     ...
     @initialized="onInitialized"
     @tag-added="onTagAdded"
@@ -264,7 +264,7 @@ Event | Description
     @focus="onFocus"
     @blur="onBlur"
     @change="onChange"
-></voerro-tags-input>
+></tags-input>
 ```
 
 ```javascript
@@ -369,25 +369,32 @@ When search results are displayed underneath the input, use the `arrow down` and
 
 ## Breaking Changes
 
-#### v1.0.0 ... v1.5.0 -> v1.5.1
-
-See the `v1` branch for details.
-
-#### v1.5.1 and above -> v2.*
-
-A pretty serious bug ([#53](../../issues/53)) was fixed in `v2.0.0`. The data format for the `existing-tags` prop and the `v-model` directive has been changed. You can find the new format in this documentation, see above.
+#### v3.x - v4.0
+- Changed component import from VoerroTagsInput to TagsInput
+- Changed style imports from 'dist/VoerroTagsInput.css' to 'dist/TagsInput.css'
 
 #### v2.4.x -> 3.0.0
 
 - Changed style imports. From 'dist/styles.css' to 'dist/VoerroTagsInput.css'
 - package main entry point change to import commonjs output
 
-
 #### v2.3.0 -> v2.4.0
 
 Multiple hidden fields instead of one, so that your backend treats the selected tags as an array.
 
+#### v1.5.1 and above -> v2.*
+
+A pretty serious bug ([#53](../../issues/53)) was fixed in `v2.0.0`. The data format for the `existing-tags` prop and the `v-model` directive has been changed. You can find the new format in this documentation, see above in original repo.
+
+#### v1.0.0 ... v1.5.0 -> v1.5.1
+
+See the `v1` branch for details in orignal repo.
+
 ## Changelog
+
+#### v.4.0.0
+- Changed component import from VoerroTagsInput to TagsInput
+- Changed style imports from 'dist/VoerroTagsInput.css' to 'dist/TagsInput.css'
 
 #### v.3.0.0
 - Changed style imports. From 'dist/styles.css' to 'dist/VoerroTagsInput.css'
