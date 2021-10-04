@@ -1,43 +1,60 @@
 {
-    "name": "@voerro/vue-tagsinput",
-    "version": "2.7.1",
-    "description": "A simple tags input with typeahead made with Vue.js 2",
-    "main": "src/main.js",
-    "keywords": [
-        "vue",
-        "vuejs",
-        "tagsinput",
-        "input",
-        "tags",
-        "typeahead",
-        "autocomplete"
-    ],
-    "author": "Alexander Zavyalov <alex@voerro.com> (http://voerro.com)",
-    "license": "MIT",
-    "scripts": {
-        "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-        "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
-    },
-    "dependencies": {},
-    "browserslist": [
-        "> 1%",
-        "last 2 versions",
-        "not ie <= 8"
-    ],
-    "devDependencies": {
-        "babel-core": "^6.26.3",
-        "babel-loader": "^7.1.5",
-        "babel-preset-env": "^1.7.0",
-        "babel-preset-stage-3": "^6.24.1",
-        "cross-env": "^5.2.1",
-        "css-loader": "^0.28.11",
-        "file-loader": "^1.1.11",
-        "vue": "^2.6.12",
-        "vue-loader": "^15.9.6",
-        "vue-template-compiler": "^2.6.12",
-        "webpack": "^4.46.0",
-        "webpack-cli": "^3.3.12",
-        "webpack-dev-server": "^3.11.2"
-    },
-    "repository": "https://github.com/voerro/vue-tagsinput"
+  "name": "@voerro/vue-tagsinput",
+  "version": "3.0.0",
+  "description": "A simple tags input with typeahead made with Vue.js 2",
+  "author": "Alexander Zavyalov <alex@voerro.com> (http://voerro.com)",
+  "scripts": {
+    "start": "npm run serve",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build --target lib --name 'VoerroTagsInput' ./src/index.ts",
+    "build:demo": "vue-cli-service build"
+  },
+  "main": "dist/VoerroTagsInput.common.js",
+  "buildEntry": "src/",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "public",
+    "package.json",
+    "tsconfig.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "core-js": "^3.6.5"
+  },
+  "devDependencies": {
+    "@types/webpack-env": "^1.16.2",
+    "@vue/cli": "^4.5.13",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-service": "^4.5.13",
+    "bulma": "^0.9.3",
+    "cache-loader": "^4.1.0",
+    "cross-env": "^7.0.3",
+    "sass": "^1.40.1",
+    "sass-loader": "^10.2.0",
+    "typescript": "^4.4.3",
+    "vue-template-compiler": "^2.6.14"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.14"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "keywords": [
+    "vue",
+    "vuejs",
+    "tagsinput",
+    "input",
+    "tags",
+    "typeahead",
+    "autocomplete"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/voerro/vue-tagsinput"
 }
