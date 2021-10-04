@@ -452,10 +452,11 @@ See the `v1` branch for details in orignal repo.
 
 ## Contribution
 
-Everyone is welcome to contribute. When making a contribution, please base your branch off of `dev` and merge it into `dev` as well. Thank you!
+Everyone is welcome to contribute. When making a contribution, base your branch off of `master` and open a PR into `master` as well.
 
 ## Support
 
 This software is absolutely free to use and is developed in the author's free time. If you found this software useful and would like to say thank you to the author, please consider making a donation. It's not the amount, it's the gesture.
 
-- PayPal: https://paypal.me/AlexanderZavyalov
+- Maintainer - [paypal](https://paypal.me/landongavin)
+- Original author - see original repo
