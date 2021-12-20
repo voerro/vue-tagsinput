@@ -24,12 +24,15 @@
                 </slot>
             </span>
 
-            <input type="text"
+            <component
+                :is="renderTextarea ? 'textarea' : 'input'"
+                rows="1"
+                type="text"
                 ref="taginput"
                 :id="inputId"
                 :name="inputId"
                 :placeholder="placeholder"
-                :value="input"
+                :value.prop="input"
                 @input="e => input = e.target.value"
                 v-show="!hideInputField"
                 @compositionstart="composing=true"
@@ -44,7 +47,7 @@
                 @focus="onFocus"
                 @click="onClick"
                 @blur="onBlur"
-                @value="tags">
+                @value="tags"/>
 
             <div style="display: none;" v-if="elementId">
                 <input v-for="(tag, index) in tags"
@@ -54,7 +57,6 @@
                     :value="hiddenInputValue(tag)">
             </div>
         </div>
-
         <!-- Typeahead/Autocomplete -->
         <div v-show="searchResults.length">
             <p v-if="typeaheadStyle === 'badges'"
@@ -256,6 +258,11 @@ export default {
         },
 
         caseSensitiveTags: {
+            type: Boolean,
+            default: false
+        },
+
+        renderTextarea: {
             type: Boolean,
             default: false
         },
