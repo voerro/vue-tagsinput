@@ -5,13 +5,17 @@
     align-items: center;
 }
 
-.tags-input input {
+.tags-input input, textarea {
     flex: 1;
     background: transparent;
     border: none;
 }
 
-.tags-input input:focus {
+.tags-input textarea {
+    resize: none;
+}
+
+.tags-input input:focus, .tags-input textarea:focus {
     outline: none;
 }
 
