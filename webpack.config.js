@@ -1,6 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
-var VueLoaderPlugin = require('vue-loader/lib/plugin')
+const VueLoaderPlugin = require('vue-loader/dist/plugin').default;
 
 module.exports = {
   entry: './src/main.js',
@@ -20,11 +20,6 @@ module.exports = {
       },      {
         test: /\.vue$/,
         loader: 'vue-loader',
-        options: {
-          loaders: {
-          }
-          // other vue-loader options go here
-        }
       },
       {
         test: /\.js$/,
@@ -42,19 +37,35 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm-bundler.js'
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true,
-    overlay: true
+    static: [
+      {
+        directory: path.join(__dirname, 'dist'),
+        publicPath: '/dist',
+      },
+      {
+        directory: path.join(__dirname, 'demo'),
+        publicPath: '/demo',
+      },
+      {
+        directory: path.join(__dirname, 'public'),
+        publicPath: '/',
+      },
+    ],
+    client: {
+      logging: 'warn',
+      overlay: true
+    }
   },
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map',
+  devtool: 'eval-source-map',
   plugins: [
     new VueLoaderPlugin()
   ]
