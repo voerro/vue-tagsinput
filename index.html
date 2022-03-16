@@ -7,7 +7,7 @@
     <title>@voerro/vue-tagsinput</title>
 
     <link rel="stylesheet" href="dist/style.css">
-    <link rel="stylesheet" href="demo/css/bulma.min.css">
+    <link rel="stylesheet" href="public/css/bulma.min.css">
 
     <style>
         .mb-1 {
@@ -49,7 +49,7 @@
                 <h1 class="title">@voerro/vue-tagsinput</h1>
 
                 <h2 class="subtitle">
-                    Tags input for Vue.js 2 by
+                    Tags input for Vue 3 by
                     <a href="http://voerro.com">Voerro</a>
                 </h2>
             </div>
@@ -132,7 +132,7 @@
                             <label class="label">Typeahead Style</label>
 
                             <div class="control">
-                                <select class="input" type="text" v-model="typeaheadStyle">
+                                <select class="input" v-model="typeaheadStyle">
                                     <option value="badges">Badges</option>
                                     <option value="dropdown">Dropdown</option>
                                 </select>
@@ -313,13 +313,18 @@
         </div>
     </div>
 
-    <script src="https://unpkg.com/vue@3"></script>
-    <script src="dist/voerro-vue-tagsinput.js"></script>
-
-    <script>
-        Vue.createApp({
+    <script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+          }
+        }
+    </script>
+    <script type="module" src="dist/voerro-vue-tagsinput.js"></script>
+    <script type="module">
+        import { createApp } from 'vue'
+        createApp({
             components: { VoerroTagsInput },
-
             data() {
                 return {
                     selectedTags: [

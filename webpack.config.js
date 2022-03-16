@@ -36,27 +36,15 @@ module.exports = {
     ]
   },
   resolve: {
+    extensions: ['\*', '.js', '.jsx', '.vue'],
+    symlinks: false,
     alias: {
-      'vue$': 'vue/dist/vue.esm-bundler.js'
+        "@": path.resolve(__dirname, '../src'),
+        'vue$': 'vue/dist/vue.esm-bundler.js',
     },
-    extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
     historyApiFallback: true,
-    static: [
-      {
-        directory: path.join(__dirname, 'dist'),
-        publicPath: '/dist',
-      },
-      {
-        directory: path.join(__dirname, 'demo'),
-        publicPath: '/demo',
-      },
-      {
-        directory: path.join(__dirname, 'public'),
-        publicPath: '/',
-      },
-    ],
     client: {
       logging: 'warn',
       overlay: true
@@ -72,7 +60,7 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+  module.exports.devtool = 'source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
