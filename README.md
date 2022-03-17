@@ -4,7 +4,7 @@
 [![npm](https://img.shields.io/npm/dm/@voerro/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
 [![MIT](https://img.shields.io/github/license/AlexMordred/vue-tagsinput.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-A simple tags input with typeahead built with Vue.js 2.
+A simple tags input with typeahead built with Vue3.
 
 ![](demo.gif)
 ![](demo2.gif)
