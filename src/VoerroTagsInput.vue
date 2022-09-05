@@ -580,6 +580,7 @@ export default {
                         this.typeaheadCallback(searchQuery)
                             .then((results) => {
                                 this.typeaheadTags = results;
+                                this.doSearch(searchQuery);
                             });
                     } else if (this.typeaheadUrl.length > 0) {
                         this.typeaheadTags.splice(0);
