@@ -113,7 +113,7 @@ export default {
             }
         },
 
-        value: {
+        modelValue: {
             type: Array,
             default: () => {
                 return [];
@@ -358,15 +358,15 @@ export default {
             this.searchTag();
         },
 
-        tags() {
+        'tags.length'() {
             // Updating the hidden input
             this.hiddenInput = JSON.stringify(this.tags);
 
             // Update the bound v-model value
-            this.$emit('input', this.tags);
+            this.$emit('update:modelValue', this.tags);
         },
 
-        value() {
+        modelValue() {
             this.tagsFromValue();
         },
 
@@ -717,14 +717,14 @@ export default {
          * @returns void
          */
         tagsFromValue() {
-            if (this.value && this.value.length) {
-                if (!Array.isArray(this.value)) {
-                    console.error('Voerro Tags Input: the v-model value must be an array!');
+            if (this.modelValue && this.modelValue.length) {
+                if (!Array.isArray(this.modelValue)) {
+                    console.error('Voerro Tags Input: the v-model modelValue must be an array!');
 
                     return;
                 }
 
-                let tags = this.value;
+                let tags = this.modelValue;
 
                 // Don't update if nothing has changed
                 if (this.tags == tags) {
