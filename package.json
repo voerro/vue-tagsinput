@@ -11,6 +11,7 @@
       "import": "./dist/vue-tagsinput.js",
       "require": "./dist/vue-tagsinput.umd.js"
     },
+    "./dist/style": "./dist/style.css",
     "./dist/style.css": "./dist/style.css"
   },
   "scripts": {
