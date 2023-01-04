@@ -10,7 +10,7 @@ export default defineConfig({
     lib: {
       entry: "./src/index.js",
       name: "@james090500/vue-tagsinput",
-      fileName: "vue-stripe",
+      fileName: "vue-tagsinput",
     },
     rollupOptions: {
       external: ["vue"],
