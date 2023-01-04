@@ -1,48 +1,24 @@
 {
-    "name": "@james090500/vue-tagsinput",
-    "version": "3.0.0",
-    "description": "A simple tags input with typeahead made with Vue 3",
-    "main": "src/main.js",
-    "keywords": [
-        "vue",
-        "vuejs",
-        "tagsinput",
-        "input",
-        "tags",
-        "typeahead",
-        "autocomplete"
-    ],
-    "author": "Alexander Zavyalov <alex@voerro.com> (http://voerro.com)",
-    "contributors": [
-        {
-            "name": "James Harrison",
-            "email": "james@fasttortoise.co.uk",
-            "url": "https://james090500.com"
-        }
-    ],
-    "license": "MIT",
-    "scripts": {
-        "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-        "build": "cross-env NODE_ENV=production webpack --progress"
-    },
-    "browserslist": [
-        "> 1%",
-        "last 2 versions",
-        "not ie <= 8"
-    ],
-    "devDependencies": {
-        "@babel/preset-env": "^7.16.11",
-        "babel-core": "^6.26.3",
-        "babel-loader": "^8.2.3",
-        "babel-preset-stage-3": "^6.24.1",
-        "cross-env": "^7.0.3",
-        "css-loader": "^6.7.1",
-        "file-loader": "^6.2.0",
-        "vue-loader": "^17.0.0",
-        "webpack": "^5.70.0",
-        "webpack-cli": "^4.9.2",
-        "webpack-dev-server": "^4.7.4",
-        "vue": "^3.2.31"
-    },
-    "repository": "https://github.com/voerro/vue-tagsinput"
+  "name": "@james090500/vue-tagsinput",
+  "version": "3.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "prepare": "npm run build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+  },
+  "dependencies": {
+    "vue": "^3.2.45"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "eslint": "^8.31.0",
+    "eslint-plugin-vue": "^9.8.0",
+    "prettier": "^2.8.1",
+    "vite": "^4.0.4"
+  }
 }
