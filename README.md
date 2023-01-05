@@ -1,7 +1,7 @@
 # Voerro Vue Tags Input v3
 
-[![npm (scoped)](https://img.shields.io/npm/v/@voerro/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
-[![npm](https://img.shields.io/npm/dm/@voerro/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
+[![npm (scoped)](https://img.shields.io/npm/v/@james090500/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@james090500/vue-tagsinput)
+[![npm](https://img.shields.io/npm/dm/@james090500/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@james090500/vue-tagsinput)
 [![MIT](https://img.shields.io/github/license/AlexMordred/vue-tagsinput.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 A simple tags input with typeahead built with Vue3.
@@ -20,7 +20,7 @@ npm i https://github.com/james090500/vue-tagsinput
 Then register the component with Vue:
 
 ```javascript
-import VoerroTagsInput from '@voerro/vue-tagsinput';
+import VoerroTagsInput from '@james090500/vue-tagsinput';
 
 Vue.component('tags-input', VoerroTagsInput);
 ```
@@ -33,7 +33,7 @@ If you're not using NPM, you can include the required files into your page manua
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.7.1/dist/voerro-vue-tagsinput.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@james090500/vue-tagsinput@2.7.1/dist/voerro-vue-tagsinput.js"></script>
 
 <script>
     new Vue({
@@ -46,10 +46,10 @@ If you're not using NPM, you can include the required files into your page manua
 Include the CSS file on your page to apply the styling. Read the `Styling` section to learn how to customize the appearance.
 
 ```
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@voerro/vue-tagsinput@2.7.1/dist/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@james090500/vue-tagsinput@2.7.1/dist/style.css">
 ```
 
-**IMPORTANT:** Always grab the latest versions of the package from [JSDELIVR](https://www.jsdelivr.com/package/npm/@voerro/vue-tagsinput?path=dist), the ones provided in the examples above might be outdated. Same goes for Vue.js.
+**IMPORTANT:** Always grab the latest versions of the package from [JSDELIVR](https://www.jsdelivr.com/package/npm/@james090500/vue-tagsinput?path=dist), the ones provided in the examples above might be outdated. Same goes for Vue.js.
 
 ## Usage
 

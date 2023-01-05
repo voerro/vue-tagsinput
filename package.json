@@ -1,19 +1,10 @@
 {
   "name": "@james090500/vue-tagsinput",
   "version": "3.1.1",
-  "private": true,
   "type": "module",
   "files": ["dist"],
   "main": "./dist/vue-tagsinput.mjs",
   "module": "./dist/vue-tagsinput.js",
-  "exports": {
-    ".": {
-      "import": "./dist/vue-tagsinput.js",
-      "require": "./dist/vue-tagsinput.umd.js"
-    },
-    "./dist/style": "./dist/style.css",
-    "./dist/style.css": "./dist/style.css"
-  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -32,5 +23,12 @@
     "eslint-plugin-vue": "^9.8.0",
     "prettier": "^2.8.1",
     "vite": "^4.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:james090500/vue-tagsinput.git"
+  },
+  "bugs": {
+    "url": "https://github.com/james090500/vue-tagsinput/issues"
   }
 }
