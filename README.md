@@ -14,7 +14,7 @@ A simple tags input with typeahead built with Vue3.
 ## Installation via NPM
 
 ```
-npm i https://github.com/james090500/vue-tagsinput
+npm i @james090500/vue-tagsinput
 ```
 
 Then register the component with Vue:
