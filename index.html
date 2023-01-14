@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
 
     <title>@voerro/vue-tagsinput</title>
-    
-    <link rel="stylesheet" href="dist/style.css">
-    <link rel="stylesheet" href="demo/css/bulma.min.css">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
     <style>
         .mb-1 {
@@ -49,7 +49,7 @@
                 <h1 class="title">@voerro/vue-tagsinput</h1>
 
                 <h2 class="subtitle">
-                    Tags input for Vue.js 2 by
+                    Tags input for Vue 3 by
                     <a href="http://voerro.com">Voerro</a>
                 </h2>
             </div>
@@ -77,7 +77,7 @@
 
                     <div class="field">
                         <label class="label">Limit</label>
-                    
+
                         <div class="control">
                             <input class="input" type="text" v-model="limit">
                         </div>
@@ -130,9 +130,9 @@
                     <div v-show="typeahead" style="margin-bottom: 1rem;">
                         <div class="field">
                             <label class="label">Typeahead Style</label>
-                        
+
                             <div class="control">
-                                <select class="input" type="text" v-model="typeaheadStyle">
+                                <select class="input" v-model="typeaheadStyle">
                                     <option value="badges">Badges</option>
                                     <option value="dropdown">Dropdown</option>
                                 </select>
@@ -141,7 +141,7 @@
 
                         <div class="field">
                             <label class="label">Typeahead Max Results</label>
-                        
+
                             <div class="control">
                                 <input class="input" type="text" v-model="typeaheadMaxResults">
                             </div>
@@ -149,7 +149,7 @@
 
                         <div class="field">
                             <label class="label">Typeahead Activation Threshold</label>
-                        
+
                             <div class="control">
                                 <input class="input" type="text" v-model="typeaheadActivationThreshold">
                             </div>
@@ -159,7 +159,7 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
-                                <input type="checkbox" v-model="onlyExistingTags"> 
+                                <input type="checkbox" v-model="onlyExistingTags">
                                 Allow to add only existing tags
                             </label>
                         </div>
@@ -168,7 +168,7 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
-                                <input type="checkbox" v-model="caseSensitiveTags"> 
+                                <input type="checkbox" v-model="caseSensitiveTags">
                                 Tags are case sensitive
                             </label>
                         </div>
@@ -177,7 +177,7 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
-                                <input type="checkbox" v-model="deleteOnBackspace"> 
+                                <input type="checkbox" v-model="deleteOnBackspace">
                                 Delete on Backspace
                             </label>
                         </div>
@@ -186,7 +186,7 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
-                                <input type="checkbox" v-model="allowDuplicates"> 
+                                <input type="checkbox" v-model="allowDuplicates">
                                 Allow Duplicates
                             </label>
                         </div>
@@ -195,7 +195,7 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
-                                <input type="checkbox" v-model="addTagsOnComma"> 
+                                <input type="checkbox" v-model="addTagsOnComma">
                                 Add Tags on Comma
                             </label>
                         </div>
@@ -204,7 +204,7 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
-                                <input type="checkbox" v-model="addTagsOnSpace"> 
+                                <input type="checkbox" v-model="addTagsOnSpace">
                                 Add Tags on Space
                             </label>
                         </div>
@@ -213,7 +213,7 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
-                                <input type="checkbox" v-model="addTagsOnBlur"> 
+                                <input type="checkbox" v-model="addTagsOnBlur">
                                 Add Tags on Blur
                             </label>
                         </div>
@@ -280,7 +280,7 @@
                     <p v-text="selectedTags"></p>
 
                     <h2 class="is-size-5" style="margin-top: 1rem;">Data Events (new at the top)</h2>
-                    
+
                     <pre v-text="eventLog"></pre>
 
                     <hr>
@@ -313,54 +313,51 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.min.js"></script>
-    <script src="dist/voerro-vue-tagsinput.js"></script>
-
-    <script>
-        new Vue({
-            el: '#voerro-tags-input-demo-vqk6etkfjrcpsjg5',
-
+    <script type="module" src="src/index.js"></script>
+    <script type="module">
+        import { createApp } from 'vue/dist/vue.esm-bundler'
+        createApp({
             components: { VoerroTagsInput },
+            data() {
+                return {
+                    selectedTags: [
+                        {
+                            key: 'ne-obliviscaris',
+                            value: 'Ne Obliviscaris'
+                        },
+                        {
+                            key: 'epica',
+                            value: 'Epica'
+                        },
+                        {
+                            key: 'shape-of-despair',
+                            value: 'Shape of Despair'
+                        },
+                    ],
+                    typeahead: true,
+                    typeaheadStyle: 'badges',
+                    placeholder: 'Customizable placeholder',
+                    limit: 0,
+                    onlyExistingTags: false,
+                    caseSensitiveTags: false,
+                    deleteOnBackspace: true,
+                    allowDuplicates: false,
+                    addTagsOnComma: false,
+                    addTagsOnSpace: false,
+                    addTagsOnBlur: false,
+                    hideInputOnLimit: false,
+                    typeaheadHideDiscard: false,
+                    typeaheadMaxResults: 20,
+                    typeaheadActivationThreshold: 1,
+                    typeheadAlwaysShow: false,
+                    typeaheadShowOnFocus: true,
+                    logChangeEvents: false,
+                    eventLog: '',
 
-            data: {
-                selectedTags: [
-                    {
-                        key: 'ne-obliviscaris',
-                        value: 'Ne Obliviscaris'
-                    },
-                    {
-                        key: 'epica',
-                        value: 'Epica'
-                    },
-                    {
-                        key: 'shape-of-despair',
-                        value: 'Shape of Despair'
-                    },
-                ],
-                typeahead: true,
-                typeaheadStyle: 'badges',
-                placeholder: 'Customizable placeholder',
-                limit: 0,
-                onlyExistingTags: false,
-                caseSensitiveTags: false,
-                deleteOnBackspace: true,
-                allowDuplicates: false,
-                addTagsOnComma: false,
-                addTagsOnSpace: false,
-                addTagsOnBlur: false,
-                hideInputOnLimit: false,
-                typeaheadHideDiscard: false,
-                typeaheadMaxResults: 20,
-                typeaheadActivationThreshold: 1,
-                typeheadAlwaysShow: false,
-                typeaheadShowOnFocus: true,
-                logChangeEvents: false,
-                eventLog: '',
-
-                // Display fields demo
-                selectedTags2: [],
+                    // Display fields demo
+                    selectedTags2: [],
+                }
             },
-
             methods: {
                 logEvent(text) {
                     this.eventLog = text + this.eventLog;
@@ -388,7 +385,7 @@
                     }
                 },
             }
-        });
+        }).mount('#voerro-tags-input-demo-vqk6etkfjrcpsjg5');
     </script>
 </body>
 </html>

@@ -1,10 +1,10 @@
-# Voerro Vue Tags Input v2
+# Voerro Vue Tags Input v3
 
 [![npm (scoped)](https://img.shields.io/npm/v/@voerro/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
 [![npm](https://img.shields.io/npm/dm/@voerro/vue-tagsinput.svg?style=flat-square)](https://www.npmjs.com/package/@voerro/vue-tagsinput)
 [![MIT](https://img.shields.io/github/license/AlexMordred/vue-tagsinput.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-A simple tags input with typeahead built with Vue.js 2.
+A simple tags input with typeahead built with Vue3.
 
 ![](demo.gif)
 ![](demo2.gif)
@@ -14,11 +14,7 @@ A simple tags input with typeahead built with Vue.js 2.
 ## Installation via NPM
 
 ```
-npm i @voerro/vue-tagsinput --save-dev
-```
-or
-```
-npm i @voerro/vue-tagsinput --save
+npm i @voerro/vue-tagsinput
 ```
 
 Then register the component with Vue:
