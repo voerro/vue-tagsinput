@@ -6,8 +6,8 @@
 
     <title>@voerro/vue-tagsinput</title>
 
-    <link rel="stylesheet" href="dist/style.css">
-    <link rel="stylesheet" href="public/css/bulma.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/bulma.min.css">
 
     <style>
         .mb-1 {
@@ -313,16 +313,9 @@
         </div>
     </div>
 
-    <script type="importmap">
-        {
-          "imports": {
-            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
-          }
-        }
-    </script>
-    <script type="module" src="dist/voerro-vue-tagsinput.js"></script>
+    <script type="module" src="src/index.js"></script>
     <script type="module">
-        import { createApp } from 'vue'
+        import { createApp } from 'vue/dist/vue.esm-bundler'
         createApp({
             components: { VoerroTagsInput },
             data() {
