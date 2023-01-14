@@ -2,7 +2,9 @@
   "name": "@voerro/vue-tagsinput",
   "version": "3.1.1",
   "type": "module",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "./dist/vue-tagsinput.mjs",
   "module": "./dist/vue-tagsinput.js",
   "scripts": {
@@ -20,15 +22,14 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-prettier": "^7.0.0",
     "eslint": "^8.31.0",
-    "eslint-plugin-vue": "^9.8.0",
-    "prettier": "^2.8.1",
+    "eslint-plugin-vue": "^9.9.0",
     "vite": "^4.0.4"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:james090500/vue-tagsinput.git"
+    "url": "git@github.com:voerro/vue-tagsinput.git"
   },
   "bugs": {
-    "url": "https://github.com/james090500/vue-tagsinput/issues"
+    "url": "https://github.com/voerro/vue-tagsinput/issues"
   }
 }
