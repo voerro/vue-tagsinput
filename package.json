@@ -5,7 +5,7 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/vue-tagsinput.mjs",
+  "main": "./dist/vue-tagsinput.umd.cjs",
   "module": "./dist/vue-tagsinput.js",
   "scripts": {
     "dev": "vite",
