@@ -177,6 +177,15 @@
                     <div class="field">
                         <div class="control">
                             <label class="checkbox">
+                                <input type="checkbox" v-model="accentSensitiveTags"> 
+                                Tags are accent sensitive
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
                                 <input type="checkbox" v-model="deleteOnBackspace"> 
                                 Delete on Backspace
                             </label>
@@ -234,6 +243,9 @@
                         v-model="selectedTags"
                         element-id="tags"
                         :existing-tags="[
+                            { key: `Divison` , value : `Division`},
+                            { key: `Divisón` , value : `División`},
+                            { key: `Divisonnn` , value : `Divisionnn`},
                             { key: 'children-of-bodom', value: 'Children of Bodom' },
                             { key: 'epica', value: 'Epica' },
                             { key: 'emperor', value: 'Emperor' },
@@ -259,6 +271,7 @@
                         :limit="limit"
                         :only-existing-tags="onlyExistingTags"
                         :case-sensitive-tags="caseSensitiveTags"
+                        :accent-sensitive-tags="accentSensitiveTags"
                         :delete-on-backspace="deleteOnBackspace"
                         :allow-duplicates="allowDuplicates"
                         :add-tags-on-comma="addTagsOnComma"
@@ -343,6 +356,7 @@
                 limit: 0,
                 onlyExistingTags: false,
                 caseSensitiveTags: false,
+                accentSensitiveTags: false,
                 deleteOnBackspace: true,
                 allowDuplicates: false,
                 addTagsOnComma: false,
